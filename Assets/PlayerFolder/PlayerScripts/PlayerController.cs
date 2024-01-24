@@ -1,13 +1,14 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(CharacterController), typeof(PlayerInput))] 
+[RequireComponent(typeof(CharacterController), typeof(PlayerInput), typeof(PlayerStats))] 
 public class PlayerController : MonoBehaviour
 {
     CharacterController _CharacterController;
     Vector3 playerVelocity;
     bool groundedPlayer;
     Transform cameraTransform;
+    PlayerStats playerStats;
 
     float playerSpeed = 2.0f;
     float jumpHeight = 1.0f;
@@ -22,10 +23,12 @@ public class PlayerController : MonoBehaviour
     {
         _CharacterController = GetComponent<CharacterController>();
         playerInput = GetComponent<PlayerInput>();
+        playerStats = GetComponent<PlayerStats>();
         cameraTransform = Camera.main.transform;
         moveAction = playerInput.actions["Move"];
         jumpAction = playerInput.actions["Jump"];
 
+        playerSpeed = playerStats.speed;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
