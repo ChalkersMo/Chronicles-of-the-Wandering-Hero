@@ -30,19 +30,16 @@ public class PlayerController : MonoBehaviour
     {
         _CharacterController = GetComponent<CharacterController>();
         playerInput = GetComponent<PlayerInput>();
-<<<<<<< Updated upstream
-=======
+
         animatorController = GetComponentInChildren<Animator>();
->>>>>>> Stashed changes
+
         cameraTransform = Camera.main.transform;
         moveAction = playerInput.actions["Move"];
         jumpAction = playerInput.actions["Jump"];
 
-<<<<<<< Updated upstream
-=======
         playerRunningSpeed = PlayerStats.instance.runningSpeed;
         playerWalkingSpeed = PlayerStats.instance.speed;
->>>>>>> Stashed changes
+
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
@@ -117,7 +114,6 @@ public class PlayerController : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.F))
         {
-            animatorController.SetInteger("State", 1);
             animatorController.SetTrigger("EquipSword");
             CanMove = false;
             Invoke(nameof(SwordEquiping), 1.5f);
@@ -126,8 +122,9 @@ public class PlayerController : MonoBehaviour
     void SwordEquiping()
     {
         CanMove = true;
+        animatorController.SetInteger("State", 1);
 
-        if(SwordEquiped != true)
+        if (SwordEquiped != true)
             SwordEquiped = true;
         else 
             SwordEquiped = false;

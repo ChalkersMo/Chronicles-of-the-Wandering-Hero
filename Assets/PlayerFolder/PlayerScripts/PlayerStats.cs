@@ -8,6 +8,7 @@ public class PlayerStats : MonoBehaviour
 
     public float speed;
     public float runningSpeed;
+    public float MultiplySwordDamage;
     void Start()
     {
         instance = this;
