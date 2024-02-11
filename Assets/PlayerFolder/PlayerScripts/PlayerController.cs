@@ -31,7 +31,7 @@ public class PlayerController : MonoBehaviour
         _CharacterController = GetComponent<CharacterController>();
         playerInput = GetComponent<PlayerInput>();
 
-        animatorController = GetComponentInChildren<Animator>();
+        animatorController = GetComponent<Animator>();
 
         cameraTransform = Camera.main.transform;
         moveAction = playerInput.actions["Move"];

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerStats : MonoBehaviour
@@ -9,7 +7,7 @@ public class PlayerStats : MonoBehaviour
     public float speed;
     public float runningSpeed;
     public float MultiplySwordDamage;
-    void Start()
+    void Awake ()
     {
         instance = this;
     }

@@ -26,22 +26,16 @@ public class PlayerSwordAnimationController : MonoBehaviour
             if (animatorController.GetCurrentAnimatorStateInfo(0).normalizedTime > cooldownTime &&
             animatorController.GetCurrentAnimatorStateInfo(0).IsName("hit1"))
             {
-                playerSwordController.IsAttacking = false;
-                playerController.CanMove = true;
                 animatorController.SetBool("hit1", false);
             }
             if (animatorController.GetCurrentAnimatorStateInfo(0).normalizedTime > cooldownTime &&
                 animatorController.GetCurrentAnimatorStateInfo(0).IsName("hit2"))
             {
-                playerSwordController.IsAttacking = false;
-                playerController.CanMove = true;
                 animatorController.SetBool("hit2", false);
             }
             if (animatorController.GetCurrentAnimatorStateInfo(0).normalizedTime > cooldownTime &&
                 animatorController.GetCurrentAnimatorStateInfo(0).IsName("hit3"))
             {
-                playerController.CanMove = true;
-                playerSwordController.IsAttacking = false;
                 animatorController.SetBool("hit3", false);
                 numberOfCklicks = 0;
             }
@@ -66,8 +60,6 @@ public class PlayerSwordAnimationController : MonoBehaviour
         if (numberOfCklicks == 1)
         {
             animatorController.SetBool("hit1", true);
-            playerController.CanMove = false;
-            playerSwordController.IsAttacking = true;
         }
         numberOfCklicks = Mathf.Clamp(numberOfCklicks, 0, 3);
 
@@ -76,16 +68,24 @@ public class PlayerSwordAnimationController : MonoBehaviour
         {
             animatorController.SetBool("hit1", false);
             animatorController.SetBool("hit2", true);
-            playerController.CanMove = false;
-            playerSwordController.IsAttacking = true;
         }
         if (numberOfCklicks >= 3 && animatorController.GetCurrentAnimatorStateInfo(0).normalizedTime > cooldownTime && animatorController
             .GetCurrentAnimatorStateInfo(0).IsName("hit2"))
         {
             animatorController.SetBool("hit2", false);
             animatorController.SetBool("hit3", true);
-            playerController.CanMove = false;
-            playerSwordController.IsAttacking = true;
+            
         }
+    }
+
+    public void Attacking()
+    {
+        playerController.CanMove = false;
+        playerSwordController.IsAttacking = true;
+    }
+    public void DisAttacking()
+    {
+        playerController.CanMove = true;
+        playerSwordController.IsAttacking = false;
     }
 }
