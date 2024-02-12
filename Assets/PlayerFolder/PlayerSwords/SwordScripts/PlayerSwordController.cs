@@ -13,16 +13,19 @@ public class PlayerSwordController : MonoBehaviour
     {
         if (other.CompareTag("Enemy") && IsAttacking != false)
         {
-            CreatePopUp(transform.position, $"{Math.Round(swordItem.Damage * PlayerStats.instance.MultiplySwordDamage), 1}", Color.gray);
+            float damage = (float)Math.Round(swordItem.Damage * PlayerStats.instance.MultiplySwordDamage, 2);
+            other.GetComponent<EnemyDamageable>().TakeDamage(damage);
+            CreatePopUp(transform.position, $"{damage}", swordItem.DamagePopUpFaceColor, swordItem.DamagePopUpoutlineColor);
         }     
     }
-    public void CreatePopUp(Vector3 position, string text, Color color)
+    public void CreatePopUp(Vector3 position, string text, Color faceColor, Color outlineColor)
     {
         var popup = Instantiate(DamagePopUpPrefab, position, Quaternion.identity);
         var temp = popup.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
         temp.text = text;
-        temp.faceColor = color;
-
+        temp.faceColor = faceColor;
+        temp.outlineColor = outlineColor;
+       
         Destroy(popup, 1f);
     }
 }

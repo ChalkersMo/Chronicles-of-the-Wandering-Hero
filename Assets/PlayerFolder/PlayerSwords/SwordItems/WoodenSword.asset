@@ -15,3 +15,6 @@ MonoBehaviour:
   Name: Woody
   Description: This sword is just a big stick. Nothing special
   Damage: 1
+  Prefab: {fileID: 0}
+  DamagePopUpFaceColor: {r: 0.6603774, g: 0.24608402, b: 0, a: 1}
+  DamagePopUpoutlineColor: {r: 0.8113208, g: 0.30225676, b: 0, a: 1}

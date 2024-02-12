@@ -8,4 +8,6 @@ public class SwordItem : ScriptableObject
     public float Damage;
 
     public GameObject Prefab;
+    public Color DamagePopUpFaceColor;
+    public Color DamagePopUpoutlineColor;
 }

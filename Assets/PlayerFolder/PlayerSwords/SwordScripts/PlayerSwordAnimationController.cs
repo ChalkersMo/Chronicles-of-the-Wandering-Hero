@@ -80,12 +80,18 @@ public class PlayerSwordAnimationController : MonoBehaviour
 
     public void Attacking()
     {
-        playerController.CanMove = false;
         playerSwordController.IsAttacking = true;
+    }
+    public void DisableMoving()
+    {
+        playerController.CanMove = false;
+    }
+    public void EnableMoving()
+    {
+        playerController.CanMove = true;
     }
     public void DisAttacking()
     {
-        playerController.CanMove = true;
         playerSwordController.IsAttacking = false;
     }
 }
