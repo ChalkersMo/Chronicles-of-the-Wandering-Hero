@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a383ae65bd8f4c04f8be278c8dbdce3e, type: 3}
+  m_Name: WoodenSword
+  m_EditorClassIdentifier: 
+  Name: Woody
+  Description: This sword is just a big stick. Nothing special
+  Damage: 1
+  Prefab: {fileID: 0}
+  DamagePopUpFaceColor: {r: 0.6603774, g: 0.24608402, b: 0, a: 1}
+  DamagePopUpoutlineColor: {r: 0.8113208, g: 0.30225676, b: 0, a: 1}
