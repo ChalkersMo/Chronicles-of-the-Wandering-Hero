@@ -1005,7 +1005,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 611825703}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.07775912, y: 0.000000017154285, z: 0.000000001337953, w: 0.9969722}
+  m_LocalRotation: {x: -0.07775912, y: -0.000000017154285, z: -0.000000001337953,
+    w: 0.9969722}
   m_LocalPosition: {x: -0.41411716, y: -3.357058, z: -4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1608,8 +1609,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1141186338}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.09583285, y: -0.000000017654303, z: -0.0000000016996852,
-    w: 0.99539745}
+  m_LocalRotation: {x: -0.09583285, y: 0.000000017654296, z: 0.0000000016996843, w: 0.99539745}
   m_LocalPosition: {x: -0.41411716, y: -3.357058, z: -4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -4000,7 +4000,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CanMove: 0
-  SwordEquiped: 0
 --- !u!114 &5499888523371194886
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4072,7 +4071,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 6
   runningSpeed: 8
-  MultiplySwordDamage: 95.234
+  MultiplySwordDamage: 12.5345
+  MaxHealth: 100
 --- !u!114 &5499888523371194889
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4085,21 +4085,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40cd95b513d194e40b7dbab8117c3b08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHealth: 100
   _healthBarFill: {fileID: 394791377}
   _healthBarDamageFill: {fileID: 905457416}
   _healthTxt: {fileID: 841012751}
   _colourgradient:
     serializedVersion: 2
-    key0: {r: 1, g: 0, b: 0, a: 1}
-    key1: {r: 0.96899927, g: 1, b: 0.22075468, a: 1}
-    key2: {r: 0.13351119, g: 1, b: 0, a: 0}
+    key0: {r: 0.9811321, g: 0.21658951, b: 0.21658951, a: 1}
+    key1: {r: 0.80310595, g: 0.8962264, b: 0.28239584, a: 1}
+    key2: {r: 0.3095051, g: 0.7924528, b: 0.44235688, a: 0}
     key3: {r: 0, g: 0, b: 0, a: 0}
     key4: {r: 0, g: 0, b: 0, a: 0}
     key5: {r: 0, g: 0, b: 0, a: 0}
     key6: {r: 0, g: 0, b: 0, a: 0}
     key7: {r: 0, g: 0, b: 0, a: 0}
-    ctime0: 6939
+    ctime0: 7325
     ctime1: 30840
     ctime2: 65535
     ctime3: 0
@@ -4115,7 +4114,7 @@ MonoBehaviour:
     atime5: 0
     atime6: 0
     atime7: 0
-    m_Mode: 0
+    m_Mode: 1
     m_ColorSpace: -1
     m_NumColorKeys: 3
     m_NumAlphaKeys: 2

@@ -2,15 +2,16 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(CharacterController), typeof(PlayerInput))] 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour, IEquipSword, IRunning
 {
     CharacterController _CharacterController;
     Vector3 playerVelocity;
     bool groundedPlayer;
     Transform cameraTransform;
 
-    float playerWalkingSpeed = 6.0f;
-    float playerRunningSpeed = 8.0f;
+    public float WalkingSpeed { get; set; }
+    public float RunningSpeed { get; set; }
+
     float jumpHeight = 1.0f;
     float gravityValue = -9.81f;
     float rotationSpeed = 10f;
@@ -23,9 +24,10 @@ public class PlayerController : MonoBehaviour
     Animator animatorController;
     Vector2 animMove;
 
-    bool IsRunning;
-    public bool CanMove;
-    public bool SwordEquiped;
+    public bool IsRunning { get; set; }
+    [HideInInspector] public bool CanMove;
+    public bool SwordEquiped { get; set; }
+
     private void Start()
     {
         _CharacterController = GetComponent<CharacterController>();
@@ -37,8 +39,8 @@ public class PlayerController : MonoBehaviour
         moveAction = playerInput.actions["Move"];
         jumpAction = playerInput.actions["Jump"];
 
-        playerRunningSpeed = PlayerStats.instance.runningSpeed;
-        playerWalkingSpeed = PlayerStats.instance.speed;
+        RunningSpeed = PlayerStats.instance.runningSpeed;
+        WalkingSpeed = PlayerStats.instance.speed;
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -68,9 +70,9 @@ public class PlayerController : MonoBehaviour
             move.y = 0f;
 
             if (IsRunning != true)
-                _CharacterController.Move(move * Time.deltaTime * playerWalkingSpeed);
+                _CharacterController.Move(move * Time.deltaTime * WalkingSpeed);
             else
-                _CharacterController.Move(move * Time.deltaTime * playerRunningSpeed);
+                _CharacterController.Move(move * Time.deltaTime * RunningSpeed);
 
             float vertical = Input.GetAxisRaw("Vertical");
             float horizontal = Input.GetAxisRaw("Horizontal");
