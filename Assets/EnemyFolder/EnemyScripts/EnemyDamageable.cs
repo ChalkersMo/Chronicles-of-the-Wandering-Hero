@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-public class EnemyDamageable : MonoBehaviour
+public class EnemyDamageable : MonoBehaviour, IDamageable
 {
     GameObject _healthBar;
     Image _healthBarFill;
@@ -17,7 +17,8 @@ public class EnemyDamageable : MonoBehaviour
     Collider _collider;
     float _fillSpeed = 1;
     float _fillDamageSpeed = 0.4f;
-    float _currentHealth;
+    public float CurrentHealth { get; set; }
+    public float MaxHealth { get; set; }
 
     private void Start()
     {
@@ -29,22 +30,26 @@ public class EnemyDamageable : MonoBehaviour
         _healthBarFill = _healthBar.transform.GetChild(0).GetChild(2).GetComponentInChildren<Image>();
         _healthBarDamageFill = _healthBar.transform.GetChild(0).GetChild(1).GetComponentInChildren<Image>();
 
-        _currentHealth = enemyItem.MaxHp;
-        _healthBarText.text = _currentHealth.ToString();
+        MaxHealth = enemyItem.MaxHp;
+        CurrentHealth = enemyItem.MaxHp;
+        _healthBarText.text = CurrentHealth.ToString();
         StartCoroutine(IUpdateHelthBar());
     }
     public void TakeDamage(float amount)
     {
-        _currentHealth -= amount;
-        _currentHealth = (float)Math.Round(Mathf.Clamp(_currentHealth, 0, enemyItem.MaxHp), 2);
-        _healthBarText.text  = _currentHealth.ToString();
+        CurrentHealth -= amount;
+        CurrentHealth = (float)Math.Round(Mathf.Clamp(CurrentHealth, 0, MaxHealth), 2);
+        _healthBarText.text  = CurrentHealth.ToString();
         StartCoroutine(IUpdateHelthBar());
-        if (_currentHealth <= 0)
+        if (CurrentHealth <= 0)
+        {
+            StopCoroutine(IUpdateHelthBar());
             Die();
+        }            
     }
     IEnumerator IUpdateHelthBar()
     {
-        float targetFillAmount = _currentHealth / enemyItem.MaxHp;
+        float targetFillAmount = CurrentHealth / MaxHealth;
         _healthBarFill.DOFillAmount(targetFillAmount, _fillSpeed);
         _healthBarFill.DOColor(enemyItem.HealthBarColorGradient.Evaluate(targetFillAmount), _fillSpeed);
         yield return new WaitForSeconds(_fillSpeed);

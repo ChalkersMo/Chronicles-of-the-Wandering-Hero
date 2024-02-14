@@ -4,10 +4,11 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 
-public class PlayerDamageable : MonoBehaviour
+public class PlayerDamageable : MonoBehaviour, IDamageable, IHealable
 {
-    [SerializeField] float _maxHealth;
-    float _currentHealth;
+    public float MaxHealth { get; set; }
+    public float CurrentHealth { get; set; }
+
     [SerializeField] Image _healthBarFill;
     [SerializeField] Image _healthBarDamageFill;
     [SerializeField] TextMeshProUGUI _healthTxt;
@@ -17,28 +18,29 @@ public class PlayerDamageable : MonoBehaviour
 
     private void Start()
     {
-        _currentHealth = _maxHealth;
-        _healthTxt.text = _currentHealth.ToString();
+        MaxHealth = PlayerStats.instance.MaxHealth;
+        CurrentHealth = MaxHealth;
+        _healthTxt.text = CurrentHealth.ToString();
 
     }
     public void TakeDamage(float amount)
     {
-        _currentHealth -= amount;
-        _currentHealth = Mathf.Clamp(_currentHealth, 0, _maxHealth);
-        _healthTxt.text += _currentHealth.ToString();
+        CurrentHealth -= amount;
+        CurrentHealth = Mathf.Clamp(CurrentHealth, 0, MaxHealth);
+        _healthTxt.text += CurrentHealth.ToString();
         StartCoroutine(UpdateHealthBar());
     }
     public void Heal(float amount)
     {
-        _currentHealth += amount;
-        _currentHealth = Mathf.Clamp(_currentHealth, 0, _maxHealth);
-        _healthTxt.text += _currentHealth.ToString();
+        CurrentHealth += amount;
+        CurrentHealth = Mathf.Clamp(CurrentHealth, 0, MaxHealth);
+        _healthTxt.text += CurrentHealth.ToString();
         StartCoroutine(UpdateHealthBar());
     }
 
     IEnumerator UpdateHealthBar()
     {
-        float targetFillAmount = _currentHealth / _maxHealth;
+        float targetFillAmount = CurrentHealth / MaxHealth;
         _healthBarFill.DOFillAmount(targetFillAmount, _fillSpeed);
         yield return new WaitForSeconds(_fillSpeed);
         _healthBarDamageFill.DOFillAmount(targetFillAmount, _fillDamageSpeed);
