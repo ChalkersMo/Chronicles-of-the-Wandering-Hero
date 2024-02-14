@@ -11,6 +11,7 @@ public class VolumeControl : MonoBehaviour
     public AudioMixer mixer;
     public Slider slider;
 
+    private float _volumeValue;
     private const float _multiplier = 20f;
 
     private void Awake()
@@ -20,14 +21,21 @@ public class VolumeControl : MonoBehaviour
 
     private void HadleSliderValueChanged(float value)
     {
-        var volumeValue = Mathf.Log10(value) * _multiplier;
-        mixer.SetFloat(volumeParameter, volumeValue);   
+        _volumeValue = Mathf.Log10(value) * _multiplier;
+        mixer.SetFloat(volumeParameter, _volumeValue);
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        _volumeValue = PlayerPrefs.GetFloat(volumeParameter, Mathf.Log10(slider.value) * _multiplier);
+        slider.value = Mathf.Pow(10f, _volumeValue / _multiplier);
     }
+
+    private void OnDisable()
+    {
+        PlayerPrefs.SetFloat(volumeParameter, _volumeValue);
+    }
+
 
 }
