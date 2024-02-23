@@ -10,5 +10,6 @@ public class NPC : ScriptableObject
     public bool isContactable;
     public bool isEnemy;
     public bool isFriend;
-    public List<string> Dialogue;
+    [TextArea(3, 10)]
+    public string[] sentences;
 }
