@@ -4,16 +4,15 @@ using DG.Tweening;
 public class NPCDialogueZone : MonoBehaviour
 {
     [SerializeField] Dialogue dialogue;
-    [SerializeField] GameObject PressObj;
     [SerializeField] GameObject NPCGameObj;
+    [SerializeField] GameObject PressButtonTip;
 
     private void OnTriggerEnter(Collider other)
     {
-        if (PressObj != null)
+        if (PressButtonTip != null)
         {
-            PressObj.SetActive(true);
+            PressButtonTip.SetActive(true);
         }
-
     }
     private void OnTriggerStay(Collider other)
     {
@@ -22,15 +21,25 @@ public class NPCDialogueZone : MonoBehaviour
             //NPCGameObj.transform.DORotate(other.transform.position, 1);
             if (Input.GetKey(KeyCode.F))
             {
-                FindObjectOfType<DialogueManager>().StartDialogue(dialogue);
+                PlayerController PC = FindObjectOfType<PlayerController>();
+                PlayerSwordAnimationController PSAC = FindObjectOfType<PlayerSwordAnimationController>();
+                if (PressButtonTip != null)
+                {
+                    PressButtonTip.SetActive(false);
+                }
+                PC.enabled = false;
+                PSAC.enabled = false;
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+                FindObjectOfType<DialogueManager>().StartDialogue(dialogue);               
             }
         }
     }
     private void OnTriggerExit(Collider other)
     {
-        if (PressObj != null)
+        if (PressButtonTip != null)
         {
-            PressObj.SetActive(false);
+            PressButtonTip.SetActive(false);
         }
     }
 }
