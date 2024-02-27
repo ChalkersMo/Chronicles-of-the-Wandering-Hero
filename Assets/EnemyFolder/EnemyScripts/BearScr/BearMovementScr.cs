@@ -36,8 +36,6 @@ public class BearMovementScr : MonoBehaviour
         {
             StartCoroutine(Patrol());
         }
-        Debug.Log(distance);
-
     }
     IEnumerator Patrol()
     {

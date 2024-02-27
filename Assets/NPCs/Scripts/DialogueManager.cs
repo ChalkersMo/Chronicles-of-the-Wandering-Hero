@@ -10,9 +10,8 @@ public class DialogueManager : MonoBehaviour
     public TextMeshProUGUI nametext;
     public TextMeshProUGUI dialoguetext;
     private Queue<string> sentences;
-    [SerializeField] GameObject Camera;
     public bool IsDialogueEnd = false;
-
+    [SerializeField] GameObject TPC;
     public static event Action EndOfDialogue;
 
     void Start()
@@ -20,18 +19,29 @@ public class DialogueManager : MonoBehaviour
         sentences = new Queue<string>();
         DialogueCanvas.SetActive(false);
     }
-    public void StartDialogue(Dialogue dialogue)
+    public void StartDialogue(NPC dialogue)
     {
+        TPC.SetActive(false);
         Cursor.lockState = CursorLockMode.None;
         IsDialogueEnd = false;
         DialogueCanvas.SetActive(true);
-        Camera.SetActive(false);
         nametext.text = dialogue.Name;
         sentences.Clear();
-        foreach (string sentence in dialogue.sentences)
+        if(dialogue.isTaskCompleted != true)
         {
-            sentences.Enqueue(sentence);
+            foreach (string sentence in dialogue.sentences1)
+            {
+                sentences.Enqueue(sentence);
+            }
         }
+        else
+        {
+            foreach (string sentence in dialogue.sentences2)
+            {
+                sentences.Enqueue(sentence);
+            }
+        }
+       
         DisplayNextSentece();
     }
 
@@ -61,10 +71,15 @@ public class DialogueManager : MonoBehaviour
 
     public void EndDialogue()
     {
+        StopAllCoroutines();
+        PlayerController PC = FindObjectOfType<PlayerController>();
+        PlayerSwordAnimationController PSAC = FindObjectOfType<PlayerSwordAnimationController>();
+        PC.enabled = true;
+        PSAC.enabled = true;
         Cursor.lockState = CursorLockMode.Locked;
         IsDialogueEnd = true;
         DialogueCanvas.SetActive(false);
-        Camera.SetActive(true);
+        TPC.SetActive(true);
         EndOfDialogue?.Invoke();
     }
 }
