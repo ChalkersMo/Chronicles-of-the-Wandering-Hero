@@ -7,7 +7,12 @@ public class Inventory : MonoBehaviour
     public List<InventorySlot> slots;
     public int maxSlots;
     GameObject currentItem;
+    InventoryVisual inventoryVisual;
 
+    private void Start()
+    {
+        inventoryVisual = GetComponent<InventoryVisual>();
+    }
     public bool AddItem(InventorySlot item, int quantity)
     {
         if (slots.Count >= maxSlots)
@@ -24,10 +29,12 @@ public class Inventory : MonoBehaviour
             }
         }
 
+        inventoryVisual.enabled = true;
         slots.Add(item);
         currentItem = item.itemObj;
         currentItem.transform.SetParent(transform.GetComponentInChildren<GridLayoutGroup>().transform);
         currentItem.transform.localScale = new Vector3(1, 1, 1);
+        inventoryVisual.enabled = false;
         return true;
     }
     public bool DeleteItem(InventorySlot item, int quantity)
