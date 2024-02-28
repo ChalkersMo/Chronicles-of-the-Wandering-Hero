@@ -1,0 +1,5 @@
+{
+	"NameItem":,
+	"Level":,
+	"Damage"
+}
