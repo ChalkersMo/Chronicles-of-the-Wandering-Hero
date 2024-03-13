@@ -116,9 +116,12 @@ public class PlayerController : MonoBehaviour, IEquipSword, IRunning
         }
         if (Input.GetKeyDown(KeyCode.F))
         {
-            animatorController.SetTrigger("EquipSword");
-            CanMove = false;
-            Invoke(nameof(SwordEquiping), 1.5f);
+            if(SwordEquiped != true)
+            {
+                animatorController.SetTrigger("EquipSword");
+                CanMove = false;
+                Invoke(nameof(SwordEquiping), 1.5f);
+            }          
         }
     }
     void SwordEquiping()

@@ -1,24 +1,57 @@
+using DG.Tweening;
 using UnityEngine;
 
 public class InventoryVisual : MonoBehaviour
 {
-    private void OnEnable()
+    PlayerController _playerController;
+    PlayerSwordAnimationController _playerSwordAnimationController;
+
+    Canvas _canvas;
+
+    float _transitionSpeed;
+    bool _isActive;
+    private void Awake()
     {
-        OnInventory();
-    }
-    private void OnDisable()
-    {
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        _playerController = player.GetComponent<PlayerController>();
+        _playerSwordAnimationController = player.GetComponent<PlayerSwordAnimationController>();
+        _canvas = GetComponent<Canvas>();
+        _transitionSpeed = 0;
         OffInventory();
+        _transitionSpeed = 1;
+        _isActive = false;
     }
 
     public void OnInventory()
     {
-        GetComponent<Canvas>().sortingOrder = 5;
-        transform.GetChild(0).gameObject.SetActive(true);
+        _playerController.enabled = false;
+        _playerSwordAnimationController.enabled = false;
+        _canvas.sortingOrder = 5;
+        transform.GetChild(0).DOScale(1, _transitionSpeed);
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
     }
     public void OffInventory()
     {
-        GetComponent<Canvas>().sortingOrder = 0;
-        transform.GetChild(0).gameObject.SetActive(false);
+        _playerController.enabled = true;
+        _playerSwordAnimationController.enabled = true;
+        _canvas.sortingOrder = 0;
+        transform.GetChild(0).DOScale(0, _transitionSpeed);
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+    }
+
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.B) && _isActive != true)
+        {
+            _isActive = true;
+            OnInventory();
+        }
+        else if(Input.GetKeyDown(KeyCode.B) && _isActive != false)
+        {
+            _isActive = false;
+            OffInventory();
+        }
     }
 }

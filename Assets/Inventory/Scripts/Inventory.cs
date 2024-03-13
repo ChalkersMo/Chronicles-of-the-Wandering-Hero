@@ -4,51 +4,40 @@ using UnityEngine.UI;
 
 public class Inventory : MonoBehaviour
 {
-    public List<InventorySlot> slots;
+    private Dictionary<string, ScriptableObject> items = new Dictionary<string, ScriptableObject>();
     public int maxSlots;
     GameObject currentItem;
-    InventoryVisual inventoryVisual;
 
-    private void Start()
-    {
-        inventoryVisual = GetComponent<InventoryVisual>();
-    }
     public bool AddItem(InventorySlot item, int quantity)
     {
-        if (slots.Count >= maxSlots)
+        if (items.Count >= maxSlots)
         {
             return false;
         }
 
-        foreach (InventorySlot slot in slots)
+        if (items.ContainsKey(item.Name) && item.stackable)
         {
-            if (slot.item == item && slot.stackable)
-            {
-                slot.quantity += quantity;
-                return true;
-            }
+            item.quantity += quantity;
+            return true;
         }
-
-        inventoryVisual.enabled = true;
-        slots.Add(item);
-        currentItem = item.itemObj;
+        items.Add(item.Name, item.itemScrObj);
+        currentItem = Instantiate(item.ObjForInventory);
         currentItem.transform.SetParent(transform.GetComponentInChildren<GridLayoutGroup>().transform);
         currentItem.transform.localScale = new Vector3(1, 1, 1);
-        inventoryVisual.enabled = false;
         return true;
     }
     public bool DeleteItem(InventorySlot item, int quantity)
     {
-        foreach (InventorySlot slot in slots)
+        if (items.ContainsKey(item.Name) && item.stackable)
         {
-            if (slot.item == item && slot.stackable)
-            {
-                slot.quantity -= quantity;
-                return true;
-            }
-        }
+            item.quantity -= quantity;
+            if(item.quantity <= 0)
+                items.Remove(item.Name);
 
-        slots.Remove(item);
+            return true;
+        }
+       
+        items.Remove(item.Name);
         return true;
     }
 }

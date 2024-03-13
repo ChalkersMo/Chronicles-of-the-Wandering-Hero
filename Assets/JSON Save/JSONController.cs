@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 
@@ -10,7 +8,7 @@ public class JSONController : MonoBehaviour
     [ContextMenu("Load")]
     public void LoadField()
     {
-        item = JsonUtility.FromJson<item>(File.ReadAllText(Application.streamingAssetsPath + "/JSON.json"));
+        item = JsonUtility.FromJson<Item>(File.ReadAllText(Application.streamingAssetsPath + "/JSON.json"));
     }
 
     [ContextMenu("Save")]
