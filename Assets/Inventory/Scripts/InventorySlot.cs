@@ -1,14 +1,23 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class InventorySlot : MonoBehaviour
 {
-    public ScriptableObject itemScrObj;
-    public ItemScriptable item;
     public string Name;
     public string Description;
-    public Sprite rarenessSprite;
-    public GameObject itemObj;
+    public Sprite ItemSprite;
+    public GameObject ItemObj;
     public GameObject ObjForInventory;
-    public int quantity;
-    public bool stackable;
+    public GameObject TipToPickUp;
+    public int Quantity;
+    public bool Stackable;
+
+    public void Assign(InventorySlot source)
+    {
+        var type = typeof(InventorySlot);
+        foreach (var field in type.GetFields())
+        {         
+            field.SetValue(this, field.GetValue(source));  
+        }
+    }
 }

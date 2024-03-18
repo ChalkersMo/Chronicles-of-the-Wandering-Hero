@@ -9,6 +9,9 @@ TagManager:
   - Inventory/ItemName
   - Inventory/ItemDescription
   - Inventory/ItemImage
+  - Inventory/ItemQuantity
+  - HUD/EquipedItems
+  - Inventory/ItemEquipButton
   layers:
   - Default
   - TransparentFX

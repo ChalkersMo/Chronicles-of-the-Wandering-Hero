@@ -6,18 +6,12 @@ public class ItemPickUpZone : MonoBehaviour
     InventorySlot inventorySlot;
     PickUpTip _tip;
     Inventory inventory;
-    ItemScriptable item;
 
-    GameObject _pressCanvas;
-    Transform _tipSpawnPoint;
     private void Start()
     {
         inventory = FindObjectOfType<Inventory>();
         inventorySlot = GetComponent<InventorySlot>();
-        _pressCanvas = GameObject.Find("PressCanvas");
-        _tipSpawnPoint = _pressCanvas.GetComponentInChildren<VerticalLayoutGroup>().transform;
         _tip = GetComponent<PickUpTip>();
-        item = inventorySlot.item;
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -33,7 +27,7 @@ public class ItemPickUpZone : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.F))
             {
                 _tip.DestroyTip();
-                inventory.AddItem(inventorySlot, item.Quantity);
+                inventory.AddItem(inventorySlot, inventorySlot.Quantity);
                 Destroy(gameObject);
             }
         }

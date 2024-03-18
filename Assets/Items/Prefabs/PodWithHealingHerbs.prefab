@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 258924811562576599}
   - component: {fileID: 2857063711911068406}
   m_Layer: 7
-  m_Name: fishing_bobber
+  m_Name: PodWithHealingHerbs
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -170,16 +170,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 391103ac62664a340883570c5ae06a7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemScrObj: {fileID: 11400000, guid: dcfbe34c600942f4e9c035ae647f366f, type: 2}
-  item: {fileID: 11400000, guid: dcfbe34c600942f4e9c035ae647f366f, type: 2}
-  Name: Bobber
-  Description: Yes, it's test
-  rarenessSprite: {fileID: 21300000, guid: 084e578671ec0de489bcb21a8b9ffab0, type: 3}
-  itemObj: {fileID: 5147051664035713417}
+  Name: HealingPod
+  Description: Pod with healing herbs. Heal you by 10 points
+  ItemSprite: {fileID: 21300000, guid: 09d38a8378868664b888768e5c85e4f4, type: 3}
+  ItemObj: {fileID: 919132149155446097, guid: fe1ba754602a2d84a8bf05f741443c54, type: 3}
   ObjForInventory: {fileID: 7257025149817544207, guid: 596b9ce0c2102db48a0584461aba289f,
     type: 3}
-  quantity: 0
-  stackable: 1
+  TipToPickUp: {fileID: 2802702512843156077, guid: 57069fcf8b082574185b2db61e47bd09,
+    type: 3}
+  Quantity: 1
+  Stackable: 1
 --- !u!114 &258924811562576599
 MonoBehaviour:
   m_ObjectHideFlags: 0

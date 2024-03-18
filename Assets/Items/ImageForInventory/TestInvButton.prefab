@@ -145,4 +145,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dadaa04bb60d8bc469c82130cd380290, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemScriptable: {fileID: 11400000, guid: dcfbe34c600942f4e9c035ae647f366f, type: 2}
+  itemQuantity: 0

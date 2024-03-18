@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class Inventory : MonoBehaviour
 {
-    private Dictionary<string, ScriptableObject> items = new Dictionary<string, ScriptableObject>();
+    [SerializeField] private Dictionary<string, InventorySlot> items = new Dictionary<string, InventorySlot>();
     public int maxSlots;
     GameObject currentItem;
 
@@ -15,23 +15,27 @@ public class Inventory : MonoBehaviour
             return false;
         }
 
-        if (items.ContainsKey(item.Name) && item.stackable)
+        if (items.ContainsKey(item.Name) && item.Stackable)
         {
-            item.quantity += quantity;
+            items[item.Name].Quantity += quantity;
             return true;
         }
-        items.Add(item.Name, item.itemScrObj);
+
         currentItem = Instantiate(item.ObjForInventory);
+        InventorySlot itemInvSlot = currentItem.AddComponent<InventorySlot>();
+        itemInvSlot.Assign(item);
+        items.Add(itemInvSlot.Name, itemInvSlot);
         currentItem.transform.SetParent(transform.GetComponentInChildren<GridLayoutGroup>().transform);
         currentItem.transform.localScale = new Vector3(1, 1, 1);
+        currentItem.GetComponent<Image>().sprite = item.ItemSprite;
         return true;
     }
     public bool DeleteItem(InventorySlot item, int quantity)
     {
-        if (items.ContainsKey(item.Name) && item.stackable)
+        if (items.ContainsKey(item.Name) && item.Stackable)
         {
-            item.quantity -= quantity;
-            if(item.quantity <= 0)
+            item.Quantity -= quantity;
+            if(item.Quantity <= 0)
                 items.Remove(item.Name);
 
             return true;

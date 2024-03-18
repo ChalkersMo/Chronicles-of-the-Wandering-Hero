@@ -113,6 +113,16 @@ public class PlayerController : MonoBehaviour, IEquipSword, IRunning
 
             Quaternion targetRotation = Quaternion.Euler(0, cameraTransform.eulerAngles.y, 0);
             transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+            if (Input.GetKeyDown(KeyCode.LeftAlt))
+            {
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+            }
+            else if(Input.GetKeyUp(KeyCode.LeftAlt))
+            {
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+            }
         }
         if (Input.GetKeyDown(KeyCode.F))
         {
