@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.UI;
 
 public class InventorySlot : MonoBehaviour
 {
@@ -11,6 +10,7 @@ public class InventorySlot : MonoBehaviour
     public GameObject TipToPickUp;
     public int Quantity;
     public bool Stackable;
+    public ItemUseable ItemUseable;
 
     public void Assign(InventorySlot source)
     {

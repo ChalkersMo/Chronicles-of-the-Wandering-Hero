@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 6394947016470614047}
   - component: {fileID: 258924811562576599}
   - component: {fileID: 2857063711911068406}
+  - component: {fileID: 2115144651770104735}
   m_Layer: 7
   m_Name: PodWithHealingHerbs
   m_TagString: Untagged
@@ -180,6 +181,7 @@ MonoBehaviour:
     type: 3}
   Quantity: 1
   Stackable: 1
+  ItemUseable: {fileID: 2115144651770104735}
 --- !u!114 &258924811562576599
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -204,3 +206,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26a0dab4e769c28478446f46ba699665, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2115144651770104735
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5147051664035713417}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02d90ff8c90b4a942a57809a150640c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _recoveringTime: 0
+  _isRecovering: 0

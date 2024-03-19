@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class ShowItemInfo : MonoBehaviour
 {
-    ItemHUDSlots equipedItems;
+    ItemHUDSlots itemsSlots;
     InventorySlot InventorySlot;
     TextMeshProUGUI Description;
     TextMeshProUGUI Name;
@@ -14,16 +14,18 @@ public class ShowItemInfo : MonoBehaviour
     public int itemQuantity;
     Button equipButton;
     bool _isEquiped;
+    ItemUseable ItemUseable;
 
     private void Start()
     {
         InventorySlot = GetComponent<InventorySlot>();
+        ItemUseable = InventorySlot.ItemUseable;
         Name = GameObject.FindGameObjectWithTag("Inventory/ItemName").GetComponent<TextMeshProUGUI>();
         Description = GameObject.FindGameObjectWithTag("Inventory/ItemDescription").GetComponent<TextMeshProUGUI>();
         Quantity = GameObject.FindGameObjectWithTag("Inventory/ItemQuantity").GetComponent<TextMeshProUGUI>();
         Image = GameObject.FindGameObjectWithTag("Inventory/ItemImage").GetComponent<Image>();
         equipButton = GameObject.FindGameObjectWithTag("Inventory/ItemEquipButton").GetComponent<Button>();
-        equipedItems = GameObject.FindGameObjectWithTag("HUD/EquipedItems").GetComponent<ItemHUDSlots>();
+        itemsSlots = GameObject.FindGameObjectWithTag("HUD/EquipedItems").GetComponent<ItemHUDSlots>();
         
     }
     public void ShowInfo()
@@ -49,14 +51,14 @@ public class ShowItemInfo : MonoBehaviour
 
     void EquipItem()
     {
-        equipedItems.EquipItem(InventorySlot.ItemSprite, InventorySlot.Name);
+        itemsSlots.EquipItem(InventorySlot.ItemSprite, InventorySlot.Name, ItemUseable);
         equipButton.onClick.RemoveAllListeners();
         equipButton.onClick.AddListener(UnEquipItem);
         _isEquiped = true;
     }
     void UnEquipItem()
     {
-        equipedItems.UnEquipItem(InventorySlot.ItemSprite, InventorySlot.Name);
+        itemsSlots.UnEquipItem(InventorySlot.Name);
         equipButton.onClick.RemoveAllListeners();
         equipButton.onClick.AddListener(EquipItem);
         _isEquiped = false;

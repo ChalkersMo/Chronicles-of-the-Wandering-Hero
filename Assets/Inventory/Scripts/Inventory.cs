@@ -23,7 +23,10 @@ public class Inventory : MonoBehaviour
 
         currentItem = Instantiate(item.ObjForInventory);
         InventorySlot itemInvSlot = currentItem.AddComponent<InventorySlot>();
+        ItemUseable itemUseable = item.ItemUseable;
+        itemUseable.Assign(currentItem);
         itemInvSlot.Assign(item);
+        itemInvSlot.ItemUseable = currentItem.GetComponent<ItemUseable>();
         items.Add(itemInvSlot.Name, itemInvSlot);
         currentItem.transform.SetParent(transform.GetComponentInChildren<GridLayoutGroup>().transform);
         currentItem.transform.localScale = new Vector3(1, 1, 1);
