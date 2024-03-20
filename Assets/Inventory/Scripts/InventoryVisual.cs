@@ -1,10 +1,18 @@
 using DG.Tweening;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class InventoryVisual : MonoBehaviour
 {
     PlayerController _playerController;
     PlayerSwordAnimationController _playerSwordAnimationController;
+
+    TextMeshProUGUI _nameItem;
+    TextMeshProUGUI _descriptionItem;
+    TextMeshProUGUI _quantityItem;
+    Image _imageItem;
+    [SerializeField] Sprite UIMaskSprite;
 
     Canvas _canvas;
 
@@ -12,6 +20,11 @@ public class InventoryVisual : MonoBehaviour
     bool _isActive;
     private void Awake()
     {
+        _nameItem = GameObject.FindGameObjectWithTag("Inventory/ItemName").GetComponent<TextMeshProUGUI>();
+        _descriptionItem = GameObject.FindGameObjectWithTag("Inventory/ItemDescription").GetComponent<TextMeshProUGUI>();
+        _quantityItem = GameObject.FindGameObjectWithTag("Inventory/ItemQuantity").GetComponent<TextMeshProUGUI>();
+        _imageItem = GameObject.FindGameObjectWithTag("Inventory/ItemImage").GetComponent<Image>();
+
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         _playerController = player.GetComponent<PlayerController>();
         _playerSwordAnimationController = player.GetComponent<PlayerSwordAnimationController>();
@@ -37,6 +50,10 @@ public class InventoryVisual : MonoBehaviour
         _playerSwordAnimationController.enabled = true;
         _canvas.sortingOrder = 0;
         transform.GetChild(0).DOScale(0, _transitionSpeed);
+        _nameItem.text = "Item name";
+        _descriptionItem.text = "Here will be your item description";
+        _quantityItem.text = "Item quantity";
+        _imageItem.sprite = UIMaskSprite;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
     }

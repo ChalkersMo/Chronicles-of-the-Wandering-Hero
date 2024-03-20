@@ -27,14 +27,14 @@ public class PlayerDamageable : MonoBehaviour, IDamageable, IHealable
     {
         CurrentHealth -= amount;
         CurrentHealth = Mathf.Clamp(CurrentHealth, 0, MaxHealth);
-        _healthTxt.text += CurrentHealth.ToString();
+        _healthTxt.text = CurrentHealth.ToString();
         StartCoroutine(UpdateHealthBar());
     }
     public void Heal(float amount)
     {
         CurrentHealth += amount;
         CurrentHealth = Mathf.Clamp(CurrentHealth, 0, MaxHealth);
-        _healthTxt.text += CurrentHealth.ToString();
+        _healthTxt.text = CurrentHealth.ToString();
         StartCoroutine(UpdateHealthBar());
     }
 

@@ -13,7 +13,7 @@ public class HealingPod : ItemUseable
     private void Start()
     {
         GameObject player = GameObject.FindGameObjectWithTag("Player");
-        inventory = GameObject.FindGameObjectWithTag("Inventory").GetComponent<Inventory>();
+        inventory = GetComponentInParent<Inventory>();
         invSlot = GetComponent<InventorySlot>();
         _slots = FindObjectOfType<ItemHUDSlots>();
         playerStats = player.GetComponent<PlayerStats>();
