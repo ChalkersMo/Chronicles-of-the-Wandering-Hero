@@ -21,7 +21,7 @@ public class PlayerSwordAnimationController : MonoBehaviour
 
     private void Update()
     {
-        if(animatorController.GetInteger("State") == 1)
+        if(animatorController.GetInteger("State") == 1 && playerSwordController != null)
         {
             if (animatorController.GetCurrentAnimatorStateInfo(0).normalizedTime > cooldownTime &&
             animatorController.GetCurrentAnimatorStateInfo(0).IsName("hit1"))

@@ -182,6 +182,8 @@ MonoBehaviour:
   Quantity: 1
   Stackable: 1
   ItemUseable: {fileID: 2115144651770104735}
+  IsEquipeable: 1
+  IsSword: 0
 --- !u!114 &258924811562576599
 MonoBehaviour:
   m_ObjectHideFlags: 0

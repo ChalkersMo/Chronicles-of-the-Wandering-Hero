@@ -12,6 +12,8 @@ TagManager:
   - Inventory/ItemQuantity
   - HUD/EquipedItems
   - Inventory/ItemEquipButton
+  - HUD/MainSwordImage
+  - HUD/SecondarySwordImage
   layers:
   - Default
   - TransparentFX

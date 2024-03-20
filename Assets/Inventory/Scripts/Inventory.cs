@@ -23,8 +23,11 @@ public class Inventory : MonoBehaviour
 
         currentItem = Instantiate(item.ObjForInventory);
         InventorySlot itemInvSlot = currentItem.AddComponent<InventorySlot>();
-        ItemUseable itemUseable = item.ItemUseable;
-        itemUseable.Assign(currentItem);
+        if(item.ItemUseable != null)
+        {
+            ItemUseable itemUseable = item.ItemUseable;
+            itemUseable.Assign(currentItem);
+        }       
         itemInvSlot.Assign(item);
         itemInvSlot.ItemUseable = currentItem.GetComponent<ItemUseable>();
         items.Add(itemInvSlot.Name, itemInvSlot);

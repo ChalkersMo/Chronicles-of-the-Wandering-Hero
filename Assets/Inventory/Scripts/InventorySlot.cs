@@ -11,6 +11,8 @@ public class InventorySlot : MonoBehaviour
     public int Quantity;
     public bool Stackable;
     public ItemUseable ItemUseable;
+    public bool IsEquipeable;
+    public bool IsSword;
 
     public void Assign(InventorySlot source)
     {

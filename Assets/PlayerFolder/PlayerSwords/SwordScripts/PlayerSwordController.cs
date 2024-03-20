@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerSwordController : MonoBehaviour
 {
-    [SerializeField] SwordItem swordItem;
+    public SwordItem swordItem;
     public bool IsAttacking;
 
     [SerializeField] GameObject DamagePopUpPrefab;
