@@ -98,8 +98,8 @@ public class SwordHolder : MonoBehaviour
             secondarySword = null;
             _secondarySwordImage.sprite= NullSprite;
 
-            if(_secondarySwordHolder.GetChild(1) != null)
-                Destroy(_secondarySwordHolder.GetChild(1).gameObject);
+            if(_secondarySwordHolder.GetChild(0) != null)
+                Destroy(_secondarySwordHolder.GetChild(0).gameObject);
 
             _isSecondarySwordEquiped = false;
         }

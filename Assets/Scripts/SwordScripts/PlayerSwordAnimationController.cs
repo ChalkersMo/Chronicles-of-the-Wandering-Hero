@@ -16,7 +16,6 @@ public class PlayerSwordAnimationController : MonoBehaviour
     {
         animatorController = GetComponentInChildren<Animator>();
         playerController = FindObjectOfType<PlayerController>();
-        playerSwordController = FindObjectOfType<PlayerSwordController>();
     }
 
     private void Update()
@@ -56,6 +55,16 @@ public class PlayerSwordAnimationController : MonoBehaviour
     public void AssignSwordController(PlayerSwordController controller)
     {
         playerSwordController = controller;
+
+        if(playerSwordController != null)
+            animatorController.SetInteger("State", 1);
+        else
+        {
+            animatorController.SetInteger("State", 0);
+            animatorController.SetBool("hit1", false);
+            animatorController.SetBool("hit2", false);
+            animatorController.SetBool("hit3", false);
+        }
     }
     void OnClick()
     {
@@ -84,18 +93,22 @@ public class PlayerSwordAnimationController : MonoBehaviour
 
     public void Attacking()
     {
-        playerSwordController.IsAttacking = true;
+        if(playerSwordController != null)
+            playerSwordController.IsAttacking = true;
     }
     public void DisableMoving()
     {
-        playerController.CanMove = false;
+        if (playerSwordController != null)
+            playerController.CanMove = false;
     }
     public void EnableMoving()
     {
-        playerController.CanMove = true;
+        if (playerSwordController != null)
+            playerController.CanMove = true;
     }
     public void DisAttacking()
     {
-        playerSwordController.IsAttacking = false;
+        if (playerSwordController != null)
+            playerSwordController.IsAttacking = false;
     }
 }
