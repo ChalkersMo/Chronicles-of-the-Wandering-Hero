@@ -45,7 +45,8 @@ public class EnemyDamageable : MonoBehaviour, IDamageable
         {
             StopCoroutine(IUpdateHelthBar());
             Die();
-        }            
+        }
+        Debug.Log("YEEES");
     }
     IEnumerator IUpdateHelthBar()
     {

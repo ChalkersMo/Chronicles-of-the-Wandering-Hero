@@ -22,9 +22,12 @@ public class NPCDialogueZone : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (PressButtonTip != null)
+        if (other.CompareTag("Player"))
         {
-            PressButtonTip.SetActive(true);
+            if (PressButtonTip != null)
+            {
+                PressButtonTip.SetActive(true);
+            }
         }
     }
     private void OnTriggerStay(Collider other)
@@ -49,9 +52,12 @@ public class NPCDialogueZone : MonoBehaviour
     }
     private void OnTriggerExit(Collider other)
     {
-        if (PressButtonTip != null)
+        if (other.CompareTag("Player"))
         {
-            PressButtonTip.SetActive(false);
+            if (PressButtonTip != null)
+            {
+                PressButtonTip.SetActive(false);
+            }
         }
     }
 }

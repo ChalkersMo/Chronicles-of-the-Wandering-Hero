@@ -1,5 +1,7 @@
+using Cinemachine;
 using DG.Tweening;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,6 +18,7 @@ public class InventoryVisual : MonoBehaviour
 
     Canvas _canvas;
 
+    CinemachineVirtualCamera ThirdPersonCamera;
     float _transitionSpeed;
     bool _isActive;
     private void Awake()
@@ -24,6 +27,7 @@ public class InventoryVisual : MonoBehaviour
         _descriptionItem = GameObject.FindGameObjectWithTag("Inventory/ItemDescription").GetComponent<TextMeshProUGUI>();
         _quantityItem = GameObject.FindGameObjectWithTag("Inventory/ItemQuantity").GetComponent<TextMeshProUGUI>();
         _imageItem = GameObject.FindGameObjectWithTag("Inventory/ItemImage").GetComponent<Image>();
+        ThirdPersonCamera = GameObject.FindGameObjectWithTag("ThirdPersonCamera").GetComponent<CinemachineVirtualCamera>();
 
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         _playerController = player.GetComponent<PlayerController>();
@@ -43,6 +47,7 @@ public class InventoryVisual : MonoBehaviour
         transform.GetChild(0).DOScale(1, _transitionSpeed);
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
+        ThirdPersonCamera.enabled = false;
     }
     public void OffInventory()
     {
@@ -56,6 +61,7 @@ public class InventoryVisual : MonoBehaviour
         _imageItem.sprite = UIMaskSprite;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+        ThirdPersonCamera.enabled = true;
     }
 
     private void Update()

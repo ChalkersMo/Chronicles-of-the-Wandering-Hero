@@ -15,7 +15,7 @@ public class PlayerSwordAnimationController : MonoBehaviour
     private void Start()
     {
         animatorController = GetComponentInChildren<Animator>();
-        playerController = FindObjectOfType<PlayerController>();
+        playerController = GetComponent<PlayerController>();
     }
 
     private void Update()
