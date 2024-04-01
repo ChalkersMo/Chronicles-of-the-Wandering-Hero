@@ -11,22 +11,29 @@ public class PlayerSwordController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Enemy") && IsAttacking != false)
+        if (IsAttacking)
         {
-            float damage = (float)Math.Round(swordItem.Damage * PlayerStats.instance.MultiplySwordDamage, 2);
-            other.GetComponent<EnemyDamageable>().TakeDamage(damage);
-            CreatePopUp(transform.position, $"{damage}", swordItem.DamagePopUpFaceColor, swordItem.DamagePopUpoutlineColor);
-            IsAttacking = false;
-        }     
-    }
+            if (other.CompareTag("Enemy"))
+            {
+                float damage = (float)Math.Round(swordItem.Damage * PlayerStats.instance.MultiplySwordDamage, 2);
+                other.GetComponent<EnemyDamageable>().TakeDamage(damage);
+                CreatePopUp(transform.position, $"{damage}", swordItem.DamagePopUpFaceColor, swordItem.DamagePopUpoutlineColor);
+                IsAttacking = false;
+            }
+        }
+    }     
+    
     private void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("Enemy") && IsAttacking != false)
+        if (IsAttacking)
         {
-            float damage = (float)Math.Round(swordItem.Damage * PlayerStats.instance.MultiplySwordDamage, 2);
-            other.GetComponent<EnemyDamageable>().TakeDamage(damage);
-            CreatePopUp(transform.position, $"{damage}", swordItem.DamagePopUpFaceColor, swordItem.DamagePopUpoutlineColor);
-            IsAttacking = false;
+            if (other.CompareTag("Enemy"))
+            {
+                float damage = (float)Math.Round(swordItem.Damage * PlayerStats.instance.MultiplySwordDamage, 2);
+                other.GetComponent<EnemyDamageable>().TakeDamage(damage);
+                CreatePopUp(transform.position, $"{damage}", swordItem.DamagePopUpFaceColor, swordItem.DamagePopUpoutlineColor);
+                IsAttacking = false;
+            }
         }
     }
     public void CreatePopUp(Vector3 position, string text, Color faceColor, Color outlineColor)

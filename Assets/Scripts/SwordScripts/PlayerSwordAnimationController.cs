@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class PlayerSwordAnimationController : MonoBehaviour
 {
+    EventBus eventBus;
     Animator animatorController;
     PlayerController playerController;
     PlayerSwordController playerSwordController;
@@ -14,44 +15,28 @@ public class PlayerSwordAnimationController : MonoBehaviour
 
     private void Start()
     {
+        eventBus = EventBus.Instance;
         animatorController = GetComponentInChildren<Animator>();
         playerController = GetComponent<PlayerController>();
+
+        eventBus.OnAttack += StartAttacking;
     }
 
     private void Update()
     {
-        if(animatorController.GetInteger("State") == 1 && playerSwordController != null)
+        if (Input.GetMouseButtonDown(0))
         {
-            if (animatorController.GetCurrentAnimatorStateInfo(0).normalizedTime > cooldownTime &&
-            animatorController.GetCurrentAnimatorStateInfo(0).IsName("hit1"))
-            {
-                animatorController.SetBool("hit1", false);
-            }
-            if (animatorController.GetCurrentAnimatorStateInfo(0).normalizedTime > cooldownTime &&
-                animatorController.GetCurrentAnimatorStateInfo(0).IsName("hit2"))
-            {
-                animatorController.SetBool("hit2", false);
-            }
-            if (animatorController.GetCurrentAnimatorStateInfo(0).normalizedTime > cooldownTime &&
-                animatorController.GetCurrentAnimatorStateInfo(0).IsName("hit3"))
-            {
-                animatorController.SetBool("hit3", false);
-                numberOfCklicks = 0;
-            }
-
-            if (Time.time - lastClickedTime > maxComboDelay)
-            {
-                numberOfCklicks = 0;
-            }
-            if (Time.time > nextFireTime && playerController.SwordEquiped != false && playerSwordController.IsAttacking == false)
-            {
-                if (Input.GetMouseButtonDown(0))
-                {
-                    OnClick();
-                }
-            }
-        }       
+            OnClick();
+        }
+        if (Time.time - lastClickedTime > maxComboDelay)
+        {
+            numberOfCklicks = 0;
+            animatorController.SetBool("hit1", false);
+            animatorController.SetBool("hit2", false);
+            animatorController.SetBool("hit3", false);
+        }
     }
+
     public void AssignSwordController(PlayerSwordController controller)
     {
         playerSwordController = controller;
@@ -68,47 +53,72 @@ public class PlayerSwordAnimationController : MonoBehaviour
     }
     void OnClick()
     {
-        lastClickedTime = Time.time;
-        numberOfCklicks++;
-        if (numberOfCklicks == 1)
-        {
-            animatorController.SetBool("hit1", true);
-        }
-        numberOfCklicks = Mathf.Clamp(numberOfCklicks, 0, 3);
+        eventBus.OnAttack?.Invoke();       
+    }
 
-        if (numberOfCklicks >= 2 && animatorController.GetCurrentAnimatorStateInfo(0).normalizedTime > cooldownTime && animatorController
-            .GetCurrentAnimatorStateInfo(0).IsName("hit1"))
+    void StartAttacking()
+    {
+        if (animatorController.GetInteger("State") == 1 && playerSwordController != null)
+        {
+            if (playerController.SwordEquiped && !playerSwordController.IsAttacking)
+            {               
+                lastClickedTime = Time.time;
+                numberOfCklicks++;
+                if (numberOfCklicks == 1)
+                {
+                    animatorController.SetBool("hit1", true);
+                }
+                numberOfCklicks = Mathf.Clamp(numberOfCklicks, 0, 3);
+                AfterAttack();
+                playerController.CanMove = false;
+            }
+        }
+    }
+
+    public void EnableAttacking()
+    {
+        if (playerSwordController != null)
+            playerSwordController.IsAttacking = true;
+    }
+    public void DisableAttacking()
+    {
+        if (playerSwordController != null)
+            playerSwordController.IsAttacking = false;
+    }
+    public void EndAttacking()
+    {
+        if (playerSwordController != null)
+            playerController.CanMove = true;
+
+        AfterAttack();
+    }
+
+    void AfterAttack()
+    {
+        if (Time.time - lastClickedTime > maxComboDelay)
+        {
+            numberOfCklicks = 0;
+            animatorController.SetBool("hit1", false);
+            animatorController.SetBool("hit2", false);
+            animatorController.SetBool("hit3", false);           
+        }
+
+        if (numberOfCklicks >= 2
+            && animatorController.GetCurrentAnimatorStateInfo(0).normalizedTime > cooldownTime
+            && animatorController.GetCurrentAnimatorStateInfo(0).IsName("hit1"))
         {
             animatorController.SetBool("hit1", false);
             animatorController.SetBool("hit2", true);
         }
-        if (numberOfCklicks >= 3 && animatorController.GetCurrentAnimatorStateInfo(0).normalizedTime > cooldownTime && animatorController
-            .GetCurrentAnimatorStateInfo(0).IsName("hit2"))
+        if (numberOfCklicks >= 3
+            && animatorController.GetCurrentAnimatorStateInfo(0).normalizedTime > cooldownTime
+            && animatorController.GetCurrentAnimatorStateInfo(0).IsName("hit2"))
         {
             animatorController.SetBool("hit2", false);
             animatorController.SetBool("hit3", true);
-            
         }
-    }
-
-    public void Attacking()
-    {
-        if(playerSwordController != null)
-            playerSwordController.IsAttacking = true;
-    }
-    public void DisableMoving()
-    {
-        if (playerSwordController != null)
-            playerController.CanMove = false;
-    }
-    public void EnableMoving()
-    {
-        if (playerSwordController != null)
-            playerController.CanMove = true;
-    }
-    public void DisAttacking()
-    {
-        if (playerSwordController != null)
-            playerSwordController.IsAttacking = false;
+        if(animatorController.GetCurrentAnimatorStateInfo(0).normalizedTime > cooldownTime
+            && animatorController.GetCurrentAnimatorStateInfo(0).IsName("hit3"))
+            animatorController.SetBool("hit3", false);
     }
 }

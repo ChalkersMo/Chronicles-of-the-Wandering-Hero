@@ -58,61 +58,12 @@ public class PlayerController : MonoBehaviour, IEquipSword, IRunning
             else if (Input.GetKeyDown(KeyCode.LeftControl) && IsRunning != false)
                 IsRunning = false;
 
-            groundedPlayer = _CharacterController.isGrounded;
-            if (groundedPlayer && playerVelocity.y < 0)
-            {
-                playerVelocity.y = 0;
-            }
-
-            Vector2 input = moveAction.ReadValue<Vector2>();
-            Vector3 move = new Vector3(input.x, 0, input.y);
-            move = move.x * cameraTransform.right.normalized + move.z * cameraTransform.forward.normalized;
-            move.y = 0f;
-
-            if (IsRunning != true)
-                _CharacterController.Move(move * Time.deltaTime * WalkingSpeed);
-            else
-                _CharacterController.Move(move * Time.deltaTime * RunningSpeed);
-
-            float vertical = Input.GetAxisRaw("Vertical");
-            float horizontal = Input.GetAxisRaw("Horizontal");
-            if (groundedPlayer)
-            {
-                if(IsRunning != true)
-                {
-                    animMove = new Vector2(horizontal, vertical);
-                    animatorController.SetFloat("SpeedMultiplier", 1f);
-                }    
-                else
-                {
-                    animMove = new Vector2(horizontal, vertical);
-                    animatorController.SetFloat("SpeedMultiplier", 1.3f);
-                }                   
-            }
-
-            animatorController.SetBool("IsGrounded", groundedPlayer);
-            animatorController.SetBool("IsRunning", IsRunning);
-
-            if (groundedPlayer != false)
-                groundedTime += Time.deltaTime;
-            else
-                groundedTime = 0f;
-
             if (jumpAction.triggered && groundedPlayer && groundedTime >= 2f)
             {
                 playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
                 animatorController.SetTrigger("Jump");
             }
 
-
-            animatorController.SetFloat("X", animMove.x, 0.1f, Time.deltaTime);
-            animatorController.SetFloat("Y", animMove.y, 0.1f, Time.deltaTime);
-
-            playerVelocity.y += gravityValue * Time.deltaTime;
-            _CharacterController.Move(playerVelocity * Time.deltaTime);
-
-            Quaternion targetRotation = Quaternion.Euler(0, cameraTransform.eulerAngles.y, 0);
-            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
             if (Input.GetKeyDown(KeyCode.LeftAlt))
             {
                 Cursor.lockState = CursorLockMode.None;
@@ -124,6 +75,61 @@ public class PlayerController : MonoBehaviour, IEquipSword, IRunning
                 Cursor.visible = false;
             }
         }
+    }
+    private void FixedUpdate()
+    {
+        groundedPlayer = _CharacterController.isGrounded;
+        if (groundedPlayer && playerVelocity.y < 0)
+        {
+            playerVelocity.y = 0;
+        }
+
+        Vector2 input = moveAction.ReadValue<Vector2>();
+        Vector3 move = new Vector3(input.x, 0, input.y);
+        move = move.x * cameraTransform.right.normalized + move.z * cameraTransform.forward.normalized;
+        move.y = 0f;
+
+        if (CanMove != false)
+        {
+            if (IsRunning != true)
+                _CharacterController.Move(WalkingSpeed * Time.deltaTime * move);
+            else
+                _CharacterController.Move(RunningSpeed * Time.deltaTime * move);
+
+            float vertical = Input.GetAxisRaw("Vertical");
+            float horizontal = Input.GetAxisRaw("Horizontal");
+
+            if (groundedPlayer)
+            {
+                if (IsRunning != true)
+                {
+                    animMove = new Vector2(horizontal, vertical);
+                    animatorController.SetFloat("SpeedMultiplier", 1f);
+                }
+                else
+                {
+                    animMove = new Vector2(horizontal, vertical);
+                    animatorController.SetFloat("SpeedMultiplier", 1.3f);
+                }
+                animatorController.SetFloat("X", animMove.x, 0.1f, Time.deltaTime);
+                animatorController.SetFloat("Y", animMove.y, 0.1f, Time.deltaTime);
+            }
+            
+        }
+
+        animatorController.SetBool("IsGrounded", groundedPlayer);
+        animatorController.SetBool("IsRunning", IsRunning);
+
+        if (groundedPlayer != false)
+            groundedTime += Time.deltaTime;
+        else
+            groundedTime = 0f;
+
+        playerVelocity.y += gravityValue * Time.deltaTime;
+        _CharacterController.Move(playerVelocity * Time.deltaTime);
+
+        Quaternion targetRotation = Quaternion.Euler(0, cameraTransform.eulerAngles.y, 0);
+        transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
     }
     public void SwordEquiping()
     {

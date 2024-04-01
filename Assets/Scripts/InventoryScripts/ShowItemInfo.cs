@@ -36,24 +36,27 @@ public class ShowItemInfo : MonoBehaviour
         Description.text = InventorySlot.Description;
         Quantity.text = InventorySlot.Quantity.ToString();
         Image.sprite = InventorySlot.ItemSprite;
-        if (_isEquiped != true && _isEquipeable != false)
+        if(_isEquipeable)
         {
-            equipButton.onClick.RemoveAllListeners();
-            equipButton.onClick.AddListener(EquipItem);
-            _isEquiped = false;
-        }
-        else if (_isEquiped != false && _isEquipeable != false)
-        {
-            equipButton.onClick.RemoveAllListeners();
-            equipButton.onClick.AddListener(UnEquipItem);
-            _isEquiped = true;
-        }
+            if (!_isEquiped)
+            {
+                equipButton.onClick.RemoveAllListeners();
+                equipButton.onClick.AddListener(EquipItem);
+                _isEquiped = false;
+            }
+            else if (_isEquiped)
+            {
+                equipButton.onClick.RemoveAllListeners();
+                equipButton.onClick.AddListener(UnEquipItem);
+                _isEquiped = true;
+            }
+        }    
         equipButton.transform.DOScale(1, 0.7f);
     }
 
     void EquipItem()
     {
-        if (InventorySlot.IsSword != true)
+        if (!InventorySlot.IsSword)
             itemsSlots.EquipItem(InventorySlot.ItemSprite, InventorySlot.Name, ItemUseable);
         else
             _swordHolder.EquipSword(InventorySlot.ItemObj);
@@ -64,7 +67,7 @@ public class ShowItemInfo : MonoBehaviour
     }
     void UnEquipItem()
     {
-        if (InventorySlot.IsSword != true)
+        if (!InventorySlot.IsSword)
             itemsSlots.UnEquipItem(InventorySlot.Name);
         else
             _swordHolder.UnequipSword(InventorySlot.ItemObj);
