@@ -18,5 +18,5 @@ MonoBehaviour:
   IsMain: 0
   Sprite: {fileID: 21300000, guid: de77ecfae1bdebc47a105f663d434548, type: 3}
   Prefab: {fileID: 4400551432329997077, guid: 62c9c0d948f05424dbb27016929d6471, type: 3}
-  DamagePopUpFaceColor: {r: 0.6320754, g: 0.21113425, b: 0.044125997, a: 0}
-  DamagePopUpoutlineColor: {r: 0.4716981, g: 0.18806264, b: 0, a: 0}
+  DamagePopUpFaceColor: {r: 0.4245283, g: 0.12169811, b: 0, a: 1}
+  DamagePopUpoutlineColor: {r: 0.254717, g: 0.10188681, b: 0, a: 1}
