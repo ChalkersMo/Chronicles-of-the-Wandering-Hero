@@ -8,10 +8,9 @@ public class PlayerSwordAnimationController : MonoBehaviour
     PlayerSwordController playerSwordController;
 
     public float cooldownTime = 0.7f;
-    float nextFireTime = 0f;
     public static int numberOfCklicks = 0;
     float lastClickedTime = 0;
-    float maxComboDelay = 1;
+    float maxComboDelay = 1.5f;
 
     private void Start()
     {
@@ -28,13 +27,7 @@ public class PlayerSwordAnimationController : MonoBehaviour
         {
             OnClick();
         }
-        if (Time.time - lastClickedTime > maxComboDelay)
-        {
-            numberOfCklicks = 0;
-            animatorController.SetBool("hit1", false);
-            animatorController.SetBool("hit2", false);
-            animatorController.SetBool("hit3", false);
-        }
+        ComboRenewCheck();
     }
 
     public void AssignSwordController(PlayerSwordController controller)
@@ -89,20 +82,11 @@ public class PlayerSwordAnimationController : MonoBehaviour
     {
         if (playerSwordController != null)
             playerController.CanMove = true;
-
         AfterAttack();
     }
 
     void AfterAttack()
     {
-        if (Time.time - lastClickedTime > maxComboDelay)
-        {
-            numberOfCklicks = 0;
-            animatorController.SetBool("hit1", false);
-            animatorController.SetBool("hit2", false);
-            animatorController.SetBool("hit3", false);           
-        }
-
         if (numberOfCklicks >= 2
             && animatorController.GetCurrentAnimatorStateInfo(0).normalizedTime > cooldownTime
             && animatorController.GetCurrentAnimatorStateInfo(0).IsName("hit1"))
@@ -117,8 +101,15 @@ public class PlayerSwordAnimationController : MonoBehaviour
             animatorController.SetBool("hit2", false);
             animatorController.SetBool("hit3", true);
         }
-        if(animatorController.GetCurrentAnimatorStateInfo(0).normalizedTime > cooldownTime
-            && animatorController.GetCurrentAnimatorStateInfo(0).IsName("hit3"))
+    }
+    void ComboRenewCheck()
+    {
+        if (Time.time - lastClickedTime > maxComboDelay)
+        {
+            numberOfCklicks = 0;
+            animatorController.SetBool("hit1", false);
+            animatorController.SetBool("hit2", false);
             animatorController.SetBool("hit3", false);
+        }
     }
 }

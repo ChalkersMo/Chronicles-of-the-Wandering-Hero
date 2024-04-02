@@ -8,34 +8,29 @@ public class PlayerSwordController : MonoBehaviour
     public bool IsAttacking;
 
     [SerializeField] GameObject DamagePopUpPrefab;
-
+    EventBus eventBus;
+    EnemyDamageable _enemyDamageable;
+    private void OnEnable()
+    {
+        eventBus = EventBus.Instance;
+        eventBus.OnHit += Hit;
+    }
+    private void OnDisable()
+    {
+        eventBus.OnHit -= Hit;
+    }
     private void OnTriggerEnter(Collider other)
     {
         if (IsAttacking)
         {
-            if (other.CompareTag("Enemy"))
+            if (other.TryGetComponent(out EnemyDamageable enemyDamageable))
             {
-                float damage = (float)Math.Round(swordItem.Damage * PlayerStats.instance.MultiplySwordDamage, 2);
-                other.GetComponent<EnemyDamageable>().TakeDamage(damage);
-                CreatePopUp(transform.position, $"{damage}", swordItem.DamagePopUpFaceColor, swordItem.DamagePopUpoutlineColor);
-                IsAttacking = false;
+                _enemyDamageable = enemyDamageable;
+                eventBus.OnHit?.Invoke();
             }
         }
     }     
     
-    private void OnTriggerStay(Collider other)
-    {
-        if (IsAttacking)
-        {
-            if (other.CompareTag("Enemy"))
-            {
-                float damage = (float)Math.Round(swordItem.Damage * PlayerStats.instance.MultiplySwordDamage, 2);
-                other.GetComponent<EnemyDamageable>().TakeDamage(damage);
-                CreatePopUp(transform.position, $"{damage}", swordItem.DamagePopUpFaceColor, swordItem.DamagePopUpoutlineColor);
-                IsAttacking = false;
-            }
-        }
-    }
     public void CreatePopUp(Vector3 position, string text, Color faceColor, Color outlineColor)
     {
         var popup = Instantiate(DamagePopUpPrefab, position, Quaternion.identity);
@@ -46,4 +41,15 @@ public class PlayerSwordController : MonoBehaviour
        
         Destroy(popup, 1f);
     }
+    void Hit()
+    {
+        if (_enemyDamageable != null)
+        {
+            float damage = (float)Math.Round(swordItem.Damage * PlayerStats.instance.MultiplySwordDamage, 2);
+            _enemyDamageable.TakeDamage(damage);
+            CreatePopUp(transform.position, $"{damage}", swordItem.DamagePopUpFaceColor, swordItem.DamagePopUpoutlineColor);
+            IsAttacking = false;
+        }
+    }
+
 }

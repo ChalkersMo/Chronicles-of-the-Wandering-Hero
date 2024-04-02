@@ -16,6 +16,7 @@ public class EventBus : MonoBehaviour
             Destroy(gameObject);     
     }
     public Action OnAttack;
+    public Action OnHit;
     public Action OnTakeDamage;
     public Action OnHeal;
 }
