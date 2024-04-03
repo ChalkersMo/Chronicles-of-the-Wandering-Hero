@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: WooKnie
   Description: Just a wooden knife
-  Damage: 4
+  Damage: 100
   IsMain: 0
   Sprite: {fileID: 21300000, guid: de77ecfae1bdebc47a105f663d434548, type: 3}
   Prefab: {fileID: 4400551432329997077, guid: 62c9c0d948f05424dbb27016929d6471, type: 3}

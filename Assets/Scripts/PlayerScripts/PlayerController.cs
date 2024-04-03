@@ -58,39 +58,23 @@ public class PlayerController : MonoBehaviour, IEquipSword, IRunning
             else if (Input.GetKeyDown(KeyCode.LeftControl) && IsRunning != false)
                 IsRunning = false;
 
-            if (jumpAction.triggered && groundedPlayer && groundedTime >= 2f)
+            if (jumpAction.triggered && groundedPlayer && groundedTime >= 1)
             {
                 playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
                 animatorController.SetTrigger("Jump");
             }
 
-            if (Input.GetKeyDown(KeyCode.LeftAlt))
+            groundedPlayer = _CharacterController.isGrounded;
+            if (groundedPlayer && playerVelocity.y < 0)
             {
-                Cursor.lockState = CursorLockMode.None;
-                Cursor.visible = true;
+                playerVelocity.y = 0;
             }
-            else if(Input.GetKeyUp(KeyCode.LeftAlt))
-            {
-                Cursor.lockState = CursorLockMode.Locked;
-                Cursor.visible = false;
-            }
-        }
-    }
-    private void FixedUpdate()
-    {
-        groundedPlayer = _CharacterController.isGrounded;
-        if (groundedPlayer && playerVelocity.y < 0)
-        {
-            playerVelocity.y = 0;
-        }
 
-        Vector2 input = moveAction.ReadValue<Vector2>();
-        Vector3 move = new Vector3(input.x, 0, input.y);
-        move = move.x * cameraTransform.right.normalized + move.z * cameraTransform.forward.normalized;
-        move.y = 0f;
+            Vector2 input = moveAction.ReadValue<Vector2>();
+            Vector3 move = new Vector3(input.x, 0, input.y);
+            move = move.x * cameraTransform.right.normalized + move.z * cameraTransform.forward.normalized;
+            move.y = 0f;
 
-        if (CanMove != false)
-        {
             if (IsRunning != true)
                 _CharacterController.Move(WalkingSpeed * Time.deltaTime * move);
             else
@@ -114,23 +98,34 @@ public class PlayerController : MonoBehaviour, IEquipSword, IRunning
                 animatorController.SetFloat("X", animMove.x, 0.1f, Time.deltaTime);
                 animatorController.SetFloat("Y", animMove.y, 0.1f, Time.deltaTime);
             }
-            
+
+            animatorController.SetBool("IsGrounded", groundedPlayer);
+            animatorController.SetBool("IsRunning", IsRunning);
+
+            if (groundedPlayer != false)
+                groundedTime += Time.deltaTime;
+            else
+                groundedTime = 0f;
+
+            playerVelocity.y += gravityValue * Time.deltaTime;
+            _CharacterController.Move(playerVelocity * Time.deltaTime);
+
+            Quaternion targetRotation = Quaternion.Euler(0, cameraTransform.eulerAngles.y, 0);
+            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+
+            if (Input.GetKeyDown(KeyCode.LeftAlt))
+            {
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+            }
+            else if(Input.GetKeyUp(KeyCode.LeftAlt))
+            {
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+            }
         }
-
-        animatorController.SetBool("IsGrounded", groundedPlayer);
-        animatorController.SetBool("IsRunning", IsRunning);
-
-        if (groundedPlayer != false)
-            groundedTime += Time.deltaTime;
-        else
-            groundedTime = 0f;
-
-        playerVelocity.y += gravityValue * Time.deltaTime;
-        _CharacterController.Move(playerVelocity * Time.deltaTime);
-
-        Quaternion targetRotation = Quaternion.Euler(0, cameraTransform.eulerAngles.y, 0);
-        transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
     }
+   
     public void SwordEquiping()
     {
         CanMove = true;

@@ -7,10 +7,10 @@ public class PlayerSwordAnimationController : MonoBehaviour
     PlayerController playerController;
     PlayerSwordController playerSwordController;
 
-    public float cooldownTime = 0.7f;
+    public float cooldownTime = 1.2f;
     public static int numberOfCklicks = 0;
     float lastClickedTime = 0;
-    float maxComboDelay = 1.5f;
+    float maxComboDelay = 2;
 
     private void Start()
     {
@@ -27,7 +27,8 @@ public class PlayerSwordAnimationController : MonoBehaviour
         {
             OnClick();
         }
-        ComboRenewCheck();
+        if (animatorController.GetInteger("State") == 1 && playerSwordController != null)
+            ComboRenewCheck();
     }
 
     public void AssignSwordController(PlayerSwordController controller)
@@ -53,20 +54,16 @@ public class PlayerSwordAnimationController : MonoBehaviour
     {
         if (animatorController.GetInteger("State") == 1 && playerSwordController != null)
         {
-            if (playerController.SwordEquiped && !playerSwordController.IsAttacking)
+            if (playerController.SwordEquiped && !playerSwordController.IsAttacking && Time.time - lastClickedTime > cooldownTime)
             {               
                 lastClickedTime = Time.time;
-                numberOfCklicks++;
-                if (numberOfCklicks == 1)
-                {
-                    animatorController.SetBool("hit1", true);
-                }
+                numberOfCklicks++;               
                 numberOfCklicks = Mathf.Clamp(numberOfCklicks, 0, 3);
-                AfterAttack();
+                AttackAnim();
                 playerController.CanMove = false;
             }
         }
-    }
+    } 
 
     public void EnableAttacking()
     {
@@ -82,26 +79,28 @@ public class PlayerSwordAnimationController : MonoBehaviour
     {
         if (playerSwordController != null)
             playerController.CanMove = true;
-        AfterAttack();
     }
 
-    void AfterAttack()
+    void AttackAnim()
     {
+        if (numberOfCklicks == 1)
+        {
+            animatorController.SetBool("hit1", true);
+        }
         if (numberOfCklicks >= 2
-            && animatorController.GetCurrentAnimatorStateInfo(0).normalizedTime > cooldownTime
-            && animatorController.GetCurrentAnimatorStateInfo(0).IsName("hit1"))
+          && animatorController.GetBool("hit1"))
         {
             animatorController.SetBool("hit1", false);
             animatorController.SetBool("hit2", true);
         }
         if (numberOfCklicks >= 3
-            && animatorController.GetCurrentAnimatorStateInfo(0).normalizedTime > cooldownTime
-            && animatorController.GetCurrentAnimatorStateInfo(0).IsName("hit2"))
+            && animatorController.GetBool("hit2"))
         {
             animatorController.SetBool("hit2", false);
             animatorController.SetBool("hit3", true);
         }
     }
+
     void ComboRenewCheck()
     {
         if (Time.time - lastClickedTime > maxComboDelay)
@@ -110,6 +109,8 @@ public class PlayerSwordAnimationController : MonoBehaviour
             animatorController.SetBool("hit1", false);
             animatorController.SetBool("hit2", false);
             animatorController.SetBool("hit3", false);
+            EndAttacking();
+            playerSwordController.IsAttacking = false;
         }
     }
 }

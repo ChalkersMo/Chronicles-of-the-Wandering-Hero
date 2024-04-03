@@ -48,7 +48,6 @@ public class PlayerSwordController : MonoBehaviour
             float damage = (float)Math.Round(swordItem.Damage * PlayerStats.instance.MultiplySwordDamage, 2);
             _enemyDamageable.TakeDamage(damage);
             CreatePopUp(transform.position, $"{damage}", swordItem.DamagePopUpFaceColor, swordItem.DamagePopUpoutlineColor);
-            IsAttacking = false;
         }
     }
 
