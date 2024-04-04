@@ -22,8 +22,6 @@ public class PlayerController : MonoBehaviour, IEquipSword, IRunning
     InputAction moveAction;
     InputAction jumpAction;
 
-    Vector2 animMove;
-
     public bool IsRunning { get; set; }
     [HideInInspector] public bool CanMove;
     public bool SwordEquiped { get; set; }
@@ -53,55 +51,41 @@ public class PlayerController : MonoBehaviour, IEquipSword, IRunning
     {
         if(CanMove != false)
         {
-            if (Input.GetKeyDown(KeyCode.LeftControl) && IsRunning != true)
+            playerAnimController.SetBools(groundedPlayer, IsRunning);
+
+            if (Input.GetKeyDown(KeyCode.LeftControl) && !IsRunning)
                 IsRunning = true;
-            else if (Input.GetKeyDown(KeyCode.LeftControl) && IsRunning != false)
+            else if (Input.GetKeyDown(KeyCode.LeftControl) && IsRunning)
                 IsRunning = false;
 
             if (jumpAction.triggered && groundedPlayer && groundedTime >= 1)
             {
                 playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
-
+                playerAnimController.Jump();
             }
 
             groundedPlayer = _CharacterController.isGrounded;
+
             if (groundedPlayer && playerVelocity.y < 0)
-            {
                 playerVelocity.y = 0;
-            }
+
 
             Vector2 input = moveAction.ReadValue<Vector2>();
             Vector3 move = new Vector3(input.x, 0, input.y);
             move = move.x * cameraTransform.right.normalized + move.z * cameraTransform.forward.normalized;
             move.y = 0f;
 
-            if (IsRunning != true)
-                _CharacterController.Move(WalkingSpeed * Time.deltaTime * move);
-            else
-                _CharacterController.Move(RunningSpeed * Time.deltaTime * move);
-
-            float vertical = Input.GetAxisRaw("Vertical");
-            float horizontal = Input.GetAxisRaw("Horizontal");
-
-            if (groundedPlayer)
+            if (IsRunning)
             {
-                if (IsRunning != true)
-                {
-                    animMove = new Vector2(horizontal, vertical);
-
-                }
-                else
-                {
-                    animMove = new Vector2(horizontal, vertical);
-
-                }
-              //  animatorController.SetFloat("X", animMove.x, 0.1f, Time.deltaTime);
-                //animatorController.SetFloat("Y", animMove.y, 0.1f, Time.deltaTime);
+                _CharacterController.Move(RunningSpeed * Time.deltaTime * move);
+                playerAnimController.Run();
             }
-
-           // animatorController.SetBool("IsGrounded", groundedPlayer);
-//animatorController.SetBool("IsRunning", IsRunning);
-
+            else
+            {
+                _CharacterController.Move(WalkingSpeed * Time.deltaTime * move);
+                playerAnimController.Walk();
+            }
+            
             if (groundedPlayer != false)
                 groundedTime += Time.deltaTime;
             else
@@ -132,7 +116,7 @@ public class PlayerController : MonoBehaviour, IEquipSword, IRunning
 
         if (SwordEquiped != true)
         {
-           // animatorController.SetInteger("State", 1);
+            playerAnimController.EquipSword();
             SwordEquiped = true;
         }                       
     }
@@ -142,7 +126,7 @@ public class PlayerController : MonoBehaviour, IEquipSword, IRunning
 
         if (SwordEquiped != false)
         {
-           // animatorController.SetInteger("State", 0);
+            playerAnimController.SwordDisEquiping();
             SwordEquiped = false;
         }
     }
