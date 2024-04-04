@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour, IEquipSword, IRunning
 {
     CharacterController _CharacterController;
+    PlayerAnimController playerAnimController;
     Vector3 playerVelocity;
     bool groundedPlayer;
     Transform cameraTransform;
@@ -21,7 +22,6 @@ public class PlayerController : MonoBehaviour, IEquipSword, IRunning
     InputAction moveAction;
     InputAction jumpAction;
 
-    Animator animatorController;
     Vector2 animMove;
 
     public bool IsRunning { get; set; }
@@ -33,7 +33,7 @@ public class PlayerController : MonoBehaviour, IEquipSword, IRunning
         _CharacterController = GetComponent<CharacterController>();
         playerInput = GetComponent<PlayerInput>();
 
-        animatorController = GetComponent<Animator>();
+        playerAnimController = GetComponent<PlayerAnimController>();
 
         cameraTransform = Camera.main.transform;
         moveAction = playerInput.actions["Move"];
@@ -61,7 +61,7 @@ public class PlayerController : MonoBehaviour, IEquipSword, IRunning
             if (jumpAction.triggered && groundedPlayer && groundedTime >= 1)
             {
                 playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
-                animatorController.SetTrigger("Jump");
+
             }
 
             groundedPlayer = _CharacterController.isGrounded;
@@ -88,19 +88,19 @@ public class PlayerController : MonoBehaviour, IEquipSword, IRunning
                 if (IsRunning != true)
                 {
                     animMove = new Vector2(horizontal, vertical);
-                    animatorController.SetFloat("SpeedMultiplier", 1f);
+
                 }
                 else
                 {
                     animMove = new Vector2(horizontal, vertical);
-                    animatorController.SetFloat("SpeedMultiplier", 1.3f);
+
                 }
-                animatorController.SetFloat("X", animMove.x, 0.1f, Time.deltaTime);
-                animatorController.SetFloat("Y", animMove.y, 0.1f, Time.deltaTime);
+              //  animatorController.SetFloat("X", animMove.x, 0.1f, Time.deltaTime);
+                //animatorController.SetFloat("Y", animMove.y, 0.1f, Time.deltaTime);
             }
 
-            animatorController.SetBool("IsGrounded", groundedPlayer);
-            animatorController.SetBool("IsRunning", IsRunning);
+           // animatorController.SetBool("IsGrounded", groundedPlayer);
+//animatorController.SetBool("IsRunning", IsRunning);
 
             if (groundedPlayer != false)
                 groundedTime += Time.deltaTime;
@@ -132,7 +132,7 @@ public class PlayerController : MonoBehaviour, IEquipSword, IRunning
 
         if (SwordEquiped != true)
         {
-            animatorController.SetInteger("State", 1);
+           // animatorController.SetInteger("State", 1);
             SwordEquiped = true;
         }                       
     }
@@ -142,7 +142,7 @@ public class PlayerController : MonoBehaviour, IEquipSword, IRunning
 
         if (SwordEquiped != false)
         {
-            animatorController.SetInteger("State", 0);
+           // animatorController.SetInteger("State", 0);
             SwordEquiped = false;
         }
     }

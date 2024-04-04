@@ -64,7 +64,7 @@ public class PlayerSwordAnimationController : MonoBehaviour
             }
         }
     } 
-
+ 
     public void EnableAttacking()
     {
         if (playerSwordController != null)
