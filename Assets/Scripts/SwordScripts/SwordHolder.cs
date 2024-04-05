@@ -25,7 +25,6 @@ public class SwordHolder : MonoBehaviour
     PlayerSwordController _playerMainSwordController;
     PlayerSwordController _playerSecondarySwordController;
 
-    PlayerSwordAnimationController _playerSwordAnimationController;
     PlayerController _playerController;
 
     private void Start()
@@ -41,7 +40,6 @@ public class SwordHolder : MonoBehaviour
         _secondaryOutlineSwordTransform.DOScale(0, 0);
 
         GameObject player = GameObject.FindGameObjectWithTag("Player");
-        _playerSwordAnimationController = player.GetComponent<PlayerSwordAnimationController>();
         _playerController = player.GetComponent<PlayerController>();
 
         _mainSwordHolder = transform.GetChild(0);
@@ -59,7 +57,7 @@ public class SwordHolder : MonoBehaviour
                 mainSword = Instantiate(sword, _mainSwordHolder);
                 _playerMainSwordController = mainSword.GetComponent<PlayerSwordController>();
                 _mainSwordImage.sprite = _playerMainSwordController.swordItem.Sprite;
-                _playerSwordAnimationController.AssignSwordController(_playerMainSwordController);
+                _playerController.AssignSwordController(_playerMainSwordController);
                 _playerMainSwordController.enabled = true;
                 _playerController.SwordEquiping();
                 _mainSwordOutlineTransform.DOScale(2, 0);
@@ -70,8 +68,8 @@ public class SwordHolder : MonoBehaviour
             {
                 secondarySword = Instantiate(sword, _secondarySwordHolder);
                 _playerSecondarySwordController = secondarySword.GetComponent<PlayerSwordController>();
-                _secondarySwordImage.sprite = _playerSecondarySwordController.swordItem.Sprite;              
-                _playerSwordAnimationController.AssignSwordController(_playerSecondarySwordController);
+                _secondarySwordImage.sprite = _playerSecondarySwordController.swordItem.Sprite;
+                _playerController.AssignSwordController(_playerSecondarySwordController);
                 _playerSecondarySwordController.enabled = true;
                 _playerController.SwordEquiping();
                 _secondaryOutlineSwordTransform.DOScale(2, 0);
@@ -119,9 +117,9 @@ public class SwordHolder : MonoBehaviour
             _playerSecondarySwordController.enabled = false;
             _secondarySwordHolder.GetChild(0).DOScale(0, 0);
         }
-           
 
-        _playerSwordAnimationController.AssignSwordController(null);
+
+        _playerController.AssignSwordController(null);
         _isMainSwordEquiped = false;
         _isSecondarySwordEquiped = false;
 
@@ -139,7 +137,7 @@ public class SwordHolder : MonoBehaviour
                 _playerMainSwordController.enabled = true;
                 _mainSwordHolder.GetChild(0).DOScale(1, 0.3f);
                 _isMainSwordEquiped = true;
-                _playerSwordAnimationController.AssignSwordController(_playerMainSwordController);
+                _playerController.AssignSwordController(_playerMainSwordController);
                 _playerController.SwordEquiping();
                 _mainSwordOutlineTransform.DOScale(0, 0);
                 _mainSwordOutlineImage.DOFade(1, 1);
@@ -157,7 +155,7 @@ public class SwordHolder : MonoBehaviour
             {
                 _mainSwordHolder.GetChild(0).DOScale(0, 0.3f);
                 _isMainSwordEquiped = false;
-                _playerSwordAnimationController.AssignSwordController(null);
+                _playerController.AssignSwordController(null);
                 _playerMainSwordController.enabled = false;
                 _playerController.SwordDisEquiping();
                 _mainSwordOutlineTransform.DOScale(2, 1);
@@ -173,7 +171,7 @@ public class SwordHolder : MonoBehaviour
                 _playerSecondarySwordController.enabled = true;
                 _secondarySwordHolder.GetChild(0).DOScale(1, 0.3f);
                 _isSecondarySwordEquiped = true;
-                _playerSwordAnimationController.AssignSwordController(_playerSecondarySwordController);
+                _playerController.AssignSwordController(_playerSecondarySwordController);
                 _playerController.SwordEquiping();
                 _secondaryOutlineSwordTransform.DOScale(0, 0);
                 _secondaryOutlineSwordImage.DOFade(1, 1);
@@ -191,7 +189,7 @@ public class SwordHolder : MonoBehaviour
             {
                 _secondarySwordHolder.GetChild(0).DOScale(0, 0.3f);
                 _isSecondarySwordEquiped = false;
-                _playerSwordAnimationController.AssignSwordController(null);
+                _playerController.AssignSwordController(null);
                 _playerSecondarySwordController.enabled = false;
                 _playerController.SwordDisEquiping();
                 _secondaryOutlineSwordTransform.DOScale(2, 1);

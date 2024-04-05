@@ -8,7 +8,6 @@ using UnityEngine.UI;
 public class InventoryVisual : MonoBehaviour
 {
     PlayerController _playerController;
-    PlayerSwordAnimationController _playerSwordAnimationController;
 
     TextMeshProUGUI _nameItem;
     TextMeshProUGUI _descriptionItem;
@@ -31,7 +30,7 @@ public class InventoryVisual : MonoBehaviour
 
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         _playerController = player.GetComponent<PlayerController>();
-        _playerSwordAnimationController = player.GetComponent<PlayerSwordAnimationController>();
+
         _canvas = GetComponent<Canvas>();
         _transitionSpeed = 0;
         OffInventory();
@@ -42,7 +41,6 @@ public class InventoryVisual : MonoBehaviour
     public void OnInventory()
     {
         _playerController.enabled = false;
-        _playerSwordAnimationController.enabled = false;
         _canvas.sortingOrder = 5;
         transform.GetChild(0).DOScale(1, _transitionSpeed);
         Cursor.visible = true;
@@ -52,7 +50,6 @@ public class InventoryVisual : MonoBehaviour
     public void OffInventory()
     {
         _playerController.enabled = true;
-        _playerSwordAnimationController.enabled = true;
         _canvas.sortingOrder = 0;
         transform.GetChild(0).DOScale(0, _transitionSpeed);
         _nameItem.text = "Item name";

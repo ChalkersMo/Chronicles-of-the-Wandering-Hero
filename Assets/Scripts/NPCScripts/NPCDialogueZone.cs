@@ -38,12 +38,10 @@ public class NPCDialogueZone : MonoBehaviour
             if (Input.GetKey(KeyCode.F))
             {
                 PlayerController PC = FindObjectOfType<PlayerController>();
-                PlayerSwordAnimationController PSAC = FindObjectOfType<PlayerSwordAnimationController>();
                 if (PressButtonTip != null)
                     PressButtonTip.SetActive(false);
 
                 PC.enabled = false;
-                PSAC.enabled = false;
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
                 FindObjectOfType<DialogueManager>().StartDialogue(NPCScriptableObject);               

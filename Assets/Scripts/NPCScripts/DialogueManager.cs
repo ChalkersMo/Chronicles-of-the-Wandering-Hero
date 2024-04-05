@@ -73,9 +73,7 @@ public class DialogueManager : MonoBehaviour
     {
         StopAllCoroutines();
         PlayerController PC = FindObjectOfType<PlayerController>();
-        PlayerSwordAnimationController PSAC = FindObjectOfType<PlayerSwordAnimationController>();
         PC.enabled = true;
-        PSAC.enabled = true;
         Cursor.lockState = CursorLockMode.Locked;
         IsDialogueEnd = true;
         DialogueCanvas.SetActive(false);
