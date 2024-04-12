@@ -2822,6 +2822,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ef0aef8ed5a690439fb7fdd73dfdf1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  killcounter:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &278883249
 GameObject:
   m_ObjectHideFlags: 0
@@ -9768,6 +9771,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ef0aef8ed5a690439fb7fdd73dfdf1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  killcounter:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!4 &848098955 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6841525593827895693, guid: 8be4dcaf6b4245341b59481c573c1ada,
@@ -10996,6 +11002,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ef0aef8ed5a690439fb7fdd73dfdf1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  killcounter:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &945947374
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11875,12 +11884,12 @@ PrefabInstance:
     - target: {fileID: 1951492569254047668, guid: 47f0b9df9e5f1c14cbc6b50257e7e158,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.000000019168732
+      value: -0.000000019168732
       objectReference: {fileID: 0}
     - target: {fileID: 1951492569254047668, guid: 47f0b9df9e5f1c14cbc6b50257e7e158,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.0000000016229774
+      value: -0.0000000016229774
       objectReference: {fileID: 0}
     - target: {fileID: 3489478698940682640, guid: 47f0b9df9e5f1c14cbc6b50257e7e158,
         type: 3}
@@ -11900,12 +11909,12 @@ PrefabInstance:
     - target: {fileID: 3489478698940682640, guid: 47f0b9df9e5f1c14cbc6b50257e7e158,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.00000000427897
+      value: 0.00000000427897
       objectReference: {fileID: 0}
     - target: {fileID: 3489478698940682640, guid: 47f0b9df9e5f1c14cbc6b50257e7e158,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -4.4060808e-10
+      value: 4.4060808e-10
       objectReference: {fileID: 0}
     - target: {fileID: 5611056566566572433, guid: 47f0b9df9e5f1c14cbc6b50257e7e158,
         type: 3}
@@ -11920,17 +11929,17 @@ PrefabInstance:
     - target: {fileID: 5611056566566572433, guid: 47f0b9df9e5f1c14cbc6b50257e7e158,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.06622749
+      value: -0.06622753
       objectReference: {fileID: 0}
     - target: {fileID: 5611056566566572433, guid: 47f0b9df9e5f1c14cbc6b50257e7e158,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.000000020882876
+      value: -0.000000030652085
       objectReference: {fileID: 0}
     - target: {fileID: 5611056566566572433, guid: 47f0b9df9e5f1c14cbc6b50257e7e158,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.0000000013860634
+      value: -0.0000000020344784
       objectReference: {fileID: 0}
     - target: {fileID: 6589432489703694472, guid: 47f0b9df9e5f1c14cbc6b50257e7e158,
         type: 3}
@@ -16232,6 +16241,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ef0aef8ed5a690439fb7fdd73dfdf1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  killcounter:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1532442784
 GameObject:
   m_ObjectHideFlags: 0
@@ -23795,11 +23807,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: InventoryCanvas
       objectReference: {fileID: 0}
-    - target: {fileID: 102096701751916509, guid: 7cfd65fc8e9d8884a912183904fbcb91,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5105911547743247465, guid: 7cfd65fc8e9d8884a912183904fbcb91,
         type: 3}
       propertyPath: m_Pivot.x
@@ -23908,7 +23915,7 @@ PrefabInstance:
     - target: {fileID: 6130921809588678675, guid: 7cfd65fc8e9d8884a912183904fbcb91,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.00000333786
+      value: 0.0000038146973
       objectReference: {fileID: 0}
     - target: {fileID: 6724484979162259076, guid: 7cfd65fc8e9d8884a912183904fbcb91,
         type: 3}
@@ -24169,6 +24176,7 @@ PrefabInstance:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 3922962162745321647}
   - {fileID: 2349812665603037420}
   - {fileID: 1048045493}
   - {fileID: 1030981434}
@@ -24186,6 +24194,5 @@ SceneRoots:
   - {fileID: 1968719917}
   - {fileID: 709503033}
   - {fileID: 1169297924}
-  - {fileID: 3922962162745321647}
   - {fileID: 420022619705807253}
   - {fileID: 118538193}

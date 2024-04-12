@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 6397968121914136619}
   - component: {fileID: 9121085596569273753}
   - component: {fileID: 5477091634328561209}
-  - component: {fileID: 2196111302235660946}
   m_Layer: 5
   m_Name: InventoryButton
   m_TagString: Untagged
@@ -120,29 +119,4 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 9121085596569273753}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2196111302235660946}
-        m_TargetAssemblyTypeName: ShowItemInfo, Assembly-CSharp
-        m_MethodName: ShowInfo
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &2196111302235660946
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7257025149817544207}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dadaa04bb60d8bc469c82130cd380290, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemQuantity: 0
+      m_Calls: []
