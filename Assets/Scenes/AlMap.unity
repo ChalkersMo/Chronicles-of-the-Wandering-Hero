@@ -11929,17 +11929,17 @@ PrefabInstance:
     - target: {fileID: 5611056566566572433, guid: 47f0b9df9e5f1c14cbc6b50257e7e158,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.06622749
+      value: -0.06622753
       objectReference: {fileID: 0}
     - target: {fileID: 5611056566566572433, guid: 47f0b9df9e5f1c14cbc6b50257e7e158,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.000000020882876
+      value: -0.000000030652085
       objectReference: {fileID: 0}
     - target: {fileID: 5611056566566572433, guid: 47f0b9df9e5f1c14cbc6b50257e7e158,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.0000000013860634
+      value: -0.0000000020344784
       objectReference: {fileID: 0}
     - target: {fileID: 6589432489703694472, guid: 47f0b9df9e5f1c14cbc6b50257e7e158,
         type: 3}
@@ -23935,11 +23935,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: InventoryCanvas
       objectReference: {fileID: 0}
-    - target: {fileID: 102096701751916509, guid: 7cfd65fc8e9d8884a912183904fbcb91,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5105911547743247465, guid: 7cfd65fc8e9d8884a912183904fbcb91,
         type: 3}
       propertyPath: m_Pivot.x
@@ -24048,7 +24043,7 @@ PrefabInstance:
     - target: {fileID: 6130921809588678675, guid: 7cfd65fc8e9d8884a912183904fbcb91,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.00000333786
+      value: 0.0000038146973
       objectReference: {fileID: 0}
     - target: {fileID: 6724484979162259076, guid: 7cfd65fc8e9d8884a912183904fbcb91,
         type: 3}
@@ -24309,6 +24304,7 @@ PrefabInstance:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 3922962162745321647}
   - {fileID: 2349812665603037420}
   - {fileID: 1048045493}
   - {fileID: 1030981434}
@@ -24326,7 +24322,6 @@ SceneRoots:
   - {fileID: 1968719917}
   - {fileID: 709503033}
   - {fileID: 1169297924}
-  - {fileID: 3922962162745321647}
   - {fileID: 420022619705807253}
   - {fileID: 118538193}
   - {fileID: 1121723128}

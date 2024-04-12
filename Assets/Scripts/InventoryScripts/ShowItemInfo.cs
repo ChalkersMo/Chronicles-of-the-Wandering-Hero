@@ -5,75 +5,38 @@ using UnityEngine.UI;
 
 public class ShowItemInfo : MonoBehaviour
 {
-    ItemHUDSlots itemsSlots;
-    InventorySlot InventorySlot;
-    TextMeshProUGUI Description;
-    TextMeshProUGUI Name;
-    TextMeshProUGUI Quantity;
-    Image Image;
-    public int itemQuantity;
-    Button equipButton;
-    bool _isEquiped;
-    bool _isEquipeable;
-    ItemUseable ItemUseable;
-    SwordHolder _swordHolder;
-    private void Start()
+    [SerializeField] TextMeshProUGUI Name;
+    [SerializeField] TextMeshProUGUI Description;
+    [SerializeField] TextMeshProUGUI Quantity;
+
+    [SerializeField] Image Image;
+
+    [SerializeField] Button equipButton;
+
+    ItemEquiping itemEquiping;
+    void Start()
     {
-        InventorySlot = GetComponent<InventorySlot>();
-        _isEquipeable = InventorySlot.IsEquipeable;
-        ItemUseable = InventorySlot.ItemUseable;
-        Name = GameObject.FindGameObjectWithTag("Inventory/ItemName").GetComponent<TextMeshProUGUI>();
-        Description = GameObject.FindGameObjectWithTag("Inventory/ItemDescription").GetComponent<TextMeshProUGUI>();
-        Quantity = GameObject.FindGameObjectWithTag("Inventory/ItemQuantity").GetComponent<TextMeshProUGUI>();
-        Image = GameObject.FindGameObjectWithTag("Inventory/ItemImage").GetComponent<Image>();
-        equipButton = GameObject.FindGameObjectWithTag("Inventory/ItemEquipButton").GetComponent<Button>();
-        itemsSlots = GameObject.FindGameObjectWithTag("HUD/EquipedItems").GetComponent<ItemHUDSlots>();
-        _swordHolder = FindObjectOfType<SwordHolder>();
+        itemEquiping = FindObjectOfType<ItemEquiping>();
+        if(itemEquiping != null)
+            equipButton = itemEquiping.GetComponent<Button>();
     }
-    public void ShowInfo()
+
+    public void ShowInfo(InventorySlot inventorySlot)
     {
-        Name.text = InventorySlot.Name;
-        Description.text = InventorySlot.Description;
-        Quantity.text = InventorySlot.Quantity.ToString();
-        Image.sprite = InventorySlot.ItemSprite;
-        if(_isEquipeable)
+        Name.text = inventorySlot.Name;
+        Description.text = inventorySlot.Description;
+        Quantity.text = inventorySlot.Quantity.ToString();
+        Image.sprite = inventorySlot.ItemSprite;
+        if (inventorySlot.IsEquipeable)
         {
-            if (!_isEquiped)
-            {
-                equipButton.onClick.RemoveAllListeners();
-                equipButton.onClick.AddListener(EquipItem);
-                _isEquiped = false;
-            }
-            else if (_isEquiped)
-            {
-                equipButton.onClick.RemoveAllListeners();
-                equipButton.onClick.AddListener(UnEquipItem);
-                _isEquiped = true;
-            }
-        }    
-        equipButton.transform.DOScale(1, 0.7f);
-    }
-
-    void EquipItem()
-    {
-        if (!InventorySlot.IsSword)
-            itemsSlots.EquipItem(InventorySlot.ItemSprite, InventorySlot.Name, ItemUseable);
+            itemEquiping.AddListenerToButton(inventorySlot);
+            equipButton.transform.DOScale(1, 0.7f);
+        }
         else
-            _swordHolder.EquipSword(InventorySlot.ItemObj);
-
-        equipButton.onClick.RemoveAllListeners();
-        equipButton.onClick.AddListener(UnEquipItem);
-        _isEquiped = true;
+        {
+            equipButton.transform.DOScale(0, 0.7f);
+        }       
     }
-    void UnEquipItem()
-    {
-        if (!InventorySlot.IsSword)
-            itemsSlots.UnEquipItem(InventorySlot.Name);
-        else
-            _swordHolder.UnequipSword(InventorySlot.ItemObj);
 
-        equipButton.onClick.RemoveAllListeners();
-        equipButton.onClick.AddListener(EquipItem);
-        _isEquiped = false;
-    }
+
 }
