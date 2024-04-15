@@ -14,7 +14,10 @@ public class PlayerAnimController : MonoBehaviour
     {
         animatorController = GetComponentInChildren<Animator>();
     }
-
+    private void Update()
+    {
+        Debug.Log(animatorController.GetCurrentAnimatorStateInfo(0).IsName("MovementBlend"));
+    }
     public void WalkAnim()
     {
         float vertical = Input.GetAxisRaw("Vertical");
@@ -39,7 +42,7 @@ public class PlayerAnimController : MonoBehaviour
     }
     public void AttackAnim(int numberOfCklicks)
     {
-        if (numberOfCklicks >= 1 && ReadyToHit)
+        if (numberOfCklicks >= 0 && ReadyToHit)
         {
             animatorController.SetBool("hit1", true);
             ReadyToHit = false;
@@ -62,23 +65,21 @@ public class PlayerAnimController : MonoBehaviour
             return;
         }
     }
-    public void AfterAttackAnim(int numberOfCklicks)
+    public void AfterAttackAnim()
     {
-        if (numberOfCklicks >= 2
-          && animatorController.GetBool("hit1"))
+        if (animatorController.GetBool("hit1"))
         {
             animatorController.SetBool("hit1", false);
             ReadyToHit2 = true;
             return;
         }
-        if (numberOfCklicks >= 3
-            && animatorController.GetBool("hit2"))
+        if (animatorController.GetBool("hit2"))
         {
             animatorController.SetBool("hit2", false);
             ReadyToHit3 = true;
             return;
         }
-        if (animatorController.GetBool("hit2"))
+        if (animatorController.GetBool("hit3"))
         {
             animatorController.SetBool("hit3", false);
             ReadyToHit2 = false;
@@ -86,6 +87,7 @@ public class PlayerAnimController : MonoBehaviour
             ReadyToHit = true;
             return;
         }
+
     }
 
     public void ComboRenewAnim()

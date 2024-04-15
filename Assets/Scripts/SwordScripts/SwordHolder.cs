@@ -129,7 +129,7 @@ public class SwordHolder : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Z))
+        if (Input.GetKeyDown(KeyCode.Z) && _playerMainSwordController != null)
         {
            
             if (_isMainSwordEquiped != true)
@@ -164,7 +164,7 @@ public class SwordHolder : MonoBehaviour
 
         }
 
-        if (Input.GetKeyDown(KeyCode.X))
+        if (Input.GetKeyDown(KeyCode.X) && _playerSecondarySwordController != null)
         {
             if (_isSecondarySwordEquiped != true)
             {

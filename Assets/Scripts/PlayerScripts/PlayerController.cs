@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour, IEquipSword, IRunning
     public float cooldownTime = 1.2f;
 
     float lastClickedTime = 0;
-    float maxComboDelay = 4;
+    float maxComboDelay = 1;
     float jumpHeight = 1.0f;
     float gravityValue = -9.81f;
     float rotationSpeed = 10f;
@@ -52,7 +52,6 @@ public class PlayerController : MonoBehaviour, IEquipSword, IRunning
 
         CanMove = true;
         SwordEquiped = false;
-        groundedTime = 2f;
     }
     void Update()
     {
@@ -65,7 +64,7 @@ public class PlayerController : MonoBehaviour, IEquipSword, IRunning
             else if (Input.GetKeyDown(KeyCode.LeftControl) && IsRunning)
                 IsRunning = false;
 
-            if (jumpAction.triggered && groundedPlayer && groundedTime >= 1)
+            if (jumpAction.triggered && groundedPlayer)
             {
                 playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
                 playerAnimController.JumpAnim();
@@ -84,19 +83,14 @@ public class PlayerController : MonoBehaviour, IEquipSword, IRunning
 
             if (IsRunning)
             {
-                _CharacterController.Move(RunningSpeed * Time.deltaTime * move);
                 playerAnimController.RunAnim();
+                _CharacterController.Move(RunningSpeed * Time.deltaTime * move);
             }
             else
             {
-                _CharacterController.Move(WalkingSpeed * Time.deltaTime * move);
                 playerAnimController.WalkAnim();
+                _CharacterController.Move(WalkingSpeed * Time.deltaTime * move);
             }
-            
-            if (groundedPlayer != false)
-                groundedTime += Time.deltaTime;
-            else
-                groundedTime = 0f;
 
             playerVelocity.y += gravityValue * Time.deltaTime;
             _CharacterController.Move(playerVelocity * Time.deltaTime);
@@ -114,9 +108,9 @@ public class PlayerController : MonoBehaviour, IEquipSword, IRunning
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;
             }
-        }
 
-        ComboRenewCheck();
+            ComboRenewCheck();
+        }
         if (Input.GetMouseButtonDown(0))
         {
             StartAttacking();
@@ -160,11 +154,12 @@ public class PlayerController : MonoBehaviour, IEquipSword, IRunning
     {
         if (playerSwordController != null)
         {
-            if (SwordEquiped && !playerSwordController.IsAttacking)
+            lastClickedTime = Time.time;
+            numberOfCklicks++;
+            numberOfCklicks = Mathf.Clamp(numberOfCklicks, 0, 3);
+
+            if (SwordEquiped && CanMove)
             {
-                lastClickedTime = Time.time;
-                numberOfCklicks++;
-                numberOfCklicks = Mathf.Clamp(numberOfCklicks, 0, 3);
                 playerAnimController.AttackAnim(numberOfCklicks);
                 CanMove = false;
             }
@@ -176,6 +171,7 @@ public class PlayerController : MonoBehaviour, IEquipSword, IRunning
         {
             numberOfCklicks = 0;
             playerAnimController.ComboRenewAnim();
+            CanMove = true;
             playerSwordController.IsAttacking = false;
         }
     }
@@ -191,7 +187,7 @@ public class PlayerController : MonoBehaviour, IEquipSword, IRunning
     }
     public void EndAttacking()
     {
+        playerAnimController.AfterAttackAnim();
         CanMove = true;
-        playerAnimController.AfterAttackAnim(numberOfCklicks);
     }
 }
