@@ -14,10 +14,6 @@ public class PlayerAnimController : MonoBehaviour
     {
         animatorController = GetComponentInChildren<Animator>();
     }
-    private void Update()
-    {
-        Debug.Log(animatorController.GetCurrentAnimatorStateInfo(0).IsName("MovementBlend"));
-    }
     public void WalkAnim()
     {
         float vertical = Input.GetAxisRaw("Vertical");

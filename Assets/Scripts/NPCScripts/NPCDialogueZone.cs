@@ -5,11 +5,17 @@ using TMPro;
 public class NPCDialogueZone : MonoBehaviour
 {
     Collider _collider;
+
     [SerializeField] NPC NPCScriptableObject;
+
     [SerializeField] GameObject NPCGameObj;
     [SerializeField] GameObject PressButtonTip;
     [SerializeField] GameObject NameTextGO;
+
     TextMeshProUGUI _nameText;
+
+    DialogueManager dialogueManager;
+    PlayerController playerController;
 
     private void Start()
     {
@@ -19,6 +25,7 @@ public class NPCDialogueZone : MonoBehaviour
         NameTextGO = Instantiate(NameTextGO, healthBarPos, Quaternion.identity, transform);
         _nameText = NameTextGO.GetComponentInChildren<TextMeshProUGUI>();
         _nameText.text = $"{NPCScriptableObject.Name}";
+        dialogueManager = FindObjectOfType<DialogueManager>();
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -34,17 +41,10 @@ public class NPCDialogueZone : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            //NPCGameObj.transform.DORotate(other.transform.position, 1);
+            NPCGameObj.transform.DORotate(other.transform.position, 1);
             if (Input.GetKey(KeyCode.F))
             {
-                PlayerController PC = FindObjectOfType<PlayerController>();
-                if (PressButtonTip != null)
-                    PressButtonTip.SetActive(false);
-
-                PC.enabled = false;
-                Cursor.lockState = CursorLockMode.None;
-                Cursor.visible = true;
-                FindObjectOfType<DialogueManager>().StartDialogue(NPCScriptableObject);               
+                StartingDialogue();
             }
         }
     }
@@ -55,6 +55,39 @@ public class NPCDialogueZone : MonoBehaviour
             if (PressButtonTip != null)
             {
                 PressButtonTip.SetActive(false);
+            }
+        }
+    }
+    private void StartingDialogue()
+    {
+        OnQuest();
+        if (PressButtonTip != null)
+            PressButtonTip.SetActive(false);
+
+        playerController.enabled = false;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        dialogueManager.StartDialogue(NPCScriptableObject);
+    }
+    private void OnQuest()
+    {
+        if (TryGetComponent(out QuestGiver questGiver))
+        {
+            if (!questGiver.questScriptable.IsCompleted && !questGiver.questScriptable.IsAccepted)
+                DialogueManager.EndOfDialogue += questGiver.GiveQuest;
+        }
+        if (TryGetComponent(out QuestProgresser questProgresser))
+        {
+            QuestScriptable _questScriptable = questProgresser.questScriptable;
+            if (_questScriptable.IsAccepted)
+            {
+                QuestPhaseScriptable _currentQuestPhase = _questScriptable.QuestPhasesScriptable[_questScriptable.CurrentPhase - 1];
+
+                if (_currentQuestPhase.IsTalkQuest
+                    && _currentQuestPhase.NPCToTalk == NPCScriptableObject)
+                {
+                    DialogueManager.EndOfDialogue += questProgresser.ProgressQuest;
+                }
             }
         }
     }

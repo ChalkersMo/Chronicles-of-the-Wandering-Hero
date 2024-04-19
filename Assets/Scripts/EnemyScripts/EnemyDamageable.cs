@@ -8,15 +8,22 @@ using UnityEngine.UI;
 
 public class EnemyDamageable : MonoBehaviour, IDamageable
 {
-    GameObject _healthBar;
-    Image _healthBarFill;
-    Image _healthBarDamageFill;
-    TextMeshProUGUI _healthBarText;
+    private GameObject _healthBar;
+
+    private Image _healthBarFill;
+    private Image _healthBarDamageFill;
+
+    private TextMeshProUGUI _healthBarText;
+
     [SerializeField] Enemy enemyItem;
+
     [SerializeField] UnityEvent DieEvent;
-    Collider _collider;
-    float _fillSpeed = 1;
-    float _fillDamageSpeed = 0.4f;
+
+    private Collider _collider;
+
+    private float _fillSpeed = 1;
+    private float _fillDamageSpeed = 0.4f;
+
     public float CurrentHealth { get; set; }
     public float MaxHealth { get; set; }
 
@@ -59,6 +66,9 @@ public class EnemyDamageable : MonoBehaviour, IDamageable
     
     void Die()
     {
-        DieEvent?.Invoke();
+        if(TryGetComponent(out QuestProgresser questProgresser))
+            questProgresser.ProgressQuest();
+
+        DieEvent?.Invoke();       
     }
 }

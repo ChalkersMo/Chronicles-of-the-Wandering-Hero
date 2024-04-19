@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -17,26 +18,26 @@ public class DialogueManager : MonoBehaviour
     void Start()
     {
         sentences = new Queue<string>();
-        DialogueCanvas.SetActive(false);
+        DialogueCanvas.transform.DOScale(0, 0);
     }
-    public void StartDialogue(NPC dialogue)
+    public void StartDialogue(NPC NPCScriptable)
     {
         TPC.SetActive(false);
         Cursor.lockState = CursorLockMode.None;
         IsDialogueEnd = false;
-        DialogueCanvas.SetActive(true);
-        nametext.text = dialogue.Name;
+        DialogueCanvas.transform.DOScale(1, 1);
+        nametext.text = NPCScriptable.Name;
         sentences.Clear();
-        if(dialogue.isTaskCompleted != true)
+        if(NPCScriptable.isTaskCompleted != true)
         {
-            foreach (string sentence in dialogue.sentences1)
+            foreach (string sentence in NPCScriptable.sentences1)
             {
                 sentences.Enqueue(sentence);
             }
         }
         else
         {
-            foreach (string sentence in dialogue.sentences2)
+            foreach (string sentence in NPCScriptable.sentences2)
             {
                 sentences.Enqueue(sentence);
             }
@@ -76,8 +77,9 @@ public class DialogueManager : MonoBehaviour
         PC.enabled = true;
         Cursor.lockState = CursorLockMode.Locked;
         IsDialogueEnd = true;
-        DialogueCanvas.SetActive(false);
+        DialogueCanvas.transform.DOScale(0, 1);
         TPC.SetActive(true);
         EndOfDialogue?.Invoke();
+        EndOfDialogue = null;
     }
 }
