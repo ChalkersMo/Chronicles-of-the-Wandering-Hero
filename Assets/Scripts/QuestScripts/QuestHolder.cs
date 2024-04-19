@@ -4,6 +4,8 @@ using UnityEngine;
 public class QuestHolder : MonoBehaviour
 {
     public static QuestHolder Instance;
+    private QuestVisual questVisual;
+    private QuestScriptable tempQuestScriptable;
 
     private Dictionary<string, QuestScriptable> AcceptedQuests = new Dictionary<string, QuestScriptable>();
     private Dictionary<string, QuestScriptable> CompletedQuests = new Dictionary<string, QuestScriptable>();
@@ -19,6 +21,8 @@ public class QuestHolder : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        questVisual = GetComponent<QuestVisual>();
     }
     
     public bool QuestAccept(QuestScriptable questScriptable, string questName)
@@ -29,59 +33,61 @@ public class QuestHolder : MonoBehaviour
         {
             AcceptedQuests.Add(questName, questScriptable);
             questScriptable.IsAccepted = true;
-            if (questScriptable.PhaseCount > 0)
+            ReplaceQuest(questScriptable);
+            questVisual.QuestAccept(questScriptable);
+
+           if (questScriptable.PhaseCount > 0)
                 questScriptable.CurrentPhase++;
-            Debug.Log("Accepted");
             return true;
         }
     }
 
-    public void QuestProgress(QuestScriptable questScriptable)
+    public void QuestProgress()
     {
-        if(questScriptable.PhaseCount > 0)
+        if(tempQuestScriptable.PhaseCount > 0)
         {
-            QuestPhaseProgress(questScriptable);
+            QuestPhaseProgress();
             return;
         }
 
-        questScriptable.ProgressPoints++;
-        if (questScriptable.ProgressPoints >= questScriptable.PointsToComplete)
-            QuestCompleted(questScriptable);
+        tempQuestScriptable.ProgressPoints++;
+        if (tempQuestScriptable.ProgressPoints >= tempQuestScriptable.PointsToComplete)
+            QuestCompleted(tempQuestScriptable);
     }
 
-    private void QuestPhaseProgress(QuestScriptable questScriptable)
+    private void QuestPhaseProgress()
     {
-        for (int i = 0; i < questScriptable.PhaseCount; i++)
+        for (int i = 0; i < tempQuestScriptable.PhaseCount; i++)
         {
-            QuestPhaseScriptable questPhase = questScriptable.QuestPhasesScriptable[i];
+            QuestPhaseScriptable questPhase = tempQuestScriptable.QuestPhasesScriptable[i];
 
             if (!questPhase.IsCompleted)
             {
                 questPhase.ProgressPoints++;
 
                 if (questPhase.ProgressPoints >= questPhase.PointsToComplete)
-                    QuestPhaseComplete(questScriptable, questPhase);
+                    QuestPhaseComplete( questPhase);
 
                 return;
             }               
         }
     }
 
-    private void QuestPhaseComplete(QuestScriptable questScriptable, QuestPhaseScriptable questPhase)
+    private void QuestPhaseComplete(QuestPhaseScriptable questPhase)
     {
         questPhase.IsCompleted = true;
         questPhase.IsActive = false;
         if (questPhase.IsLastTaskToDo)
             questPhase.NPCToTalk.isTaskCompleted = true;
         Debug.Log("FaseCompleted");
-        if (questScriptable.QuestPhasesScriptable[questScriptable.PhaseCount - 1].IsCompleted)
+        if (tempQuestScriptable.QuestPhasesScriptable[tempQuestScriptable.PhaseCount - 1].IsCompleted)
         {
-            QuestCompleted(questScriptable);
+            QuestCompleted(tempQuestScriptable);
             return;
         }
-        
-        questScriptable.CurrentPhase++;
-        questScriptable.QuestPhasesScriptable[questScriptable.CurrentPhase - 1].IsActive = true;
+
+        tempQuestScriptable.CurrentPhase++;
+        tempQuestScriptable.QuestPhasesScriptable[tempQuestScriptable.CurrentPhase - 1].IsActive = true;
     }
 
     private void QuestCompleted(QuestScriptable questScriptable)
@@ -91,5 +97,20 @@ public class QuestHolder : MonoBehaviour
         AcceptedQuests.Remove(questScriptable.Name);
         CompletedQuests.Add(questScriptable.Name, questScriptable);
         Debug.Log("QuestCompleted");
+    }
+
+    public void ReplaceQuest(QuestScriptable questScriptable)
+    {
+        if (tempQuestScriptable == null)
+        {
+            tempQuestScriptable = questScriptable;
+            questScriptable.IsActive = true;
+        }           
+        else
+        {
+            tempQuestScriptable.IsActive = false;            
+            questScriptable.IsActive = true;
+            tempQuestScriptable = questScriptable;
+        }
     }
 }

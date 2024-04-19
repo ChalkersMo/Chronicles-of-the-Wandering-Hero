@@ -6,7 +6,7 @@ public class QuestProgresser : MonoBehaviour
 
     public void ProgressQuest()
     {
-        if(questScriptable.IsAccepted)
-            QuestHolder.Instance.QuestProgress(questScriptable);
+        if(questScriptable.IsAccepted && questScriptable.IsActive)
+            QuestHolder.Instance.QuestProgress();
     }
 }

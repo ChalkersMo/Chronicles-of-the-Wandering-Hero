@@ -6,6 +6,9 @@ public class QuestScriptable : ScriptableObject
     public QuestPhaseScriptable[] QuestPhasesScriptable;
 
     [Space]
+    public Sprite QuestImage;
+
+    [Space]
     public string Name;
     public string Description;
 
@@ -19,6 +22,7 @@ public class QuestScriptable : ScriptableObject
     public int ProgressPoints;
 
     [Space]
+    public bool IsActive;
     public bool IsAccepted;
     public bool IsCompleted;
 }

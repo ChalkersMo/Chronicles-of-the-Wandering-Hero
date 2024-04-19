@@ -4,18 +4,18 @@ using TMPro;
 [RequireComponent(typeof(Collider))]
 public class NPCDialogueZone : MonoBehaviour
 {
-    Collider _collider;
+    private Collider _collider;
 
-    [SerializeField] NPC NPCScriptableObject;
+    [SerializeField] private NPC NPCScriptableObject;
 
-    [SerializeField] GameObject NPCGameObj;
-    [SerializeField] GameObject PressButtonTip;
-    [SerializeField] GameObject NameTextGO;
+    [SerializeField] private GameObject NPCGameObj;
+    [SerializeField] private GameObject PressButtonTip;
+    [SerializeField] private GameObject NameTextGO;
 
-    TextMeshProUGUI _nameText;
+    private TextMeshProUGUI _nameText;
 
-    DialogueManager dialogueManager;
-    PlayerController playerController;
+    private DialogueManager dialogueManager;
+    private PlayerController playerController;
 
     private void Start()
     {
@@ -26,6 +26,7 @@ public class NPCDialogueZone : MonoBehaviour
         _nameText = NameTextGO.GetComponentInChildren<TextMeshProUGUI>();
         _nameText.text = $"{NPCScriptableObject.Name}";
         dialogueManager = FindObjectOfType<DialogueManager>();
+        playerController = FindObjectOfType<PlayerController>();
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -41,7 +42,7 @@ public class NPCDialogueZone : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            NPCGameObj.transform.DORotate(other.transform.position, 1);
+            //NPCGameObj.transform.DORotate(other.transform.position, 1);
             if (Input.GetKey(KeyCode.F))
             {
                 StartingDialogue();
