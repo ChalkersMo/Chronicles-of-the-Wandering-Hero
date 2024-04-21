@@ -34,23 +34,25 @@ public class QuestHolder : MonoBehaviour
             AcceptedQuests.Add(questName, questScriptable);
             questScriptable.IsAccepted = true;
             ReplaceQuest(questScriptable);
-            questVisual.QuestAccept(questScriptable);
 
            if (questScriptable.PhaseCount > 0)
                 questScriptable.CurrentPhase++;
+
+            questVisual.QuestAccept(questScriptable);
             return;
         }
     }
 
     public void QuestProgress()
     {
-        if(tempQuestScriptable.PhaseCount > 0)
+        if (tempQuestScriptable.PhaseCount > 0)
         {
             QuestPhaseProgress();
             return;
         }
 
         tempQuestScriptable.ProgressPoints++;
+        questVisual.QuestProgress(tempQuestScriptable);
         if (tempQuestScriptable.ProgressPoints >= tempQuestScriptable.PointsToComplete)
             QuestCompleted(tempQuestScriptable);
     }
@@ -64,7 +66,7 @@ public class QuestHolder : MonoBehaviour
             if (!questPhase.IsCompleted)
             {
                 questPhase.ProgressPoints++;
-
+                questVisual.QuestProgress(tempQuestScriptable);
                 if (questPhase.ProgressPoints >= questPhase.PointsToComplete)
                     QuestPhaseComplete(questPhase);
 
@@ -78,6 +80,7 @@ public class QuestHolder : MonoBehaviour
         questPhase.IsCompleted = true;
         questPhase.IsActive = false;
         tempQuestScriptable.ProgressPoints++;
+        questVisual.QuestProgress(tempQuestScriptable);
 
         if (tempQuestScriptable.QuestPhasesScriptable[tempQuestScriptable.PhaseCount - 1].IsCompleted)
         {

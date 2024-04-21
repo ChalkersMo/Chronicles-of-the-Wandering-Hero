@@ -15,7 +15,7 @@ MonoBehaviour:
   QuestPhasesScriptable:
   - {fileID: 11400000, guid: 8beacdb02f257464a8f5bdd0126898fb, type: 2}
   - {fileID: 11400000, guid: 32c40a1b52af71a48b8b60638f372bd3, type: 2}
-  QuestImage: {fileID: 21300000, guid: fc0dc8aab226b2849b8af188901d7f95, type: 3}
+  QuestImage: {fileID: 21300000, guid: 11b199c4150d0dd419f971897d51f201, type: 3}
   Name: Bear dangerous
   Description: Defend Stepanis from bears
   PhaseCount: 2

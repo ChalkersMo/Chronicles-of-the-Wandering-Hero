@@ -11262,12 +11262,12 @@ PrefabInstance:
     - target: {fileID: 1951492569254047668, guid: 47f0b9df9e5f1c14cbc6b50257e7e158,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.000000019168732
+      value: -0.000000019168732
       objectReference: {fileID: 0}
     - target: {fileID: 1951492569254047668, guid: 47f0b9df9e5f1c14cbc6b50257e7e158,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.0000000016229774
+      value: -0.0000000016229774
       objectReference: {fileID: 0}
     - target: {fileID: 3489478698940682640, guid: 47f0b9df9e5f1c14cbc6b50257e7e158,
         type: 3}
@@ -23847,7 +23847,7 @@ PrefabInstance:
     - target: {fileID: 3377946503584139332, guid: d12b161fbfc785041bf9d80b5be83ec2,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.000022888184
+      value: 0.000038146973
       objectReference: {fileID: 0}
     - target: {fileID: 3790820073595846208, guid: d12b161fbfc785041bf9d80b5be83ec2,
         type: 3}
@@ -23872,7 +23872,7 @@ PrefabInstance:
     - target: {fileID: 6569271174070154263, guid: d12b161fbfc785041bf9d80b5be83ec2,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: 0.000045776367
       objectReference: {fileID: 0}
     - target: {fileID: 6948013340352900118, guid: d12b161fbfc785041bf9d80b5be83ec2,
         type: 3}
@@ -26189,6 +26189,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   questScriptable: {fileID: 11400000, guid: a76a1626d487b7f43a54683491459262, type: 2}
+  questPhase: {fileID: 11400000, guid: 8beacdb02f257464a8f5bdd0126898fb, type: 2}
 --- !u!114 &7926784960337770899
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26202,6 +26203,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   questScriptable: {fileID: 11400000, guid: a76a1626d487b7f43a54683491459262, type: 2}
+  questPhase: {fileID: 11400000, guid: 8beacdb02f257464a8f5bdd0126898fb, type: 2}
 --- !u!114 &7926784960584577519
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26215,6 +26217,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   questScriptable: {fileID: 11400000, guid: a76a1626d487b7f43a54683491459262, type: 2}
+  questPhase: {fileID: 11400000, guid: 8beacdb02f257464a8f5bdd0126898fb, type: 2}
 --- !u!1 &7990548231291973714
 GameObject:
   m_ObjectHideFlags: 0

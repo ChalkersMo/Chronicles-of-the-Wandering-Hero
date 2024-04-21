@@ -17,6 +17,8 @@ public class QuestVisual : MonoBehaviour
     [SerializeField] private TextMeshProUGUI questPhaseName;
     [SerializeField] private TextMeshProUGUI questPhaseDescription;
 
+    private TextMeshProUGUI miniQuestPhaseDescription;
+
     [SerializeField] private Image questImage;
     [SerializeField] private Image questProgressImage;
 
@@ -37,7 +39,8 @@ public class QuestVisual : MonoBehaviour
     private void Awake()
     {
         thisCanvas = GetComponent<Canvas>();
-        panelQuest = transform.GetChild(0);
+        miniQuestPhaseDescription = transform.GetChild(0).GetComponent<TextMeshProUGUI>();
+        panelQuest = transform.GetChild(1);
         panelQuest.DOScale(0, 0);
         isActive = false;
     }
@@ -91,18 +94,34 @@ public class QuestVisual : MonoBehaviour
     }
     public void QuestAccept(QuestScriptable questScriptable)
     {
+
         GameObject newQuest  = Instantiate(questTemplate, questParentContent.transform);
         QuestItem item = newQuest.GetComponent<QuestItem>();
         item.AssingFields(this, questScriptable);
 
         AcceptedQuests.Add(questScriptable.Name, newQuest);
+        if (questScriptable.PhaseCount > 0)
+        {
+            QuestPhaseScriptable questPhase = questScriptable.QuestPhasesScriptable[questScriptable.CurrentPhase - 1];
+            miniQuestPhaseDescription.text = $"{questPhase.Description}: {questPhase.ProgressPoints}/{questPhase.PointsToComplete}";
+        }
+        else
+            miniQuestPhaseDescription.text = $"{questScriptable.Description}: {questScriptable.ProgressPoints}/{questScriptable.PointsToComplete}";
+
     }
     public void QuestProgress(QuestScriptable questScriptable)
     {
-
+        if (questScriptable.PhaseCount > 0)
+        {
+            QuestPhaseScriptable questPhase = questScriptable.QuestPhasesScriptable[questScriptable.CurrentPhase - 1];
+            miniQuestPhaseDescription.text = $"{questPhase.Description}: {questPhase.ProgressPoints}/{questPhase.PointsToComplete}";
+        }
+        else
+            miniQuestPhaseDescription.text = $"{questScriptable.Description}: {questScriptable.ProgressPoints}/{questScriptable.PointsToComplete}";
     }
     public void QuestComplete(QuestScriptable questScriptable)
     {
+        miniQuestPhaseDescription.text = null;
         Destroy(AcceptedQuests[questScriptable.Name]);
     }
     public void ShowQuestinfo(QuestScriptable questScriptable)
