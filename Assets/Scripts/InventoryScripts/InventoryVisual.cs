@@ -7,19 +7,25 @@ using UnityEngine.UI;
 
 public class InventoryVisual : MonoBehaviour
 {
-    PlayerController _playerController;
+    private PlayerController _playerController;
+    private CinemachineVirtualCamera ThirdPersonCamera;
 
-    TextMeshProUGUI _nameItem;
-    TextMeshProUGUI _descriptionItem;
-    TextMeshProUGUI _quantityItem;
-    Image _imageItem;
-    [SerializeField] Sprite UIMaskSprite;
+    private TextMeshProUGUI _nameItem;
+    private TextMeshProUGUI _descriptionItem;
+    private TextMeshProUGUI _quantityItem;
 
-    Canvas _canvas;
+    private Image _imageItem;
 
-    CinemachineVirtualCamera ThirdPersonCamera;
-    float _transitionSpeed;
-    bool _isActive;
+    [SerializeField] private Sprite UIMaskSprite;
+
+    private Canvas _canvas;
+
+    [HideInInspector] public Transform panelInventory;
+
+    private float _transitionSpeed;
+
+    [HideInInspector] public bool _isActive;
+
     private void Awake()
     {
         _nameItem = GameObject.FindGameObjectWithTag("Inventory/ItemName").GetComponent<TextMeshProUGUI>();
@@ -32,6 +38,7 @@ public class InventoryVisual : MonoBehaviour
         _playerController = player.GetComponent<PlayerController>();
 
         _canvas = GetComponent<Canvas>();
+        panelInventory = transform.GetChild(0);
         _transitionSpeed = 0;
         OffInventory();
         _transitionSpeed = 1;
@@ -40,9 +47,11 @@ public class InventoryVisual : MonoBehaviour
 
     public void OnInventory()
     {
-        _playerController.enabled = false;
-        _canvas.sortingOrder = 5;
-        transform.GetChild(0).DOScale(1, _transitionSpeed);
+        OffAllUI.Instance.OffUI();
+        CanvasesSortingOrder.Instance.ShowOnFirst(_canvas);
+
+        _playerController.enabled = false;        
+        panelInventory.DOScale(1, _transitionSpeed);
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
         ThirdPersonCamera.enabled = false;
@@ -51,7 +60,7 @@ public class InventoryVisual : MonoBehaviour
     {
         _playerController.enabled = true;
         _canvas.sortingOrder = 0;
-        transform.GetChild(0).DOScale(0, _transitionSpeed);
+        panelInventory.DOScale(0, _transitionSpeed);
         _nameItem.text = "Item name";
         _descriptionItem.text = "Here will be your item description";
         _quantityItem.text = "Item quantity";

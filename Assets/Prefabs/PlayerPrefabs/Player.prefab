@@ -170,8 +170,10 @@ MonoBehaviour:
   questParentContent: {fileID: 728831190241135578}
   questTemplate: {fileID: 4352989454050030594, guid: 46d6c4db7262a1e4281fdcf639b247bd,
     type: 3}
+  panelQuest: {fileID: 0}
   playerController: {fileID: 5893736139587434016}
   thirdPersonCamera: {fileID: 0}
+  isActive: 0
 --- !u!1 &347949850187537160
 GameObject:
   m_ObjectHideFlags: 0
@@ -538,7 +540,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.000015243, y: 0}
+  m_AnchoredPosition: {x: 0.000015243, y: 0.000045776367}
   m_SizeDelta: {x: -0.000015242957, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &728831190241135578
@@ -1078,7 +1080,7 @@ MonoBehaviour:
   dialogueText: {fileID: 1166905613846596721}
   isDialogueActive: 0
   typingSpeed: 0.01
-  DialogueCanvas: {fileID: 4135252235185096441}
+  panelDialogue: {fileID: 0}
   TPC: {fileID: 0}
   playerController: {fileID: 5893736139587434016}
 --- !u!1 &1875096444245337332
@@ -1262,8 +1264,9 @@ GameObject:
   m_Component:
   - component: {fileID: 8923876393166436398}
   - component: {fileID: 2605708709756080853}
+  - component: {fileID: 7660941088785298396}
   m_Layer: 3
-  m_Name: CanvasOrderSortingManager
+  m_Name: UiManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1294,6 +1297,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c4ef43609389ae6468859d5cfa17f504, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7660941088785298396
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2163703315322639359}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72c245e1eb0af804c8f442b212754569, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &2200443759035544536
@@ -5535,7 +5550,7 @@ PrefabInstance:
     - target: {fileID: 6130921809588678675, guid: 7cfd65fc8e9d8884a912183904fbcb91,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.000022888184
+      value: 0.000038146973
       objectReference: {fileID: 0}
     - target: {fileID: 6724484979162259076, guid: 7cfd65fc8e9d8884a912183904fbcb91,
         type: 3}

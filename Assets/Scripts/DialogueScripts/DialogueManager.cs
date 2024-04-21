@@ -23,9 +23,12 @@ public class DialogueManager : MonoBehaviour
 
     public float typingSpeed = 0.2f;
 
-    [SerializeField] private GameObject DialogueCanvas;
+    [HideInInspector] public Transform panelDialogue;
+
+    private Canvas _canvas;
 
     [SerializeField] GameObject TPC;
+
     public static event Action EndOfDialogue;
 
     [SerializeField] private PlayerController playerController;
@@ -36,17 +39,21 @@ public class DialogueManager : MonoBehaviour
         else
             Destroy(gameObject);
 
+        _canvas = GetComponent<Canvas>();
+        panelDialogue = transform.GetChild(0);
         playerController = FindObjectOfType<PlayerController>();
         lines = new Queue<DialogueLine>();
-        DialogueCanvas.transform.DOScale(0, 0);
+        panelDialogue.DOScale(0, 0);
     }
     public void StartDialogue(Dialogue dialogue)
     {
+        OffAllUI.Instance.OffUI();
+        CanvasesSortingOrder.Instance.ShowOnFirst(_canvas);
         isDialogueActive = true;
         TPC.SetActive(false);
         Cursor.lockState = CursorLockMode.None;
         
-        DialogueCanvas.transform.DOScale(1, 1);
+        panelDialogue.DOScale(1, 1);
         lines.Clear();
 
         foreach (DialogueLine dialogueLine in dialogue.dialogueLines)
@@ -94,7 +101,7 @@ public class DialogueManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
-        DialogueCanvas.transform.DOScale(0, 1);
+        panelDialogue.DOScale(0, 1);
         EndOfDialogue?.Invoke();
         EndOfDialogue = null;
     }

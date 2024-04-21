@@ -28,13 +28,13 @@ public class QuestVisual : MonoBehaviour
     [Space]
     [SerializeField] private GameObject questTemplate;
 
-    private Transform panelQuest;
+    [HideInInspector] public Transform panelQuest;
 
     [Space, Header("Components to off with activating quests panel")]
     [SerializeField] private PlayerController playerController;
     [SerializeField] private GameObject thirdPersonCamera;
 
-    private bool isActive;
+    [HideInInspector] public bool isActive;
 
     private void Awake()
     {
@@ -56,6 +56,9 @@ public class QuestVisual : MonoBehaviour
     }
     public void OnQuestsPanel()
     {
+        OffAllUI.Instance.OffUI();
+        CanvasesSortingOrder.Instance.ShowOnFirst(thisCanvas);
+
         panelQuest.DOScale(1, 1);
         questName.transform.DOScale(0, 0);
         questDescription.transform.DOScale(0, 0);
