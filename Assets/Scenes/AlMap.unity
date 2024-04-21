@@ -11262,12 +11262,12 @@ PrefabInstance:
     - target: {fileID: 1951492569254047668, guid: 47f0b9df9e5f1c14cbc6b50257e7e158,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.000000019168732
+      value: 0.000000019168732
       objectReference: {fileID: 0}
     - target: {fileID: 1951492569254047668, guid: 47f0b9df9e5f1c14cbc6b50257e7e158,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.0000000016229774
+      value: 0.0000000016229774
       objectReference: {fileID: 0}
     - target: {fileID: 3489478698940682640, guid: 47f0b9df9e5f1c14cbc6b50257e7e158,
         type: 3}
@@ -11287,12 +11287,12 @@ PrefabInstance:
     - target: {fileID: 3489478698940682640, guid: 47f0b9df9e5f1c14cbc6b50257e7e158,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.00000000427897
+      value: -0.00000000427897
       objectReference: {fileID: 0}
     - target: {fileID: 3489478698940682640, guid: 47f0b9df9e5f1c14cbc6b50257e7e158,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 4.4060808e-10
+      value: -4.4060808e-10
       objectReference: {fileID: 0}
     - target: {fileID: 5611056566566572433, guid: 47f0b9df9e5f1c14cbc6b50257e7e158,
         type: 3}
@@ -23679,12 +23679,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1438546957769486399}
-  - component: {fileID: 4540228998694623578}
   - component: {fileID: 4540228998694623581}
-  - component: {fileID: 4540228998694623580}
   - component: {fileID: 4540228998694623579}
-  - component: {fileID: 4540228998694623582}
-  - component: {fileID: 4540228998694623583}
+  - component: {fileID: 4540228998694623580}
   m_Layer: 0
   m_Name: FirstNPC(Stepanis)
   m_TagString: Untagged
@@ -23850,7 +23847,7 @@ PrefabInstance:
     - target: {fileID: 3377946503584139332, guid: d12b161fbfc785041bf9d80b5be83ec2,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: 0.000022888184
       objectReference: {fileID: 0}
     - target: {fileID: 3790820073595846208, guid: d12b161fbfc785041bf9d80b5be83ec2,
         type: 3}
@@ -23897,11 +23894,6 @@ PrefabInstance:
       propertyPath: _healthBarDamageFill
       value: 
       objectReference: {fileID: 841623303}
-    - target: {fileID: 7879141669052120203, guid: d12b161fbfc785041bf9d80b5be83ec2,
-        type: 3}
-      propertyPath: m_HorizontalScrollbar
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 8194131201541148256, guid: d12b161fbfc785041bf9d80b5be83ec2,
         type: 3}
       propertyPath: m_Value
@@ -24695,7 +24687,7 @@ PrefabInstance:
     - target: {fileID: 7307776929248139729, guid: 5f3066bd1ca5b844cb251c72a104c20d,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -24834,27 +24826,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!95 &4540228998694623578
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1782702499923356293}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: de13a7420582ded45a8d7d3f96889aca, type: 3}
-  m_Controller: {fileID: 9100000, guid: 4c7fe8e1a3919c549a79a706afefd1ce, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!65 &4540228998694623579
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -24890,7 +24861,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NPCScriptableObject: {fileID: 11400000, guid: 6addea1c080ac4e43a5dd7327f812986,
     type: 2}
-  NPCGameObj: {fileID: 1782702499923356293}
   PressButtonTip: {fileID: 3815240101418694830}
   NameTextGO: {fileID: 4446745970886623713, guid: c3c11e83b76b8914aa24bc2d8385be9a,
     type: 3}
@@ -24917,32 +24887,6 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
---- !u!114 &4540228998694623582
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1782702499923356293}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad1b18bc000dba843a8fe35755e793fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  questScriptable: {fileID: 11400000, guid: a76a1626d487b7f43a54683491459262, type: 2}
---- !u!114 &4540228998694623583
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1782702499923356293}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1bd07eb93396261418374622c8ba7142, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  questScriptable: {fileID: 11400000, guid: a76a1626d487b7f43a54683491459262, type: 2}
 --- !u!4 &4747800427631158561
 Transform:
   m_ObjectHideFlags: 0

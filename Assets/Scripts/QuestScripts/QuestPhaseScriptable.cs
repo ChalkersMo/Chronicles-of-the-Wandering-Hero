@@ -3,15 +3,17 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "NewQuestPhase", menuName = "Quests/QuestPhase")]
 public class QuestPhaseScriptable : ScriptableObject
 {
+    public string Name;
     public string Description;
     [Space]
-    public int ProgressPoints;
+    public int ProgressPoints = 0;
     public int PointsToComplete;
     [Space]
-    public bool IsCompleted;
-    public bool IsActive;
+    public bool IsCompleted = false;
+    public bool IsActive = false;
     public bool IsTalkQuest;
-    public bool IsLastTaskToDo;
-    [Space, Header("Put here an item of NPC which must give reward talking with him")]
-    public NPC NPCToTalk;
+    [Space, Header("If quest is talk quest create the dialogue")]
+    public Dialogue dialogue;
+    [Space, Header("If quest is talk quest with NPC for commiting this quest place here this NPC")]
+    public NPC NPCToCommit;
 }

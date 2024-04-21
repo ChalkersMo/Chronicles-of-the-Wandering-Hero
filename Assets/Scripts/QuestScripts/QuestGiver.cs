@@ -6,7 +6,7 @@ public class QuestGiver : MonoBehaviour
 
     public void GiveQuest()
     {
-        if(questScriptable.LvlToStart > 0)
+        if(questScriptable.LvlToStart <= PlayerStats.instance.CurrentLvl)
             QuestHolder.Instance.QuestAccept(questScriptable, questScriptable.Name);          
     }
 }

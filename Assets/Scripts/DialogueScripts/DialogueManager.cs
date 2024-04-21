@@ -2,83 +2,99 @@ using DG.Tweening;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DialogueManager : MonoBehaviour
 {
-    public GameObject DialogueCanvas;
-    public TextMeshProUGUI nametext;
-    public TextMeshProUGUI dialoguetext;
-    private Queue<string> sentences;
-    public bool IsDialogueEnd = false;
+    public static DialogueManager Instance;
+
+    [Header("Fields for dialogue panel")]
+    [SerializeField] private Image characterIcon;
+    [SerializeField] private TextMeshProUGUI characterName;
+    [SerializeField] private TextMeshProUGUI dialogueText;
+
+    [Space]
+    private Queue<DialogueLine> lines;
+
+    public bool isDialogueActive = false;
+
+    public float typingSpeed = 0.2f;
+
+    [SerializeField] private GameObject DialogueCanvas;
+
     [SerializeField] GameObject TPC;
     public static event Action EndOfDialogue;
 
+    [SerializeField] private PlayerController playerController;
     void Start()
     {
-        sentences = new Queue<string>();
+        if (Instance == null)
+            Instance = this;
+        else
+            Destroy(gameObject);
+
+        playerController = FindObjectOfType<PlayerController>();
+        lines = new Queue<DialogueLine>();
         DialogueCanvas.transform.DOScale(0, 0);
     }
-    public void StartDialogue(NPC NPCScriptable)
+    public void StartDialogue(Dialogue dialogue)
     {
+        isDialogueActive = true;
         TPC.SetActive(false);
         Cursor.lockState = CursorLockMode.None;
-        IsDialogueEnd = false;
+        
         DialogueCanvas.transform.DOScale(1, 1);
-        nametext.text = NPCScriptable.Name;
-        sentences.Clear();
-        if(NPCScriptable.isTaskCompleted != true)
+        lines.Clear();
+
+        foreach (DialogueLine dialogueLine in dialogue.dialogueLines)
         {
-            foreach (string sentence in NPCScriptable.sentences1)
-            {
-                sentences.Enqueue(sentence);
-            }
+            lines.Enqueue(dialogueLine);
         }
-        else
-        {
-            foreach (string sentence in NPCScriptable.sentences2)
-            {
-                sentences.Enqueue(sentence);
-            }
-        }
-       
-        DisplayNextSentece();
+
+        DisplayNextDialogueLine();
     }
 
-    public void DisplayNextSentece()
+    public void DisplayNextDialogueLine()
     {
-        if (sentences.Count == 0)
+        if (lines.Count == 0)
         {
             EndDialogue();
             return;
         }
 
-        string sentence = sentences.Dequeue();
+        DialogueLine currentLine = lines.Dequeue();
+
+        characterIcon.sprite = currentLine.character.icon;
+        characterName.text = currentLine.character.name;
+
         StopAllCoroutines();
-        StartCoroutine(TypeSentence(sentence));
+
+        StartCoroutine(TypeSentence(currentLine));
     }
 
-    IEnumerator TypeSentence(string sentence)
+    IEnumerator TypeSentence(DialogueLine dialogueLine)
     {
-        dialoguetext.text = "";
-
-        foreach (char letter in sentence.ToCharArray())
+        dialogueText.text = "";
+        foreach (char letter in dialogueLine.line.ToCharArray())
         {
-            dialoguetext.text += letter;
-            yield return null;
+            dialogueText.text += letter;
+            yield return new WaitForSeconds(typingSpeed);
         }
     }
 
     public void EndDialogue()
     {
         StopAllCoroutines();
-        PlayerController PC = FindObjectOfType<PlayerController>();
-        PC.enabled = true;
-        Cursor.lockState = CursorLockMode.Locked;
-        IsDialogueEnd = true;
-        DialogueCanvas.transform.DOScale(0, 1);
+        isDialogueActive = false;
+        playerController.enabled = true;
         TPC.SetActive(true);
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+
+        DialogueCanvas.transform.DOScale(0, 1);
         EndOfDialogue?.Invoke();
         EndOfDialogue = null;
     }

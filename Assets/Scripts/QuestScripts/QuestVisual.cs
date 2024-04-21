@@ -14,7 +14,12 @@ public class QuestVisual : MonoBehaviour
     [Space, Header("Quest info fields")]
     [SerializeField] private TextMeshProUGUI questName;
     [SerializeField] private TextMeshProUGUI questDescription;
+    [SerializeField] private TextMeshProUGUI questPhaseName;
+    [SerializeField] private TextMeshProUGUI questPhaseDescription;
+
     [SerializeField] private Image questImage;
+    [SerializeField] private Image questProgressImage;
+
     [Space]
     [SerializeField] private ContentSizeFitter questParentContent;
 
@@ -49,6 +54,12 @@ public class QuestVisual : MonoBehaviour
     public void OnQuestsPanel()
     {
         panelQuest.DOScale(1, 1);
+        questName.transform.DOScale(0, 0);
+        questDescription.transform.DOScale(0, 0);
+        questImage.transform.DOScale(0, 0);
+        questProgressImage.DOFillAmount(0, 0);
+        questPhaseName.transform.DOScale(0, 0);
+        questPhaseDescription.transform.DOScale(0, 0);
         playerController.enabled = false;
         thirdPersonCamera.SetActive(false);
         CanvasesSortingOrder.Instance.ShowOnFirst(thisCanvas);
@@ -59,9 +70,19 @@ public class QuestVisual : MonoBehaviour
     public void OffQuestsPanel()
     {
         panelQuest.DOScale(0, 1);
+
+        questName.transform.DOScale(0, 0);
+        questDescription.transform.DOScale(0, 0);
+        questImage.transform.DOScale(0, 0);
+        questProgressImage.DOFillAmount(0, 0);
+        questPhaseName.transform.DOScale(0, 0);
+        questPhaseDescription.transform.DOScale(0, 0);
         questName.text = null;
         questDescription.text = null;
         questImage.sprite = null;
+        questPhaseName.text = null;
+        questPhaseDescription.text = null;
+
         playerController.enabled = true;
         thirdPersonCamera.SetActive(true);
         Cursor.lockState = CursorLockMode.Locked;
@@ -76,14 +97,46 @@ public class QuestVisual : MonoBehaviour
 
         AcceptedQuests.Add(questScriptable.Name, newQuest);
     }
+    public void QuestProgress(QuestScriptable questScriptable)
+    {
+
+    }
     public void QuestComplete(QuestScriptable questScriptable)
     {
         Destroy(AcceptedQuests[questScriptable.Name]);
     }
     public void ShowQuestinfo(QuestScriptable questScriptable)
     {
+        questName.transform.DOScale(0, 0);
+        questDescription.transform.DOScale(0, 0);
+        questImage.transform.DOScale(0, 0);
+
         questName.text = questScriptable.Name;
         questDescription.text = questScriptable.Description;
         questImage.sprite = questScriptable.QuestImage;
+
+        questProgressImage.DOFillAmount(0, 0);
+        float fillAmount = questScriptable.ProgressPoints / questScriptable.PointsToComplete;
+        questProgressImage.DOFillAmount(fillAmount, 1);
+
+        questName.transform.DOScale(1, 0.1f);
+        questDescription.transform.DOScale(1, 0.1f);
+        questImage.transform.DOScale(1, 0.1f);
+
+        if (questScriptable.PhaseCount > 0)
+        {
+            questPhaseName.transform.DOScale(0, 0);
+            questPhaseDescription.transform.DOScale(0, 0);
+            QuestPhaseScriptable questPhase = questScriptable.QuestPhasesScriptable[questScriptable.CurrentPhase - 1];
+            questPhaseName.transform.DOScale(1, 0.1f);
+            questPhaseDescription.transform.DOScale(1, 0.1f);
+            questPhaseName.text = questPhase.Name;
+            questPhaseDescription.text = $"{questPhase.Description}: {questPhase.ProgressPoints}/{questPhase.PointsToComplete}";
+        }
+        else
+        {
+            questPhaseName.text = null;
+            questPhaseDescription.text = null;
+        }
     }
 }

@@ -16,16 +16,22 @@ MonoBehaviour:
   Description: i'm default peasent. I like my job, i am blacksmith.  But i can't
     realy resist evils and bears. Agh...
   Level: 0
-  isContactable: 1
   isEnemy: 0
   isFriend: 1
-  isTaskCompleted: 0
-  sentences1:
-  - Hey!
-  - There is a bear!
-  - Thanks the Lord it's not an evil
-  - But it is still dangerous. Pleas help me!
-  sentences2:
-  - Thank you, i thought i'll die..
-  - I'll  reward you with what i have
-  - 2 healing pods with herbs, i think it will help you in your wandering
+  dialogues:
+  - dialogueLines:
+    - character:
+        name: Stepanis
+        icon: {fileID: 0}
+      line: Hi! I'm Stepanis, default peasent. I like my job, i am blacksmith.  But
+        i can't realy resist evils and bears. Agh...
+    - character:
+        name: You
+        icon: {fileID: 0}
+      line: Greetings
+    - character:
+        name: Stepanis
+        icon: {fileID: 0}
+      line: If you see bears please help me! I hope there aren't evils too..
+  Quests:
+  - {fileID: 11400000, guid: a76a1626d487b7f43a54683491459262, type: 2}

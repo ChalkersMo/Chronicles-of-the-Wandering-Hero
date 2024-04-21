@@ -12,11 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7237abefa49e7d4449584d270633544c, type: 3}
   m_Name: Phase1
   m_EditorClassIdentifier: 
+  Name: Bears fighting
   Description: Fight 3 bears
   ProgressPoints: 0
   PointsToComplete: 3
   IsCompleted: 0
   IsActive: 0
   IsTalkQuest: 0
-  IsLastTaskToDo: 1
-  NPCToTalk: {fileID: 11400000, guid: 6addea1c080ac4e43a5dd7327f812986, type: 2}
+  dialogue:
+    dialogueLines: []
+  NPCToCommit: {fileID: 11400000, guid: 6addea1c080ac4e43a5dd7327f812986, type: 2}

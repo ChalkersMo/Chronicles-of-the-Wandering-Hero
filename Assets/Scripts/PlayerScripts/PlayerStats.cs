@@ -9,9 +9,15 @@ public class PlayerStats : MonoBehaviour
     public float MultiplySwordDamage;
     public float MaxHealth;
     public float HealingMultiply;
+
+    public int CurrentLvl;
+
     void Awake ()
     {
-        instance = this;
+        if (instance == null)
+            instance = this;
+        else
+            Destroy(gameObject);
     }
 
 }

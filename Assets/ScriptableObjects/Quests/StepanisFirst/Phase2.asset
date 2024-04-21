@@ -12,11 +12,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7237abefa49e7d4449584d270633544c, type: 3}
   m_Name: Phase2
   m_EditorClassIdentifier: 
+  Name: Talking with Stepanis
   Description: Talk to Stepanis
   ProgressPoints: 0
   PointsToComplete: 1
   IsCompleted: 0
   IsActive: 0
   IsTalkQuest: 1
-  IsLastTaskToDo: 0
-  NPCToTalk: {fileID: 11400000, guid: 6addea1c080ac4e43a5dd7327f812986, type: 2}
+  dialogue:
+    dialogueLines:
+    - character:
+        name: You
+        icon: {fileID: 0}
+      line: Done
+    - character:
+        name: Stepanis
+        icon: {fileID: 0}
+      line: THANKS!
+    - character:
+        name: Stepanis
+        icon: {fileID: 0}
+      line: I'll reward you. 2 healing pods with herbs. I hope it will help you in
+        your wandering!!
+    - character:
+        name: You
+        icon: {fileID: 0}
+      line: I think we will meet again soon
+  NPCToCommit: {fileID: 11400000, guid: 6addea1c080ac4e43a5dd7327f812986, type: 2}

@@ -1,14 +1,13 @@
 using UnityEngine;
-using DG.Tweening;
 using TMPro;
+using UnityEditor.Experimental.GraphView;
+
 [RequireComponent(typeof(Collider))]
 public class NPCDialogueZone : MonoBehaviour
-{
+{ 
     private Collider _collider;
 
     [SerializeField] private NPC NPCScriptableObject;
-
-    [SerializeField] private GameObject NPCGameObj;
     [SerializeField] private GameObject PressButtonTip;
     [SerializeField] private GameObject NameTextGO;
 
@@ -17,14 +16,11 @@ public class NPCDialogueZone : MonoBehaviour
     private DialogueManager dialogueManager;
     private PlayerController playerController;
 
-    private void Start()
+    private bool isPlayerNear = false;
+
+   private void Start()
     {
-        _collider = GetComponent<Collider>();
-        float colliderTop = _collider.bounds.center.y + _collider.bounds.extents.y;
-        Vector3 healthBarPos = new Vector3(transform.position.x, colliderTop + 0.5f, transform.position.z);
-        NameTextGO = Instantiate(NameTextGO, healthBarPos, Quaternion.identity, transform);
-        _nameText = NameTextGO.GetComponentInChildren<TextMeshProUGUI>();
-        _nameText.text = $"{NPCScriptableObject.Name}";
+        InstantiateName();
         dialogueManager = FindObjectOfType<DialogueManager>();
         playerController = FindObjectOfType<PlayerController>();
     }
@@ -35,18 +31,15 @@ public class NPCDialogueZone : MonoBehaviour
             if (PressButtonTip != null)
             {
                 PressButtonTip.SetActive(true);
+                isPlayerNear = true;
             }
         }
     }
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerStay()
     {
-        if (other.CompareTag("Player"))
+        if (Input.GetKeyDown(KeyCode.F) && isPlayerNear)
         {
-            //NPCGameObj.transform.DORotate(other.transform.position, 1);
-            if (Input.GetKey(KeyCode.F))
-            {
-                StartingDialogue();
-            }
+            StartingDialogue();
         }
     }
     private void OnTriggerExit(Collider other)
@@ -56,41 +49,90 @@ public class NPCDialogueZone : MonoBehaviour
             if (PressButtonTip != null)
             {
                 PressButtonTip.SetActive(false);
+                isPlayerNear = false;
             }
         }
     }
     private void StartingDialogue()
     {
-        OnQuest();
+        if (NPCScriptableObject.Quests.Count > 0)
+            OnQuest();
+        else
+        {
+            ForStartingDialogue();
+            dialogueManager.StartDialogue(NPCScriptableObject.dialogues[0]);
+        }
+
+        if (PressButtonTip != null)
+        {
+            isPlayerNear = false;
+            PressButtonTip.SetActive(false);
+        }            
+    }
+    private void OnQuest()
+    {
+        bool isHaveAvaliableQuest = false;
+        foreach (QuestScriptable quest in NPCScriptableObject.Quests)
+        {
+            if (!quest.IsCompleted && !quest.IsAccepted && PlayerStats.instance.CurrentLvl >= quest.LvlToStart)
+            {
+                ForStartingDialogue();
+                DialogueManager.Instance.StartDialogue(quest.dialogue);
+                QuestHolder.Instance.QuestAccept(quest, quest.Name);
+                isHaveAvaliableQuest = true;
+                break;
+            }
+
+            if(quest.PhaseCount > 0)
+            {
+                QuestPhaseScriptable questPhase = quest.QuestPhasesScriptable[quest.CurrentPhase - 1];
+
+                if (questPhase.IsTalkQuest && PlayerStats.instance.CurrentLvl >= quest.LvlToStart)
+                {
+                    if (!questPhase.IsCompleted && questPhase.IsActive && questPhase.NPCToCommit == NPCScriptableObject)
+                    {
+                        ForStartingDialogue();
+                        DialogueManager.Instance.StartDialogue(questPhase.dialogue);
+                        QuestHolder.Instance.ReplaceQuest(quest);
+                        QuestHolder.Instance.QuestProgress();
+                    }
+                    else if (!questPhase.IsCompleted && questPhase.IsActive && questPhase.NPCToCommit != NPCScriptableObject)
+                    {
+                        ForStartingDialogue();
+                        DialogueManager.Instance.StartDialogue(questPhase.dialogue);
+                    }
+                    isHaveAvaliableQuest = true;
+                    break;
+                }
+                else
+                    continue;
+            }          
+        }
+        if (!isHaveAvaliableQuest)
+        {
+            DialogueManager.Instance.StartDialogue(NPCScriptableObject.dialogues[0]);
+        }
+    }
+
+    private void ForStartingDialogue()
+    {
         if (PressButtonTip != null)
             PressButtonTip.SetActive(false);
 
         playerController.enabled = false;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
-        dialogueManager.StartDialogue(NPCScriptableObject);
     }
-    private void OnQuest()
+    private void InstantiateName()
     {
-        if (TryGetComponent(out QuestGiver questGiver))
-        {
-            if (!questGiver.questScriptable.IsCompleted && !questGiver.questScriptable.IsAccepted)
-                DialogueManager.EndOfDialogue += questGiver.GiveQuest;
-        }
-        if (TryGetComponent(out QuestProgresser questProgresser))
-        {
-            QuestScriptable _questScriptable = questProgresser.questScriptable;
-            if (_questScriptable.IsAccepted)
-            {
-                QuestPhaseScriptable _currentQuestPhase = _questScriptable.QuestPhasesScriptable[_questScriptable.CurrentPhase - 1];
+        _collider = GetComponent<Collider>();
 
-                if (_currentQuestPhase.IsTalkQuest
-                    && _currentQuestPhase.NPCToTalk == NPCScriptableObject)
-                {
-                    DialogueManager.EndOfDialogue += questProgresser.ProgressQuest;
-                }
-            }
-        }
+        float colliderTop = _collider.bounds.center.y + _collider.bounds.extents.y;
+        Vector3 healthBarPos = new Vector3(transform.position.x, colliderTop + 0.5f, transform.position.z);
+
+        NameTextGO = Instantiate(NameTextGO, healthBarPos, Quaternion.identity, transform);
+        _nameText = NameTextGO.GetComponentInChildren<TextMeshProUGUI>();
+        _nameText.text = $"{NPCScriptableObject.Name}";
     }
 }
 

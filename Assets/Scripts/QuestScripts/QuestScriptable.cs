@@ -16,13 +16,16 @@ public class QuestScriptable : ScriptableObject
     public int PhaseCount;
 
     [Space]
-    public int CurrentPhase;
+    public int CurrentPhase = 0;
     public int LvlToStart;
-    public int PointsToComplete;
-    public int ProgressPoints;
+    public float PointsToComplete;
+    public float ProgressPoints = 0;
 
     [Space]
-    public bool IsActive;
-    public bool IsAccepted;
-    public bool IsCompleted;
+    public bool IsActive = false;
+    public bool IsAccepted = false;
+    public bool IsCompleted = false;
+
+    [Space, Header("Entering quest dialogue if need")]
+    public Dialogue dialogue;
 }
