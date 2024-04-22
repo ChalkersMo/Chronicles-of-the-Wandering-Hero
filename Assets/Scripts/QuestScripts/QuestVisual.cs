@@ -1,3 +1,4 @@
+using Cinemachine;
 using DG.Tweening;
 using System.Collections.Generic;
 using TMPro;
@@ -32,7 +33,7 @@ public class QuestVisual : MonoBehaviour
 
     [Space, Header("Components to off with activating quests panel")]
     [SerializeField] private PlayerController playerController;
-    [SerializeField] private GameObject thirdPersonCamera;
+    [SerializeField] private CinemachineVirtualCamera thirdPersonCamera;
 
     [HideInInspector] public bool isActive;
 
@@ -67,7 +68,7 @@ public class QuestVisual : MonoBehaviour
         questPhaseName.transform.DOScale(0, 0);
         questPhaseDescription.transform.DOScale(0, 0);
         playerController.enabled = false;
-        thirdPersonCamera.SetActive(false);
+        thirdPersonCamera.enabled = false;
         CanvasesSortingOrder.Instance.ShowOnFirst(thisCanvas);
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
@@ -90,7 +91,7 @@ public class QuestVisual : MonoBehaviour
         questPhaseDescription.text = null;
 
         playerController.enabled = true;
-        thirdPersonCamera.SetActive(true);
+        thirdPersonCamera.enabled = true;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         isActive = false;
