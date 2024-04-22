@@ -14,7 +14,6 @@ public class NPCDialogueZone : MonoBehaviour
     private TextMeshProUGUI _nameText;
 
     private DialogueManager dialogueManager;
-    private PlayerController playerController;
     private QuestScriptable tempQuest;
 
     private bool isPlayerNear = false;
@@ -23,7 +22,6 @@ public class NPCDialogueZone : MonoBehaviour
     {
         InstantiateName();
         dialogueManager = FindObjectOfType<DialogueManager>();
-        playerController = FindObjectOfType<PlayerController>();
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -60,15 +58,11 @@ public class NPCDialogueZone : MonoBehaviour
             OnQuest();
         else
         {
-            ForStartingDialogue();
             dialogueManager.StartDialogue(NPCScriptableObject.dialogues[0]);
         }
 
         if (PressButtonTip != null)
-        {
-            isPlayerNear = false;
-            PressButtonTip.SetActive(false);
-        }            
+            PressButtonTip.SetActive(false);       
     }
     private void OnQuest()
     {
@@ -78,7 +72,6 @@ public class NPCDialogueZone : MonoBehaviour
             if (!quest.IsCompleted && !quest.IsAccepted && PlayerStats.instance.CurrentLvl >= quest.LvlToStart)
             {
                 tempQuest = quest;
-                ForStartingDialogue();
                 DialogueManager.Instance.StartDialogue(quest.dialogue);
                 DialogueManager.EndOfDialogue += AcceptQuestAfterDialogue;
                 isHaveAvaliableQuest = true;
@@ -96,14 +89,12 @@ public class NPCDialogueZone : MonoBehaviour
                     tempQuest = quest;
                     if (!questPhase.IsCompleted && questPhase.IsActive && questPhase.NPCToCommit == NPCScriptableObject)
                     {
-                        ForStartingDialogue();
                         DialogueManager.Instance.StartDialogue(questPhase.dialogue);
                         DialogueManager.EndOfDialogue += ProgressQuestAfterDialogue;
                         isHaveAvaliableQuest = true;
                     }
                     else if (!questPhase.IsCompleted && questPhase.IsActive && questPhase.NPCToCommit != NPCScriptableObject)
                     {
-                        ForStartingDialogue();
                         DialogueManager.Instance.StartDialogue(questPhase.dialogue);
                         isHaveAvaliableQuest = true;
                     }
@@ -130,15 +121,7 @@ public class NPCDialogueZone : MonoBehaviour
         QuestHolder.Instance.ReplaceQuest(tempQuest);
         QuestHolder.Instance.QuestProgress();
     }
-    private void ForStartingDialogue()
-    {
-        if (PressButtonTip != null)
-            PressButtonTip.SetActive(false);
-
-        playerController.enabled = false;
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
-    }
+  
     private void InstantiateName()
     {
         _collider = GetComponent<Collider>();

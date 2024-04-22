@@ -1,3 +1,4 @@
+using Cinemachine;
 using DG.Tweening;
 using System;
 using System.Collections;
@@ -27,7 +28,7 @@ public class DialogueManager : MonoBehaviour
 
     private Canvas _canvas;
 
-    [SerializeField] GameObject TPC;
+    [SerializeField] CinemachineVirtualCamera TPC;
 
     public static event Action EndOfDialogue;
 
@@ -49,11 +50,12 @@ public class DialogueManager : MonoBehaviour
     {
         OffAllUI.Instance.OffUI();
         CanvasesSortingOrder.Instance.ShowOnFirst(_canvas);
-        isDialogueActive = true;
-        TPC.SetActive(false);
+        playerController.enabled = false;
+        TPC.enabled = false;
         Cursor.lockState = CursorLockMode.None;
-        
+        Cursor.visible = true;
         panelDialogue.DOScale(1, 1);
+        isDialogueActive = true;
         lines.Clear();
 
         foreach (DialogueLine dialogueLine in dialogue.dialogueLines)
@@ -97,7 +99,7 @@ public class DialogueManager : MonoBehaviour
         StopAllCoroutines();
         isDialogueActive = false;
         playerController.enabled = true;
-        TPC.SetActive(true);
+        TPC.enabled = true;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 

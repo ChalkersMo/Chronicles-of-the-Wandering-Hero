@@ -32,6 +32,14 @@ public class PlayerAnimController : MonoBehaviour
         animatorController.SetFloat("Y", animMove.y, 0.1f, Time.deltaTime);
         animatorController.SetFloat("SpeedMultiplier", 1.3f);
     }
+    public void StandAnim()
+    {
+        float vertical = 0;
+        float horizontal = 0;
+        animMove = new Vector2(horizontal, vertical);
+        animatorController.SetFloat("X", animMove.x, 0, Time.deltaTime);
+        animatorController.SetFloat("Y", animMove.y, 0, Time.deltaTime);
+    }
     public void JumpAnim()
     {
         animatorController.SetTrigger("Jump");

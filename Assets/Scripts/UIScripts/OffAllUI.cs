@@ -22,14 +22,10 @@ public class OffAllUI : MonoBehaviour
     }
     public void OffUI()
     {
-        questVisual.panelQuest.DOScale(0, 0);
-        questVisual.isActive = false;
+        questVisual.OffQuestsPanel();
 
-        inventoryVisual.panelInventory.DOScale(0, 0);
-        inventoryVisual._isActive = false;
+        inventoryVisual.OffInventory();
 
-        dialogueManager.panelDialogue.DOScale(0, 0);
         dialogueManager.EndDialogue();
-        dialogueManager.isDialogueActive = false;
     }
 }

@@ -190,4 +190,8 @@ public class PlayerController : MonoBehaviour, IEquipSword, IRunning
         playerAnimController.AfterAttackAnim();
         CanMove = true;
     }
+    private void OnDisable()
+    {
+        playerAnimController.StandAnim();
+    }
 }

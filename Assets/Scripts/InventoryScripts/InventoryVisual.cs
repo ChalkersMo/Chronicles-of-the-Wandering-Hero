@@ -55,11 +55,11 @@ public class InventoryVisual : MonoBehaviour
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
         ThirdPersonCamera.enabled = false;
+        _isActive = true;
     }
     public void OffInventory()
     {
         _playerController.enabled = true;
-        _canvas.sortingOrder = 0;
         panelInventory.DOScale(0, _transitionSpeed);
         _nameItem.text = "Item name";
         _descriptionItem.text = "Here will be your item description";
@@ -68,19 +68,17 @@ public class InventoryVisual : MonoBehaviour
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         ThirdPersonCamera.enabled = true;
+        _isActive = false;
     }
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.B) && _isActive != true)
+        if(Input.GetKeyDown(KeyCode.B))
         {
-            _isActive = true;
-            OnInventory();
-        }
-        else if(Input.GetKeyDown(KeyCode.B) && _isActive != false)
-        {
-            _isActive = false;
-            OffInventory();
+            if(!_isActive)
+                OnInventory();
+            else
+                OffInventory();
         }
     }
 }
