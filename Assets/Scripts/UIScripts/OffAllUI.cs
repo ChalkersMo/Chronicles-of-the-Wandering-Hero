@@ -23,9 +23,6 @@ public class OffAllUI : MonoBehaviour
     public void OffUI()
     {
         questVisual.OffQuestsPanel();
-
         inventoryVisual.OffInventory();
-
-        dialogueManager.EndDialogue();
     }
 }

@@ -1,3 +1,4 @@
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -5,6 +6,8 @@ using UnityEngine.UI;
 public class QuestItem : MonoBehaviour
 {
     private TextMeshProUGUI questName;
+    private Image completedImage;
+    private Image isActiveImage;
     private Button showInfoButton;
     private QuestScriptable questScriptable;
     private QuestVisual questVisual;
@@ -12,6 +15,8 @@ public class QuestItem : MonoBehaviour
     private void Awake()
     {
         showInfoButton = GetComponent<Button>();
+        completedImage = transform.GetChild(1).GetComponent<Image>();
+        isActiveImage = transform.GetChild(2).GetComponent<Image>();
         questName = showInfoButton.GetComponentInChildren<TextMeshProUGUI>();
         showInfoButton.onClick.AddListener(ShowQuestinfo);
     }
@@ -20,9 +25,27 @@ public class QuestItem : MonoBehaviour
         questVisual = _questVisual;
         questScriptable = _questScriptable;
         questName.text = questScriptable.Name;
+        questVisual.QuestItems.Add(this);
     }
-    private void ShowQuestinfo()
+    public void ShowQuestinfo()
     {
-        questVisual.ShowQuestinfo(questScriptable);
+        questVisual.ShowQuestinfo(questScriptable);       
+    }
+    public void ShowQuestProgress()
+    {
+        if (questScriptable.IsCompleted)
+            completedImage.DOFillAmount(1, 1);
+        else
+            completedImage.DOFillAmount(0, 0);
+
+        if (questScriptable.IsActive)
+            isActiveImage.DOFillAmount(1, 1);
+        else
+            isActiveImage.DOFillAmount(0, 0);
+    }
+    public void HideQuestProgress()
+    {
+        completedImage.DOFillAmount(0, 0);
+        isActiveImage.DOFillAmount(0, 0);
     }
 }

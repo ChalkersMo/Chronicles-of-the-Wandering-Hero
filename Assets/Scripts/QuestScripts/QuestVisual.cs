@@ -7,18 +7,12 @@ using UnityEngine.UI;
 
 public class QuestVisual : MonoBehaviour
 {
-    private Dictionary<string, GameObject> AcceptedQuests = new Dictionary<string, GameObject>();
-
-    private Canvas thisCanvas;
-
 
     [Space, Header("Quest info fields")]
     [SerializeField] private TextMeshProUGUI questName;
     [SerializeField] private TextMeshProUGUI questDescription;
     [SerializeField] private TextMeshProUGUI questPhaseName;
     [SerializeField] private TextMeshProUGUI questPhaseDescription;
-
-    private TextMeshProUGUI miniQuestPhaseDescription;
 
     [SerializeField] private Image questImage;
     [SerializeField] private Image questProgressImage;
@@ -29,13 +23,19 @@ public class QuestVisual : MonoBehaviour
     [Space]
     [SerializeField] private GameObject questTemplate;
 
-    [HideInInspector] public Transform panelQuest;
-
     [Space, Header("Components to off with activating quests panel")]
     [SerializeField] private PlayerController playerController;
     [SerializeField] private CinemachineVirtualCamera thirdPersonCamera;
 
+    [HideInInspector] public Transform panelQuest;
+
     [HideInInspector] public bool isActive;
+
+    public List<QuestItem> QuestItems = new List<QuestItem>();
+    
+    private Canvas thisCanvas;
+
+    private TextMeshProUGUI miniQuestPhaseDescription;
 
     private void Awake()
     {
@@ -72,6 +72,9 @@ public class QuestVisual : MonoBehaviour
         CanvasesSortingOrder.Instance.ShowOnFirst(thisCanvas);
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+
+        Invoke(nameof(ShowQuestsProgressInfo), 1);
+
         isActive = true;
     }
     public void OffQuestsPanel()
@@ -90,6 +93,7 @@ public class QuestVisual : MonoBehaviour
         questPhaseName.text = null;
         questPhaseDescription.text = null;
 
+        Invoke(nameof(HideQuestsProgressInfo), 1);
         playerController.enabled = true;
         thirdPersonCamera.enabled = true;
         Cursor.lockState = CursorLockMode.Locked;
@@ -98,12 +102,10 @@ public class QuestVisual : MonoBehaviour
     }
     public void QuestAccept(QuestScriptable questScriptable)
     {
-
         GameObject newQuest  = Instantiate(questTemplate, questParentContent.transform);
         QuestItem item = newQuest.GetComponent<QuestItem>();
         item.AssingFields(this, questScriptable);
 
-        AcceptedQuests.Add(questScriptable.Name, newQuest);
         if (questScriptable.PhaseCount > 0)
         {
             QuestPhaseScriptable questPhase = questScriptable.QuestPhasesScriptable[questScriptable.CurrentPhase - 1];
@@ -111,7 +113,6 @@ public class QuestVisual : MonoBehaviour
         }
         else
             miniQuestPhaseDescription.text = $"{questScriptable.Description}: {questScriptable.ProgressPoints}/{questScriptable.PointsToComplete}";
-
     }
     public void QuestProgress(QuestScriptable questScriptable)
     {
@@ -126,7 +127,7 @@ public class QuestVisual : MonoBehaviour
     public void QuestComplete(QuestScriptable questScriptable)
     {
         miniQuestPhaseDescription.text = null;
-        Destroy(AcceptedQuests[questScriptable.Name]);
+        ShowQuestinfo(questScriptable);
     }
     public void ShowQuestinfo(QuestScriptable questScriptable)
     {
@@ -162,4 +163,19 @@ public class QuestVisual : MonoBehaviour
             questPhaseDescription.text = null;
         }
     }
+    private void ShowQuestsProgressInfo()
+    {
+        foreach (QuestItem item in QuestItems)
+        {
+            item.ShowQuestProgress();
+        }
+    }
+    private void HideQuestsProgressInfo()
+    {
+        foreach (QuestItem item in QuestItems)
+        {
+            item.HideQuestProgress();
+        }
+    }
+
 }
