@@ -25,7 +25,8 @@ public class QuestScriptable : ScriptableObject
     public bool IsActive = false;
     public bool IsAccepted = false;
     public bool IsCompleted = false;
-
+    [Space]
+    public RewardScriptable[] Rewards;
     [Space, Header("Entering quest dialogue if need")]
     public Dialogue dialogue;
 }

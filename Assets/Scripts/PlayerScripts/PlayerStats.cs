@@ -1,3 +1,4 @@
+using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 
 public class PlayerStats : MonoBehaviour
@@ -9,6 +10,7 @@ public class PlayerStats : MonoBehaviour
     public float MultiplySwordDamage;
     public float MaxHealth;
     public float HealingMultiply;
+    public float XP;
 
     public int CurrentLvl;
 

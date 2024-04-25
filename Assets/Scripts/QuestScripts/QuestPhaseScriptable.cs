@@ -12,6 +12,8 @@ public class QuestPhaseScriptable : ScriptableObject
     public bool IsCompleted = false;
     public bool IsActive = false;
     public bool IsTalkQuest;
+    [Space]
+    public RewardScriptable[] Rewards;
     [Space, Header("If quest is talk quest create the dialogue")]
     public Dialogue dialogue;
     [Space, Header("If quest is talk quest with NPC for commiting this quest place here this NPC")]

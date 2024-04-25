@@ -1,5 +1,6 @@
 using Cinemachine;
 using DG.Tweening;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -18,6 +19,9 @@ public class QuestVisual : MonoBehaviour
     [SerializeField] private Image questProgressImage;
 
     [Space]
+    [SerializeField] private Image RewardImage;
+
+    [Space]
     [SerializeField] private ContentSizeFitter questParentContent;
 
     [Space]
@@ -31,7 +35,7 @@ public class QuestVisual : MonoBehaviour
 
     [HideInInspector] public bool isActive;
 
-    public List<QuestItem> QuestItems = new List<QuestItem>();
+    [HideInInspector] public List<QuestItem> QuestItems = new List<QuestItem>();
     
     private Canvas thisCanvas;
 
@@ -43,6 +47,7 @@ public class QuestVisual : MonoBehaviour
         miniQuestPhaseDescription = transform.GetChild(0).GetComponent<TextMeshProUGUI>();
         panelQuest = transform.GetChild(1);
         panelQuest.DOScale(0, 0);
+        RewardImage.DOFade(0, 0);
         isActive = false;
     }
     private void Update()
@@ -129,6 +134,14 @@ public class QuestVisual : MonoBehaviour
         miniQuestPhaseDescription.text = null;
         ShowQuestinfo(questScriptable);
     }
+    public void GetMainQuestRewardVisual(QuestScriptable questScriptable)
+    {
+        StartCoroutine(QuestRewardRecieving(questScriptable));
+    }
+    public void GetPhaseQuestRewardVisual(QuestPhaseScriptable questPhase)
+    {
+        StartCoroutine(QuestPhaseRewardRecieving(questPhase));
+    }
     public void ShowQuestinfo(QuestScriptable questScriptable)
     {
         questName.transform.DOScale(0, 0);
@@ -178,4 +191,27 @@ public class QuestVisual : MonoBehaviour
         }
     }
 
+    private IEnumerator QuestRewardRecieving(QuestScriptable questScriptable)
+    {
+        foreach (RewardScriptable reward in questScriptable.Rewards)
+        {
+            RewardImage.sprite = reward.RewardSprite;
+            RewardImage.DOFade(1, 1);
+            yield return new WaitForSeconds(2);
+            RewardImage.DOFade(0, 0.1f);
+        }
+        StopAllCoroutines();
+    }
+
+    private IEnumerator QuestPhaseRewardRecieving(QuestPhaseScriptable questPhase)
+    {
+        foreach (RewardScriptable reward in questPhase.Rewards)
+        {
+            RewardImage.sprite = reward.RewardSprite;
+            RewardImage.DOFade(1, 1);
+            yield return new WaitForSeconds(2);
+            RewardImage.DOFade(0, 0.1f);
+        }
+        StopAllCoroutines();
+    }
 }

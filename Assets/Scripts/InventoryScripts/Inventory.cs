@@ -31,9 +31,14 @@ public class Inventory : MonoBehaviour
         itemInvSlot.Assign(item);
         itemInvSlot.ItemUseable = currentItem.GetComponent<ItemUseable>();
         items.Add(itemInvSlot.Name, itemInvSlot);
+        quantity--;
         currentItem.transform.SetParent(transform.GetComponentInChildren<GridLayoutGroup>().transform);
         currentItem.transform.localScale = new Vector3(1, 1, 1);
         currentItem.GetComponent<Image>().sprite = item.ItemSprite;
+
+        if (items.ContainsKey(item.Name) && item.Stackable)
+            items[item.Name].Quantity += quantity;
+
         return true;
     }
     public bool DeleteItem(InventorySlot item, int quantity)

@@ -19,6 +19,8 @@ MonoBehaviour:
   IsCompleted: 0
   IsActive: 0
   IsTalkQuest: 1
+  Rewards:
+  - {fileID: 11400000, guid: 04245dae3bf032846b5252753dd6e143, type: 2}
   dialogue:
     dialogueLines:
     - character:

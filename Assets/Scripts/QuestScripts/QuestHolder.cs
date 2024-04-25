@@ -1,11 +1,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(QuestVisual), typeof(RewardReciever))]
 public class QuestHolder : MonoBehaviour
 {
     public static QuestHolder Instance;
     private QuestVisual questVisual;
+    private RewardReciever rewardReciever;
     private QuestScriptable tempQuestScriptable;
+    
 
     private Dictionary<string, QuestScriptable> AcceptedQuests = new Dictionary<string, QuestScriptable>();
     private Dictionary<string, QuestScriptable> CompletedQuests = new Dictionary<string, QuestScriptable>();
@@ -23,6 +26,7 @@ public class QuestHolder : MonoBehaviour
         }
 
         questVisual = GetComponent<QuestVisual>();
+        rewardReciever = GetComponent<RewardReciever>();
     }
     
     public void QuestAccept(QuestScriptable questScriptable, string questName)
@@ -83,6 +87,12 @@ public class QuestHolder : MonoBehaviour
         questPhase.IsActive = false;
         tempQuestScriptable.ProgressPoints++;
 
+        foreach(RewardScriptable reward in questPhase.Rewards)
+        {
+            rewardReciever.RecieveReward(reward);
+        }
+        questVisual.GetPhaseQuestRewardVisual(questPhase);
+
         if (tempQuestScriptable.QuestPhasesScriptable[tempQuestScriptable.PhaseCount - 1].IsCompleted)
         {
             QuestCompleted(tempQuestScriptable);
@@ -101,6 +111,13 @@ public class QuestHolder : MonoBehaviour
         questScriptable.IsActive = false;
         AcceptedQuests.Remove(questScriptable.Name);
         CompletedQuests.Add(questScriptable.Name, questScriptable);
+
+        foreach (RewardScriptable reward in questScriptable.Rewards)
+        {
+            rewardReciever.RecieveReward(reward);
+        }
+
+        questVisual.GetMainQuestRewardVisual(questScriptable);
         questVisual.QuestComplete(questScriptable);
     }
 
