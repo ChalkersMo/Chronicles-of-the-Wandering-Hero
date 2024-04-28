@@ -4,13 +4,13 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(CharacterController), typeof(PlayerInput))] 
 public class PlayerController : MonoBehaviour, IEquipSword, IRunning
 {
-    CharacterController _CharacterController;
-    PlayerAnimController playerAnimController;
-    PlayerSwordController playerSwordController;
+    private CharacterController _CharacterController;
+    private PlayerAnimController playerAnimController;
+    private PlayerSwordController playerSwordController;
 
-    Vector3 playerVelocity;
-    bool groundedPlayer;
-    Transform cameraTransform;
+    private Vector3 playerVelocity;
+    private bool groundedPlayer;
+    private Transform cameraTransform;
 
     public int numberOfCklicks = 0;
 
@@ -18,20 +18,22 @@ public class PlayerController : MonoBehaviour, IEquipSword, IRunning
     public float RunningSpeed { get; set; }
     public float cooldownTime = 1.2f;
 
-    float lastClickedTime = 0;
-    float maxComboDelay = 1;
-    float jumpHeight = 1.0f;
-    float gravityValue = -9.81f;
-    float rotationSpeed = 10f;
-    float groundedTime;
+    private float lastClickedTime = 0;
+    private float maxComboDelay = 1;
+    private float jumpHeight = 1.0f;
+    private float gravityValue = -9.81f;
+    private float rotationSpeed = 10f;
+    private float groundedTime;
 
-    PlayerInput playerInput;
-    InputAction moveAction;
-    InputAction jumpAction;
+    private PlayerInput playerInput;
+    private InputAction moveAction;
+    private InputAction jumpAction;
 
     [HideInInspector] public bool CanMove;
     public bool IsRunning { get; set; }
     public bool SwordEquiped { get; set; }
+
+    private bool _canJump = true;
 
     private void Start()
     {
@@ -64,10 +66,12 @@ public class PlayerController : MonoBehaviour, IEquipSword, IRunning
             else if (Input.GetKeyDown(KeyCode.LeftControl) && IsRunning)
                 IsRunning = false;
 
-            if (jumpAction.triggered && groundedPlayer)
+            if (jumpAction.triggered && groundedPlayer && _canJump)
             {
                 playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
                 playerAnimController.JumpAnim();
+                _canJump = false;
+                Invoke(nameof(JumpRenew), 2.5f);
             }
 
             groundedPlayer = _CharacterController.isGrounded;
@@ -116,7 +120,10 @@ public class PlayerController : MonoBehaviour, IEquipSword, IRunning
             StartAttacking();
         }
     }
-
+    private void JumpRenew()
+    {
+        _canJump = true;
+    }
     public void AssignSwordController(PlayerSwordController controller)
     {
         playerSwordController = controller;
