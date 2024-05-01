@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d36b64ea0abad6845a8d7db68c175e3f, type: 3}
+  m_Name: 2HealingPods
+  m_EditorClassIdentifier: 
+  Name: HealingPod
+  IsInventoryItem: 1
+  Quantity: 2
+  RewardSprite: {fileID: 21300000, guid: 09d38a8378868664b888768e5c85e4f4, type: 3}
+  InvSlot: {fileID: 6394947016470614047, guid: a7ecafba3d79d994bbe9b24d17ffc35e, type: 3}

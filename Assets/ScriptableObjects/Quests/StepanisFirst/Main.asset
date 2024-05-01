@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d09f006eb76354548b221f14a84749ae, type: 3}
+  m_Name: Main
+  m_EditorClassIdentifier: 
+  QuestPhasesScriptable:
+  - {fileID: 11400000, guid: 8beacdb02f257464a8f5bdd0126898fb, type: 2}
+  - {fileID: 11400000, guid: 32c40a1b52af71a48b8b60638f372bd3, type: 2}
+  QuestImage: {fileID: 21300000, guid: 11b199c4150d0dd419f971897d51f201, type: 3}
+  Name: Bear dangerous
+  Description: Defend Stepanis from bears
+  PhaseCount: 2
+  CurrentPhase: 0
+  LvlToStart: 0
+  PointsToComplete: 2
+  ProgressPoints: 0
+  IsActive: 0
+  IsAccepted: 0
+  IsCompleted: 0
+  Rewards:
+  - {fileID: 11400000, guid: c3ed99e06e65a174e9b0e0dfedba59b3, type: 2}
+  - {fileID: 11400000, guid: abba2cfdc64d60c4db38931e32548dfb, type: 2}
+  dialogue:
+    dialogueLines:
+    - character:
+        name: Stepanis
+        icon: {fileID: 0}
+      line: Hey! Help me!
+    - character:
+        name: You
+        icon: {fileID: 0}
+      line: What happened?
+    - character:
+        name: Stepanis
+        icon: {fileID: 0}
+      line: Bears.. It is still better then evil. But it is still dangerous
+    - character:
+        name: You
+        icon: {fileID: 0}
+      line: I'll help you
