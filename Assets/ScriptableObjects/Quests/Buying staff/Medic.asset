@@ -10,34 +10,39 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7237abefa49e7d4449584d270633544c, type: 3}
-  m_Name: Phase2
+  m_Name: Medic
   m_EditorClassIdentifier: 
-  Name: Talking with Stepanis
-  Description: Talk to Stepanis
+  Name: Medic
+  Description: I need to get some heal
   ProgressPoints: 0
   PointsToComplete: 1
   IsCompleted: 0
   IsActive: 0
   IsTalkQuest: 1
   Rewards:
-  - {fileID: 11400000, guid: 04245dae3bf032846b5252753dd6e143, type: 2}
+  - {fileID: 11400000, guid: c3ed99e06e65a174e9b0e0dfedba59b3, type: 2}
   dialogue:
     dialogueLines:
     - character:
         name: You
         icon: {fileID: 0}
-      line: Done
+      line: Hi im  got a wound, you can have a look?
     - character:
-        name: Stepanis
+        name: Medic
         icon: {fileID: 0}
-      line: THANKS!
+      line: Yea, give it a sec
     - character:
-        name: Stepanis
+        name: Medic
         icon: {fileID: 0}
-      line: I'll reward you. 2 healing pods with herbs. I hope it will help you in
-        your wandering!! Also, Shepherd is around home next to me
+      line: There is nothing serious, take that pod
     - character:
         name: You
         icon: {fileID: 0}
-      line: I think we will meet again soon
-  NPCToCommit: {fileID: 11400000, guid: 6addea1c080ac4e43a5dd7327f812986, type: 2}
+      line: 'Thank you, that all?
+
+'
+    - character:
+        name: Medic
+        icon: {fileID: 0}
+      line: Yea, goodluck
+  NPCToCommit: {fileID: 0}

@@ -1,0 +1,80 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7237abefa49e7d4449584d270633544c, type: 3}
+  m_Name: BuyNewSword
+  m_EditorClassIdentifier: 
+  Name: 
+  Description: 
+  ProgressPoints: 0
+  PointsToComplete: 0
+  IsCompleted: 0
+  IsActive: 0
+  IsTalkQuest: 0
+  Rewards: []
+  dialogue:
+    dialogueLines:
+    - character:
+        name: You
+        icon: {fileID: 0}
+      line: Hi, i got back, also i saw catana in you`r shop
+    - character:
+        name: Blacksmith
+        icon: {fileID: 0}
+      line: 200 gold, but if you buy it, you won't be able to use it, none of the
+        buyers have taken it out of the scabbard yet.
+    - character:
+        name: You
+        icon: {fileID: 0}
+      line: Let me guess this is another ancient thing from excavations in Egypt?
+    - character:
+        name: BlackSmith
+        icon: {fileID: 0}
+      line: And you are smart little one, this sword is not as old as an arrow, but
+        according to legends, everyone who took out a sword became a very strong
+        swordsman, but ...
+    - character:
+        name: You
+        icon: {fileID: 0}
+      line: But what?
+    - character:
+        name: BlackSmith
+        icon: {fileID: 0}
+      line: 'by the way, you want to buy a strong weapon. Don''t you want to implement
+        it, improve your skills and have a stable salary?
+
+'
+    - character:
+        name: You
+        icon: {fileID: 0}
+      line: What do you mean?
+    - character:
+        name: BlackSmith
+        icon: {fileID: 0}
+      line: 'They pay a lot to join the royal guard there, with your skills the red
+        carpet is rolled out for you there
+
+'
+    - character:
+        name: You
+        icon: {fileID: 0}
+      line: 'Sounds like a plan, but where to go?
+
+'
+    - character:
+        name: BlackSmith
+        icon: {fileID: 0}
+      line: There *points to some houses*
+    - character:
+        name: BlackSmith
+        icon: {fileID: 0}
+      line: ok, then I went there, bye
+  NPCToCommit: {fileID: 0}

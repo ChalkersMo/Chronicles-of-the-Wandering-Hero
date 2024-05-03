@@ -1,0 +1,86 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d09f006eb76354548b221f14a84749ae, type: 3}
+  m_Name: BuySomeStaff
+  m_EditorClassIdentifier: 
+  QuestPhasesScriptable:
+  - {fileID: 11400000, guid: c6ee018e06dee9e4c8601a1cc6f200a7, type: 2}
+  - {fileID: 11400000, guid: aee4ebecf71ad994a869232bbb8a7270, type: 2}
+  QuestImage: {fileID: 0}
+  Name: 
+  Description: 
+  PhaseCount: 0
+  CurrentPhase: 0
+  LvlToStart: 0
+  PointsToComplete: 0
+  ProgressPoints: 0
+  IsActive: 0
+  IsAccepted: 0
+  IsCompleted: 0
+  Rewards: []
+  dialogue:
+    dialogueLines:
+    - character:
+        name: You
+        icon: {fileID: 0}
+      line: Hi, i know that you selling weapons, that true?
+    - character:
+        name: ' blacksmith'
+        icon: {fileID: 0}
+      line: Here is that i have
+    - character:
+        name: You
+        icon: {fileID: 0}
+      line: '*you very carefully study everything there is and you are interested
+        in a golden arrow of a special shape with a beetle on the tip*'
+    - character:
+        name: You
+        icon: {fileID: 0}
+      line: Excuse me, but why is the arrow shaped like that, it has bad aerodynamics
+        compared to a normal arrow
+    - character:
+        name: BlackSmith
+        icon: {fileID: 0}
+      line: This is a souvenir from excavations in Egypt, this arrow was made from
+        a meteorite that fell more than 5000 years ago.
+    - character:
+        name: You
+        icon: {fileID: 0}
+      line: 'It have any practiculary uses?
+
+'
+    - character:
+        name: BlackSmith
+        icon: {fileID: 0}
+      line: According to legend, this arrow gives superpowers to "worthy people"
+        if you pierce it, if you want, ask for luck
+    - character:
+        name: You
+        icon: {fileID: 0}
+      line: Lets give it a try
+    - character:
+        name: You
+        icon: {fileID: 0}
+      line: '*you were pierced by an arrow, but you felt nothing but pain*'
+    - character:
+        name: You
+        icon: {fileID: 0}
+      line: Hm... I thing nothing was happend
+    - character:
+        name: You
+        icon: {fileID: 0}
+      line: Hm... I thing nothing was happend
+    - character:
+        name: BlackSmith
+        icon: {fileID: 0}
+      line: Well, I said that it's just a legend, I hope you didn't get an infection
+        in your blood. Go check in medic

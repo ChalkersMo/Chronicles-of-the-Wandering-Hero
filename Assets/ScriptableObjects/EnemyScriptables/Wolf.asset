@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Wolf
   Description: Fast and realy dangerous, medium but fast attacks
-  MaxHp: 150
-  Prefab: {fileID: 0}
+  MaxHp: 1
+  Prefab: {fileID: 175852, guid: f8243bb353e5cb74481bb26fe62fd298, type: 3}
   HealthBar: {fileID: 3650361921116133627, guid: 5021fbcda8653bc4cb7f7215f46858c0,
     type: 3}
   HealthBarColorGradient:

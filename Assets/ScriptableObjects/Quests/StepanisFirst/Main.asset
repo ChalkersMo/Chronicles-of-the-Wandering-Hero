@@ -32,17 +32,13 @@ MonoBehaviour:
   dialogue:
     dialogueLines:
     - character:
-        name: Stepanis
-        icon: {fileID: 0}
-      line: Hey! Help me!
-    - character:
         name: You
         icon: {fileID: 0}
-      line: What happened?
+      line: Hi im looking for Shepherd
     - character:
         name: Stepanis
         icon: {fileID: 0}
-      line: Bears.. It is still better then evil. But it is still dangerous
+      line: I know where he is but you need to kill Bears for this information
     - character:
         name: You
         icon: {fileID: 0}

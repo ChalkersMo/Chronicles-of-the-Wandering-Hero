@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d09f006eb76354548b221f14a84749ae, type: 3}
+  m_Name: Shepherd Talking
+  m_EditorClassIdentifier: 
+  QuestPhasesScriptable: []
+  QuestImage: {fileID: 0}
+  Name: First money
+  Description: Talk to Shepherd in village
+  PhaseCount: 0
+  CurrentPhase: 0
+  LvlToStart: 0
+  PointsToComplete: 0
+  ProgressPoints: 0
+  IsActive: 0
+  IsAccepted: 0
+  IsCompleted: 0
+  Rewards: []
+  dialogue:
+    dialogueLines:
+    - character:
+        name: Shepherd
+        icon: {fileID: 0}
+      line: Hi, im happy that you alive, what about wolf?
+    - character:
+        name: You
+        icon: {fileID: 0}
+      line: I killed all wolf
+    - character:
+        name: Shepherd
+        icon: {fileID: 0}
+      line: Oh... Thank you here some money go buy new stuff
