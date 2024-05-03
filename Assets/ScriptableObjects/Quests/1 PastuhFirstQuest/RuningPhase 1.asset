@@ -16,7 +16,7 @@ MonoBehaviour:
   Description: Talk to Shepherd
   ProgressPoints: 0
   PointsToComplete: 1
-  IsCompleted: 1
+  IsCompleted: 0
   IsActive: 0
   IsTalkQuest: 1
   Rewards: []

@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d09f006eb76354548b221f14a84749ae, type: 3}
-  m_Name: Shepherd Talking
+  m_Name: TalkingToShepherd
   m_EditorClassIdentifier: 
   QuestPhasesScriptable: []
   QuestImage: {fileID: 0}
-  Name: First money
-  Description: Talk to Shepherd in village
+  Name: 
+  Description: 
   PhaseCount: 0
   CurrentPhase: 0
   LvlToStart: 0
@@ -30,12 +30,8 @@ MonoBehaviour:
     - character:
         name: Shepherd
         icon: {fileID: 0}
-      line: Hi, im happy that you alive, what about wolf?
+      line: Hi, i happy that you alived, what
     - character:
         name: You
         icon: {fileID: 0}
-      line: I killed all wolf
-    - character:
-        name: Shepherd
-        icon: {fileID: 0}
-      line: Oh... Thank you here some money go buy new stuff
+      line: Hi, i happy that you alived

@@ -23,8 +23,8 @@ MonoBehaviour:
   LvlToStart: 0
   PointsToComplete: 2
   ProgressPoints: 0
-  IsActive: 1
-  IsAccepted: 1
+  IsActive: 0
+  IsAccepted: 0
   IsCompleted: 0
   Rewards: []
   dialogue:

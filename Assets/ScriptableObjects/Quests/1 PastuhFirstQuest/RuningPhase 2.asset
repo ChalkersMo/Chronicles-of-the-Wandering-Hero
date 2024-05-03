@@ -17,7 +17,7 @@ MonoBehaviour:
   ProgressPoints: 0
   PointsToComplete: 3
   IsCompleted: 0
-  IsActive: 1
+  IsActive: 0
   IsTalkQuest: 0
   Rewards:
   - {fileID: 11400000, guid: 04245dae3bf032846b5252753dd6e143, type: 2}
