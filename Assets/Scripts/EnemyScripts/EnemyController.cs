@@ -85,7 +85,7 @@ public class EnemyController : EnemyAbstract
         if (canAttack)
         {
             agent.SetDestination(transform.position);
-            if (_enemyAttack.AttackCount % 3 != 0)
+            if (_enemyAttack.AttackCount % 3 != 0 || playerInSpecialAttackRange)
             {
                 _enemyAttack.DeafaultAttack();
                 canAttack = false;
