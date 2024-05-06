@@ -15,11 +15,12 @@ MonoBehaviour:
   Name: 
   Description: 
   ProgressPoints: 0
-  PointsToComplete: 0
+  PointsToComplete: 1
   IsCompleted: 0
   IsActive: 0
-  IsTalkQuest: 0
-  Rewards: []
+  IsTalkQuest: 1
+  Rewards:
+  - {fileID: 11400000, guid: 04245dae3bf032846b5252753dd6e143, type: 2}
   dialogue:
     dialogueLines:
     - character:

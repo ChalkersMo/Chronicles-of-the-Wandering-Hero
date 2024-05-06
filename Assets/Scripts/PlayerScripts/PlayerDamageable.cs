@@ -9,12 +9,15 @@ public class PlayerDamageable : MonoBehaviour, IDamageable, IHealable
     public float MaxHealth { get; set; }
     public float CurrentHealth { get; set; }
 
-    [SerializeField] Image _healthBarFill;
-    [SerializeField] Image _healthBarDamageFill;
-    [SerializeField] TextMeshProUGUI _healthTxt;
-    float _fillSpeed = 1;
-    float _fillDamageSpeed = 0.6f;
-    [SerializeField] Gradient _colourgradient;
+    [SerializeField] private Gradient _colourgradient;
+
+    [SerializeField] private Image _healthBarFill;
+    [SerializeField] private Image _healthBarDamageFill;
+
+    [SerializeField] private TextMeshProUGUI _healthTxt;
+
+    private float _fillSpeed = 1;
+    private float _fillDamageSpeed = 0.6f;
 
     private void Start()
     {
@@ -42,6 +45,7 @@ public class PlayerDamageable : MonoBehaviour, IDamageable, IHealable
     {
         float targetFillAmount = CurrentHealth / MaxHealth;
         _healthBarFill.DOFillAmount(targetFillAmount, _fillSpeed);
+        _healthBarFill.DOColor(_colourgradient.Evaluate(targetFillAmount), _fillSpeed);
         yield return new WaitForSeconds(_fillSpeed);
         _healthBarDamageFill.DOFillAmount(targetFillAmount, _fillDamageSpeed);
         StopCoroutine(UpdateHealthBar());

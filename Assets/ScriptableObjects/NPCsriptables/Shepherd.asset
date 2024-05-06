@@ -13,10 +13,16 @@ MonoBehaviour:
   m_Name: Shepherd
   m_EditorClassIdentifier: 
   Name: Shepherd
-  Description: 
+  Description: I am Shepherd, wolfs... my biggest life problem. Of cource except 
+    evils...
   Level: 0
   isEnemy: 0
   isFriend: 1
-  dialogues: []
+  dialogues:
+  - dialogueLines:
+    - character:
+        name: Shepherd
+        icon: {fileID: 0}
+      line: Hi, what?
   Quests:
   - {fileID: 11400000, guid: 8cf0836a6ee42544f81220473394f49f, type: 2}

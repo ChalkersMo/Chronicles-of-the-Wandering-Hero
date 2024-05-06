@@ -1,9 +1,10 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
+[RequireComponent(typeof(EnemyAttacksAbstract), typeof(EnemyAnimation))]
 public class EnemyController : EnemyAbstract
 {
-    private EnemyDamageable enemyDamageable;
+    private EnemyAttacksAbstract _enemyAttack;
+    private EnemyAnimation _enemyAnim;
 
     private Transform target;
 
@@ -11,6 +12,7 @@ public class EnemyController : EnemyAbstract
 
     private bool _walkPointSet = false;
     private bool _isSeekingPoint = false;
+
     [SerializeField] private Transform[] targets;
 
     [SerializeField] private float timeToStand;
@@ -19,7 +21,8 @@ public class EnemyController : EnemyAbstract
 
     private void Start()
     {
-        enemyDamageable = GetComponent<EnemyDamageable>();
+        _enemyAttack = GetComponent<EnemyAttacksAbstract>();
+        _enemyAnim = GetComponent<EnemyAnimation>();
     }
     private void Update()
     {
@@ -40,7 +43,7 @@ public class EnemyController : EnemyAbstract
         {
             agent.SetDestination(transform.position);
             _isSeekingPoint = true;
-            Debug.Log("seeking");
+            _enemyAnim.StandAnim();
             Invoke(nameof(SeekPatrolPoint), timeToStand);          
         }         
 
@@ -48,6 +51,7 @@ public class EnemyController : EnemyAbstract
         {
             agent.SetDestination(target.position);
             agent.speed = patrolingSpeed;
+            _enemyAnim.WalkAnim();
         }
 
         if(target != null)
@@ -63,34 +67,37 @@ public class EnemyController : EnemyAbstract
         target = targets[rand];
         _walkPointSet = true;
         _isSeekingPoint = false;
-        Debug.Log("Yes!");
     }
     protected override void Chasing()
     {
         agent.SetDestination(player.position);
         agent.speed = chasingSpeed;
+        _enemyAnim.RunAnim();
     }
 
     protected override void Attacking()
     {
         agent.SetDestination(transform.position);
-
         transform.LookAt(player);
+
         if (canAttack)
         {
+            _enemyAttack.DeafaultAttack();
             canAttack = false;
+            _enemyAnim.DefaultAttackAnim();
             Invoke(nameof(RenewAttack), timeBetweenAttacks);
         }
     }   
 
     protected override void RenewAttack()
     {
-        canAttack = true;
+        base.RenewAttack();
+        _enemyAnim.RenewBools();
     }
 
     public override void TakeDamage(float damage)
     {
-        enemyDamageable.TakeDamage(damage);
+        base.TakeDamage(damage);
     }
 
     private void OnDrawGizmosSelected()

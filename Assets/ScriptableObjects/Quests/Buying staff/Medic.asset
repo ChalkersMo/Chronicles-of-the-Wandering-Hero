@@ -21,6 +21,7 @@ MonoBehaviour:
   IsTalkQuest: 1
   Rewards:
   - {fileID: 11400000, guid: c3ed99e06e65a174e9b0e0dfedba59b3, type: 2}
+  - {fileID: 11400000, guid: 04245dae3bf032846b5252753dd6e143, type: 2}
   dialogue:
     dialogueLines:
     - character:
@@ -45,4 +46,4 @@ MonoBehaviour:
         name: Medic
         icon: {fileID: 0}
       line: Yea, goodluck
-  NPCToCommit: {fileID: 0}
+  NPCToCommit: {fileID: 11400000, guid: 6addea1c080ac4e43a5dd7327f812986, type: 2}

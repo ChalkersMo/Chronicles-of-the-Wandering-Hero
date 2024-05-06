@@ -8,7 +8,12 @@ public class Enemy : ScriptableObject
 {
     public string Name;
     public string Description;
+
     public float MaxHp;
+
+    public float DefaultDamage;
+    public float SpecialDamage;
+    
     public GameObject Prefab;
     public GameObject HealthBar;
     public Gradient HealthBarColorGradient;

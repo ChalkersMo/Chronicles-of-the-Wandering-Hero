@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: The Way to village
   Description: Talk to Shepherd
-  ProgressPoints: 0
+  ProgressPoints: 1
   PointsToComplete: 1
-  IsCompleted: 0
+  IsCompleted: 1
   IsActive: 0
   IsTalkQuest: 1
   Rewards: []
