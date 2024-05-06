@@ -17,7 +17,9 @@ MonoBehaviour:
   MaxHp: 10
   DefaultDamage: 26
   SpecialDamage: 90
-  Prefab: {fileID: 2328952807196473916, guid: abfdb12ccfb8bd74985caaa4df4cf4ea, type: 3}
+  DefaultAttackDuration: 3
+  SpecialAttackDuration: 5
+  Prefab: {fileID: 5857413166334176152, guid: abfdb12ccfb8bd74985caaa4df4cf4ea, type: 3}
   HealthBar: {fileID: 3650361921116133627, guid: 5021fbcda8653bc4cb7f7215f46858c0,
     type: 3}
   HealthBarColorGradient:

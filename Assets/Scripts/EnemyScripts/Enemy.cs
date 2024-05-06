@@ -13,7 +13,10 @@ public class Enemy : ScriptableObject
 
     public float DefaultDamage;
     public float SpecialDamage;
-    
+
+    public float DefaultAttackDuration;
+    public float SpecialAttackDuration;
+
     public GameObject Prefab;
     public GameObject HealthBar;
     public Gradient HealthBarColorGradient;

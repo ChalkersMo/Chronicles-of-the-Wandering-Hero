@@ -3,6 +3,7 @@ using UnityEngine;
 [RequireComponent(typeof(EnemyAttacksAbstract), typeof(EnemyAnimation))]
 public class EnemyController : EnemyAbstract
 {
+    [SerializeField] private Enemy enemyScriptable;
     private EnemyAttacksAbstract _enemyAttack;
     private EnemyAnimation _enemyAnim;
 
@@ -28,14 +29,16 @@ public class EnemyController : EnemyAbstract
     {
         playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
         playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
+        playerInSpecialAttackRange = Physics.CheckSphere(transform.position, specialAttackRange, whatIsPlayer);
 
-        if (!playerInSightRange && !playerInAttackRange)
+        if (!playerInSightRange && !playerInAttackRange && !playerInSpecialAttackRange)
             Patroling();
-        else if (playerInSightRange && !playerInAttackRange) 
-            Chasing();
-        else  if (playerInAttackRange && playerInSightRange) 
+        else if (playerInSightRange && playerInAttackRange)
             Attacking();
-
+        else if (playerInSightRange && playerInSpecialAttackRange && _enemyAttack.AttackCount % 3 == 0)
+            Attacking();
+        else if (playerInSightRange && !playerInAttackRange && canAttack) 
+            Chasing();
     }
     protected override void Patroling()
     {
@@ -77,15 +80,25 @@ public class EnemyController : EnemyAbstract
 
     protected override void Attacking()
     {
-        agent.SetDestination(transform.position);
         transform.LookAt(player);
 
         if (canAttack)
         {
-            _enemyAttack.DeafaultAttack();
-            canAttack = false;
-            _enemyAnim.DefaultAttackAnim();
-            Invoke(nameof(RenewAttack), timeBetweenAttacks);
+            agent.SetDestination(transform.position);
+            if (_enemyAttack.AttackCount % 3 != 0)
+            {
+                _enemyAttack.DeafaultAttack();
+                canAttack = false;
+                _enemyAnim.DefaultAttackAnim();
+                Invoke(nameof(RenewAttack), enemyScriptable.DefaultAttackDuration);
+            }
+            else
+            {
+                _enemyAttack.SpecialAttack();
+                canAttack = false;
+                _enemyAnim.SpecialAttackAnim();
+                Invoke(nameof(RenewAttack), enemyScriptable.SpecialAttackDuration);
+            }          
         }
     }   
 
@@ -105,6 +118,8 @@ public class EnemyController : EnemyAbstract
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, attackRange);
         Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, specialAttackRange);
+        Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(transform.position, sightRange);
     }
 }

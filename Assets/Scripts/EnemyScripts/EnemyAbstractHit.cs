@@ -11,6 +11,8 @@ public abstract class EnemyAbstractHit : MonoBehaviour
     {
         thisCollider = GetComponent<Collider>();
         playerDamageable = FindObjectOfType<PlayerDamageable>();
+
+        thisCollider.enabled = false;
     }
     protected virtual void OnTriggerEnter(Collider other)
     {

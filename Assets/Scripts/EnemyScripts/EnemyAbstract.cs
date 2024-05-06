@@ -5,7 +5,7 @@ public abstract class EnemyAbstract : MonoBehaviour
 {
     [SerializeField] protected LayerMask whatIsPlayer;
 
-    [SerializeField] protected float sightRange, attackRange;
+    [SerializeField] protected float sightRange, attackRange, specialAttackRange;
     [SerializeField] protected float timeBetweenAttacks;
 
     protected EnemyDamageable enemyDamageable;
@@ -13,7 +13,7 @@ public abstract class EnemyAbstract : MonoBehaviour
     protected Transform player;
 
     protected bool canAttack = true;
-    protected bool playerInSightRange, playerInAttackRange;
+    protected bool playerInSightRange, playerInAttackRange, playerInSpecialAttackRange;
 
     private void Awake()
     {
