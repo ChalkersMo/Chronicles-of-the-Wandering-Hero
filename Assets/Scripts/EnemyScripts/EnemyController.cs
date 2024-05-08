@@ -16,10 +16,6 @@ public class EnemyController : EnemyAbstract
 
     [SerializeField] private Transform[] targets;
 
-    [SerializeField] private float timeToStand;
-    [SerializeField] private float patrolingSpeed;
-    [SerializeField] private float chasingSpeed;
-
     private void Start()
     {
         _enemyAttack = GetComponent<EnemyAttacksAbstract>();
@@ -47,13 +43,13 @@ public class EnemyController : EnemyAbstract
             agent.SetDestination(transform.position);
             _isSeekingPoint = true;
             _enemyAnim.StandAnim();
-            Invoke(nameof(SeekPatrolPoint), timeToStand);          
+            Invoke(nameof(SeekPatrolPoint), enemyScriptable.TimeToStand);          
         }         
 
         if (_walkPointSet)
         {
             agent.SetDestination(target.position);
-            agent.speed = patrolingSpeed;
+            agent.speed = enemyScriptable.PatrolingSpeed;
             _enemyAnim.WalkAnim();
         }
 
@@ -74,7 +70,7 @@ public class EnemyController : EnemyAbstract
     protected override void Chasing()
     {
         agent.SetDestination(player.position);
-        agent.speed = chasingSpeed;
+        agent.speed = enemyScriptable.ChasingSpeed;
         _enemyAnim.RunAnim();
     }
 
@@ -85,7 +81,7 @@ public class EnemyController : EnemyAbstract
         if (canAttack)
         {
             agent.SetDestination(transform.position);
-            if (_enemyAttack.AttackCount % 3 != 0 || playerInSpecialAttackRange)
+            if (_enemyAttack.AttackCount % 3 != 0)
             {
                 _enemyAttack.DeafaultAttack();
                 canAttack = false;

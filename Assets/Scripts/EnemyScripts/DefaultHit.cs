@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class BearHit : EnemyAbstractHit
+public class DefaultHit : EnemyAbstractHit
 {
     protected override void OnTriggerEnter(Collider other)
     {

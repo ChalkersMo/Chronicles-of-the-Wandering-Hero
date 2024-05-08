@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 307710357711940145}
   - component: {fileID: 295950590074641409}
   m_Layer: 5
-  m_Name: Stepanis
+  m_Name: NameTextGO
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

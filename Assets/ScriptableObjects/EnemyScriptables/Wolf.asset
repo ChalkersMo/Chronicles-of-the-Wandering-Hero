@@ -15,7 +15,14 @@ MonoBehaviour:
   Name: Wolf
   Description: Fast and realy dangerous, medium but fast attacks
   MaxHp: 1
-  Prefab: {fileID: 175852, guid: f8243bb353e5cb74481bb26fe62fd298, type: 3}
+  DefaultDamage: 5
+  SpecialDamage: 15
+  DefaultAttackDuration: 2
+  SpecialAttackDuration: 3
+  TimeToStand: 5
+  PatrolingSpeed: 7
+  ChasingSpeed: 10
+  Prefab: {fileID: 1917314786810527764, guid: f8243bb353e5cb74481bb26fe62fd298, type: 3}
   HealthBar: {fileID: 3650361921116133627, guid: 5021fbcda8653bc4cb7f7215f46858c0,
     type: 3}
   HealthBarColorGradient:
