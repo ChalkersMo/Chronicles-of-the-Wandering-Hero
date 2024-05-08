@@ -20,7 +20,7 @@ MonoBehaviour:
   IsActive: 0
   IsTalkQuest: 0
   Rewards:
-  - {fileID: 11400000, guid: abba2cfdc64d60c4db38931e32548dfb, type: 2}
+  - {fileID: 11400000, guid: 04245dae3bf032846b5252753dd6e143, type: 2}
   dialogue:
     dialogueLines: []
   NPCToCommit: {fileID: 11400000, guid: 147f59badd7137f4598c0a59fc008285, type: 2}

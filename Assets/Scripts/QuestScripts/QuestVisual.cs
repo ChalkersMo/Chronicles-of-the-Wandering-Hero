@@ -18,8 +18,9 @@ public class QuestVisual : MonoBehaviour
     [SerializeField] private Image questImage;
     [SerializeField] private Image questProgressImage;
 
-    [Space]
-    [SerializeField] private Image RewardImage;
+    [Space, Header("Reward visual game objects")]
+    [SerializeField] private Image MainRewardImage;
+    [SerializeField] private Image PhaseRewardImage;
 
     [Space]
     [SerializeField] private ContentSizeFitter questParentContent;
@@ -47,7 +48,10 @@ public class QuestVisual : MonoBehaviour
         miniQuestPhaseDescription = transform.GetChild(0).GetComponent<TextMeshProUGUI>();
         panelQuest = transform.GetChild(1);
         panelQuest.DOScale(0, 0);
-        RewardImage.DOFade(0, 0);
+        MainRewardImage.DOFade(0, 0);
+        MainRewardImage.gameObject.SetActive(false);
+        PhaseRewardImage.DOFade(0, 0);
+        PhaseRewardImage.gameObject.SetActive(false);
         isActive = false;
     }
     private void Update()
@@ -195,23 +199,29 @@ public class QuestVisual : MonoBehaviour
     {
         foreach (RewardScriptable reward in questScriptable.Rewards)
         {
-            RewardImage.sprite = reward.RewardSprite;
-            RewardImage.DOFade(1, 1);
-            yield return new WaitForSeconds(2);
-            RewardImage.DOFade(0, 0.1f);
+            MainRewardImage.gameObject.SetActive(true);
+            MainRewardImage.sprite = reward.RewardSprite;
+            MainRewardImage.DOFade(1, 1);
+            yield return new WaitForSeconds(4);
+            MainRewardImage.DOFade(0, 0.2f);
+            yield return new WaitForSeconds(0.2f);
+            MainRewardImage.gameObject.SetActive(false);
         }
-        StopAllCoroutines();
+        StopCoroutine(QuestRewardRecieving(questScriptable));
     }
 
     private IEnumerator QuestPhaseRewardRecieving(QuestPhaseScriptable questPhase)
     {
         foreach (RewardScriptable reward in questPhase.Rewards)
         {
-            RewardImage.sprite = reward.RewardSprite;
-            RewardImage.DOFade(1, 1);
+            PhaseRewardImage.gameObject.SetActive(true);
+            PhaseRewardImage.sprite = reward.RewardSprite;
+            PhaseRewardImage.DOFade(1, 1);
             yield return new WaitForSeconds(2);
-            RewardImage.DOFade(0, 0.1f);
+            PhaseRewardImage.DOFade(0, 0.2f);
+            yield return new WaitForSeconds(0.2f);
+            PhaseRewardImage.gameObject.SetActive(false);
         }
-        StopAllCoroutines();
+        StopCoroutine(QuestPhaseRewardRecieving(questPhase));
     }
 }
