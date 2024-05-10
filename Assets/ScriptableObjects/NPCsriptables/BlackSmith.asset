@@ -10,14 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 33af3a2ff6fbe2d46bc2586861b74a3c, type: 3}
-  m_Name: ShepherdVillage
+  m_Name: BlackSmith
   m_EditorClassIdentifier: 
-  Name: Shepherd
-  Description: I am Shepherd, wolfs... my biggest life problem. Of cource except 
-    evils...
+  Name: 
+  Description: 
   Level: 0
   isEnemy: 0
-  isFriend: 0
+  isFriend: 1
   dialogues: []
   Quests:
-  - {fileID: 11400000, guid: 8204fb75d9642c14a84cd5b90c214856, type: 2}
+  - {fileID: 11400000, guid: 1335dee3976869e4cbf1500cbf6a1d9f, type: 2}

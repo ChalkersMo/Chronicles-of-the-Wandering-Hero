@@ -26,7 +26,7 @@ MonoBehaviour:
     - character:
         name: You
         icon: {fileID: 0}
-      line: Hi, i got back, also i saw catana in you`r shop
+      line: Hi, i got back, also i saw katana in you`r shop
     - character:
         name: Blacksmith
         icon: {fileID: 0}

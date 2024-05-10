@@ -1,0 +1,193 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &1768230283145362832
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 5a4446db03809d543a7d95819c9e14e2,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 755.87
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 5a4446db03809d543a7d95819c9e14e2,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 251.947
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 5a4446db03809d543a7d95819c9e14e2,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 860.79
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 5a4446db03809d543a7d95819c9e14e2,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 5a4446db03809d543a7d95819c9e14e2,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 5a4446db03809d543a7d95819c9e14e2,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 5a4446db03809d543a7d95819c9e14e2,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 5a4446db03809d543a7d95819c9e14e2,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 5a4446db03809d543a7d95819c9e14e2,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 5a4446db03809d543a7d95819c9e14e2,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 5a4446db03809d543a7d95819c9e14e2,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1ed5c689ba8eacc4c8e9d3b8ba968880, type: 2}
+    - target: {fileID: 919132149155446097, guid: 5a4446db03809d543a7d95819c9e14e2,
+        type: 3}
+      propertyPath: m_Name
+      value: Scythe
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5a4446db03809d543a7d95819c9e14e2,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8197989457672097011}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5a4446db03809d543a7d95819c9e14e2,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5797017601623129439}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5a4446db03809d543a7d95819c9e14e2,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3219267530605032817}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5a4446db03809d543a7d95819c9e14e2,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8625900800426890431}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5a4446db03809d543a7d95819c9e14e2,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3480539107967021669}
+  m_SourcePrefab: {fileID: 100100000, guid: 5a4446db03809d543a7d95819c9e14e2, type: 3}
+--- !u!1 &1462383188700201153 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 5a4446db03809d543a7d95819c9e14e2,
+    type: 3}
+  m_PrefabInstance: {fileID: 1768230283145362832}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &8197989457672097011
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1462383188700201153}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1.9677243, z: 1}
+  m_Center: {x: -0.30834547, y: -0.12704217, z: 0.007574031}
+--- !u!65 &5797017601623129439
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1462383188700201153}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 2, z: 0.5}
+  m_Center: {x: -0.30834547, y: -0.12704217, z: 0.007574031}
+--- !u!114 &3219267530605032817
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1462383188700201153}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 391103ac62664a340883570c5ae06a7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ItemUseable: {fileID: 0}
+  ItemObj: {fileID: 7023438458725709112, guid: 4a575d9bdbe44fb45a4bf125703a39d3, type: 3}
+  ObjForInventory: {fileID: 7257025149817544207, guid: 596b9ce0c2102db48a0584461aba289f,
+    type: 3}
+  TipToPickUp: {fileID: 2802702512843156077, guid: 57069fcf8b082574185b2db61e47bd09,
+    type: 3}
+  ItemSprite: {fileID: 21300000, guid: cda5b8f6ff4723742a0821ce35b853e6, type: 3}
+  Quantity: 1
+  Stackable: 0
+  IsEquipeable: 1
+  IsEquiped: 0
+  IsSword: 1
+  Name: Scythe
+  Description: Strong "sword"
+--- !u!114 &8625900800426890431
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1462383188700201153}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2cc31292677aa0a4795292b6a4eb69ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3480539107967021669
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1462383188700201153}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26a0dab4e769c28478446f46ba699665, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
