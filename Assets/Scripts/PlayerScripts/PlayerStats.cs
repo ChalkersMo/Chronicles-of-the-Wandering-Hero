@@ -10,7 +10,6 @@ public class PlayerStats : MonoBehaviour
     public float MultiplySwordDamage;
     public float MaxHealth;
     public float HealingMultiply;
-    public float XP;
 
     public int CurrentLvl;
 

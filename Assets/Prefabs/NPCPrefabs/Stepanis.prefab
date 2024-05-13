@@ -530,6 +530,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04827e937f84cd749bdfd67b1e591e96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  questImage: {fileID: 8726381536984411111, guid: b71c82dee75c0634cbf3ee82ac114523,
+    type: 3}
   NPCScriptableObject: {fileID: 11400000, guid: 6addea1c080ac4e43a5dd7327f812986,
     type: 2}
   PressButtonTip: {fileID: 0}

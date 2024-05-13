@@ -4,13 +4,14 @@ using UnityEditor.Experimental.GraphView;
 
 [RequireComponent(typeof(Collider))]
 public class NPCDialogueZone : MonoBehaviour
-{ 
-    private Collider _collider;
-
+{
+    [SerializeField] private GameObject questImage;   
+    
     [SerializeField] private NPC NPCScriptableObject;
     [SerializeField] private GameObject PressButtonTip;
     [SerializeField] private GameObject NameTextGO;
 
+    private Collider _collider;
     private TextMeshProUGUI _nameText;
 
     private DialogueManager dialogueManager;
@@ -20,7 +21,10 @@ public class NPCDialogueZone : MonoBehaviour
 
    private void Start()
     {
+        _collider = GetComponent<Collider>();
         InstantiateName();
+        InstantiateQuestImage();
+        IsHaveQuest(PlayerStats.instance.CurrentLvl);
         dialogueManager = FindObjectOfType<DialogueManager>();
     }
     private void OnTriggerEnter(Collider other)
@@ -124,14 +128,46 @@ public class NPCDialogueZone : MonoBehaviour
   
     private void InstantiateName()
     {
-        _collider = GetComponent<Collider>();
 
         float colliderTop = _collider.bounds.center.y + _collider.bounds.extents.y;
-        Vector3 healthBarPos = new Vector3(transform.position.x, colliderTop + 0.5f, transform.position.z);
+        Vector3 instantiatePos = new Vector3(transform.position.x, colliderTop + 0.5f, transform.position.z);
 
-        NameTextGO = Instantiate(NameTextGO, healthBarPos, Quaternion.identity, transform);
+        NameTextGO = Instantiate(NameTextGO, instantiatePos, Quaternion.identity, transform);
         _nameText = NameTextGO.GetComponentInChildren<TextMeshProUGUI>();
         _nameText.text = $"{NPCScriptableObject.Name}";
+    }
+    private void InstantiateQuestImage()
+    {
+        if (NPCScriptableObject.Quests.Count > 0)
+        {
+            float colliderTop = _collider.bounds.center.y + _collider.bounds.extents.y;
+            Vector3 instantiatePos = new Vector3(transform.position.x, colliderTop + 1.5f, transform.position.z);
+            questImage = Instantiate(questImage, instantiatePos, Quaternion.identity, transform);
+            questImage.SetActive(false);
+        }
+    }
+
+    public void IsHaveQuest(int Lvl)
+    {
+        if(NPCScriptableObject.Quests.Count > 0)
+        {
+            bool isHaveQuest = false;
+            foreach(QuestScriptable quest in NPCScriptableObject.Quests)
+            {
+                if (quest.LvlToStart <= Lvl)
+                {
+                    isHaveQuest = true;
+                    break;
+                }
+                else
+                    isHaveQuest = false;
+
+            }
+            if (isHaveQuest)
+                questImage.SetActive(true);
+            else
+                questImage.SetActive(false);
+        }
     }
 }
 
