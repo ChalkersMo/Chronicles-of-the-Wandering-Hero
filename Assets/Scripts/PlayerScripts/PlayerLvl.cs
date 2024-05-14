@@ -14,8 +14,8 @@ public class PlayerLvl : MonoBehaviour
     private NPCDialogueZone[] nPCs;
 
     private int _currentLvl = 1;
-    private int _currentXp;
-    private int _xpToNextLvl = 250;
+    private float _currentXp;
+    private float _xpToNextLvl = 250;
 
     private void Start()
     {
@@ -25,7 +25,7 @@ public class PlayerLvl : MonoBehaviour
         LvlText.text = _currentLvl.ToString();
         RenewXpImage(_currentXp);
     }
-    public void AddXp(int amount)
+    public void AddXp(float amount)
     {
         _currentXp += amount;
         RenewXpImage(_currentXp);
@@ -44,7 +44,7 @@ public class PlayerLvl : MonoBehaviour
     {
         _currentLvl++;
         playerStats.CurrentLvl++;
-        _xpToNextLvl *= (int)2.5f;
+        _xpToNextLvl *= 2.5f;
         _currentXp = 0;
         RenewXpImage(_currentXp);
         LvlText.text = _currentLvl.ToString();
@@ -56,10 +56,10 @@ public class PlayerLvl : MonoBehaviour
 
     private void LvlUpWithDifferenceXp()
     {
-        int xpDifference = _xpToNextLvl - _currentXp;
+        float xpDifference = _currentXp - _xpToNextLvl;
         _currentLvl++;
         playerStats.CurrentLvl++;
-        _xpToNextLvl *= (int)2.5f;
+        _xpToNextLvl *= 2.5f;
         _currentXp = 0;
         _currentXp += xpDifference;
         RenewXpImage(_currentXp);
@@ -70,7 +70,7 @@ public class PlayerLvl : MonoBehaviour
         }
     }
 
-    private void RenewXpImage(int xp)
+    private void RenewXpImage(float xp)
     {
         xpSlider.DOFillAmount(xp/_xpToNextLvl, 1.5f);
         XpText.text = $"{_currentXp}/{_xpToNextLvl}";

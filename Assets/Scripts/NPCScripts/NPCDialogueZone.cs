@@ -154,7 +154,7 @@ public class NPCDialogueZone : MonoBehaviour
             bool isHaveQuest = false;
             foreach(QuestScriptable quest in NPCScriptableObject.Quests)
             {
-                if (quest.LvlToStart <= Lvl)
+                if (quest.LvlToStart <= Lvl && !quest.IsCompleted)
                 {
                     isHaveQuest = true;
                     break;

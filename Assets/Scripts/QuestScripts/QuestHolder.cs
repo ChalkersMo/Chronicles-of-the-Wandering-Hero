@@ -76,7 +76,7 @@ public class QuestHolder : MonoBehaviour
                 if (questPhase.ProgressPoints >= questPhase.PointsToComplete)
                     QuestPhaseComplete(questPhase);
 
-                return;
+                break;
             }               
         }
     }
