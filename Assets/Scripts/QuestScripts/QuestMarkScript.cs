@@ -57,6 +57,7 @@ public class QuestMarkScript : MonoBehaviour
         {
             float distance = Vector3.Distance(_player.position, _tempMark.transform.position);
             _tempMark.GetComponentInChildren<TextMeshProUGUI>().text = $"{Math.Round(distance)}m";
+            _tempMark.transform.localScale = new Vector3(distance / 10, distance / 10);
         }
     }
 }
