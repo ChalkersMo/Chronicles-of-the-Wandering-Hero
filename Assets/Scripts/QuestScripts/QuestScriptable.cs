@@ -8,6 +8,9 @@ public class QuestScriptable : ScriptableObject
     [Space]
     public Sprite QuestImage;
 
+    [Space, Header("If there is no phases and need mark to show quest position place here")]
+    public GameObject QuestMark;
+
     [Space]
     public string Name;
     public string Description;

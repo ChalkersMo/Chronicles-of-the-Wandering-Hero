@@ -4,10 +4,13 @@ public class RewardReciever : MonoBehaviour
 {
     private Inventory inventory;
     private PlayerStats playerStats;
+    private PlayerLvl playerLvl;
+
     private void Start()
     {
         inventory = FindObjectOfType<Inventory>();
         playerStats = PlayerStats.instance;
+        playerLvl = playerStats.gameObject.GetComponent<PlayerLvl>();
     }
     public void RecieveReward(RewardScriptable reward)
     {
@@ -17,7 +20,7 @@ public class RewardReciever : MonoBehaviour
             {
                 case "XP":
                     {
-                        playerStats.XP += reward.Quantity;
+                        playerLvl.AddXp(reward.Quantity);
                         return;
                     }
                 case "Gold":

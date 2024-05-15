@@ -8,7 +8,7 @@ public class QuestHolder : MonoBehaviour
     private QuestVisual questVisual;
     private RewardReciever rewardReciever;
     private QuestScriptable tempQuestScriptable;
-    
+    private QuestMarkScript questMarkScript;
 
     private Dictionary<string, QuestScriptable> AcceptedQuests = new Dictionary<string, QuestScriptable>();
     private Dictionary<string, QuestScriptable> CompletedQuests = new Dictionary<string, QuestScriptable>();
@@ -27,6 +27,7 @@ public class QuestHolder : MonoBehaviour
 
         questVisual = GetComponent<QuestVisual>();
         rewardReciever = GetComponent<RewardReciever>();
+        questMarkScript = GetComponent<QuestMarkScript>();
     }
     
     public void QuestAccept(QuestScriptable questScriptable, string questName)
@@ -76,7 +77,7 @@ public class QuestHolder : MonoBehaviour
                 if (questPhase.ProgressPoints >= questPhase.PointsToComplete)
                     QuestPhaseComplete(questPhase);
 
-                return;
+                break;
             }               
         }
     }
@@ -102,6 +103,7 @@ public class QuestHolder : MonoBehaviour
         tempQuestScriptable.CurrentPhase++;
         tempQuestScriptable.QuestPhasesScriptable[tempQuestScriptable.CurrentPhase - 1].IsActive = true;
         questVisual.QuestProgress(tempQuestScriptable);
+        questMarkScript.ShowQuestPhaseMark(questPhase);
     }
 
     private void QuestCompleted(QuestScriptable questScriptable)
@@ -134,6 +136,17 @@ public class QuestHolder : MonoBehaviour
             questScriptable.IsActive = true;
             tempQuestScriptable = questScriptable;
         }
+
+        if (questScriptable.PhaseCount > 0)
+        {
+            questMarkScript.ShowQuestPhaseMark
+                (questScriptable.QuestPhasesScriptable[questScriptable.CurrentPhase - 1]);
+        }
+        else
+        {
+            questMarkScript.ShowQuestMark(questScriptable);
+        }
+
         questVisual.ShowQuestinfo(tempQuestScriptable);
     }
 }
