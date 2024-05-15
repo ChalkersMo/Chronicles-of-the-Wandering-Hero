@@ -16,6 +16,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: eb53c434600e20f44b793308595e8311, type: 2}
   - {fileID: 11400000, guid: 9418afeb7e2a22d4989b15f6de051007, type: 2}
   QuestImage: {fileID: 0}
+  QuestMark: {fileID: 0}
   Name: The way to village
   Description: You must find way to village
   PhaseCount: 2

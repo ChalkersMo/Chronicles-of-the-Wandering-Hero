@@ -12,6 +12,8 @@ public class QuestPhaseScriptable : ScriptableObject
     public bool IsCompleted = false;
     public bool IsActive = false;
     public bool IsTalkQuest;
+    [Space, Header("If need mark to show quest position place here")]
+    public GameObject QuestPhaseMark;
     [Space]
     public RewardScriptable[] Rewards;
     [Space, Header("If quest is talk quest create the dialogue")]

@@ -172,7 +172,8 @@ public class QuestVisual : MonoBehaviour
             questPhaseName.transform.DOScale(1, 0.1f);
             questPhaseDescription.transform.DOScale(1, 0.1f);
             questPhaseName.text = questPhase.Name;
-            questPhaseDescription.text = $"{questPhase.Description}: {questPhase.ProgressPoints}/{questPhase.PointsToComplete}";
+            questPhaseDescription.text = $"{questPhase.Description}:" +
+                $" {questPhase.ProgressPoints}/{questPhase.PointsToComplete}";
         }
         else
         {
