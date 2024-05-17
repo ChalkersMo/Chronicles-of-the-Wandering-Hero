@@ -143,8 +143,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 1000000
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: bdf8e73ce1cb1ca4ea7e46977430ae6a, type: 2}
+  m_sharedMaterial: {fileID: 2140474, guid: bdf8e73ce1cb1ca4ea7e46977430ae6a, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -271,7 +271,7 @@ Canvas:
   m_VertexColorAlwaysGammaSpace: 1
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
-  m_SortingLayerID: 0
+  m_SortingLayerID: -733191175
   m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!114 &8384757874802812318
@@ -339,5 +339,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   questScriptable: {fileID: 0}
-  phaseScriptable: {fileID: 11400000, guid: 9418afeb7e2a22d4989b15f6de051007, type: 2}
+  phaseScriptable: {fileID: 11400000, guid: eb53c434600e20f44b793308595e8311, type: 2}
   isPhase: 1

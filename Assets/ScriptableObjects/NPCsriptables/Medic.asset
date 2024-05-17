@@ -18,5 +18,4 @@ MonoBehaviour:
   isEnemy: 0
   isFriend: 0
   dialogues: []
-  Quests:
-  - {fileID: 0}
+  Quests: []

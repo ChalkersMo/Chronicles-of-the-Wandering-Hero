@@ -5,6 +5,9 @@ public class QuestScriptable : ScriptableObject
 {
     public QuestPhaseScriptable[] QuestPhasesScriptable;
 
+    [Space, Header("If needto activate next quest after ending this put here next quest")]
+    public QuestScriptable NextQuest;
+
     [Space]
     public Sprite QuestImage;
 

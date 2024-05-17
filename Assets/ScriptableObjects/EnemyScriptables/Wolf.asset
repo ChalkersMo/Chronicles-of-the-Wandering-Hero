@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Wolf
   Description: Fast and realy dangerous, medium but fast attacks
-  MaxHp: 1
+  MaxHp: 3
   DefaultDamage: 5
   SpecialDamage: 15
   DefaultAttackDuration: 2

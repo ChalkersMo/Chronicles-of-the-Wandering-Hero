@@ -33,19 +33,7 @@ public class RewardReciever : MonoBehaviour
         }
         else
         {
-            switch (reward.Name) 
-            {
-                case "HealingPod":
-                    {
-                        inventory.AddItem(reward.InvSlot, reward.Quantity);
-                        return;
-                    }
-                default:
-                    {
-                        return;
-                    }
-            }
-
+            inventory.AddItem(reward.InvSlot, reward.Quantity);
         }
     }
     

@@ -66,10 +66,8 @@ public class QuestHolder : MonoBehaviour
 
     private void QuestPhaseProgress()
     {
-        for (int i = 0; i < tempQuestScriptable.PhaseCount; i++)
+        foreach(QuestPhaseScriptable questPhase in tempQuestScriptable.QuestPhasesScriptable)
         {
-            QuestPhaseScriptable questPhase = tempQuestScriptable.QuestPhasesScriptable[i];
-
             if (!questPhase.IsCompleted)
             {
                 questPhase.ProgressPoints++;
@@ -78,7 +76,7 @@ public class QuestHolder : MonoBehaviour
                     QuestPhaseComplete(questPhase);
 
                 break;
-            }               
+            }
         }
     }
 
@@ -121,6 +119,9 @@ public class QuestHolder : MonoBehaviour
 
         questVisual.GetMainQuestRewardVisual(questScriptable);
         questVisual.QuestComplete(questScriptable);
+
+        if (questScriptable.NextQuest != null)
+            QuestAccept(questScriptable.NextQuest, questScriptable.NextQuest.Name);
     }
 
     public void ReplaceQuest(QuestScriptable questScriptable)

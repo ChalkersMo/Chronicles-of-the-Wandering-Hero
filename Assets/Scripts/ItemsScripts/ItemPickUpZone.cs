@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.UI;
 
 public class ItemPickUpZone : MonoBehaviour
 {
@@ -26,9 +25,7 @@ public class ItemPickUpZone : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.F))
             {
-                _tip.DestroyTip();
-                inventory.AddItem(inventorySlot, inventorySlot.Quantity);
-                Destroy(gameObject);
+                PickUp();
             }
         }
     }
@@ -37,6 +34,17 @@ public class ItemPickUpZone : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             _tip.DestroyTip();
+        }
+    }
+
+    private void PickUp()
+    {
+        _tip.DestroyTip();
+        inventory.AddItem(inventorySlot, inventorySlot.Quantity);
+        Destroy(gameObject);
+        if(TryGetComponent(out QuestProgresser questProgresser))
+        {
+            questProgresser.ProgressQuest();
         }
     }
 }
