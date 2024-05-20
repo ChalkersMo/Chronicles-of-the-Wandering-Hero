@@ -22,5 +22,9 @@ MonoBehaviour:
   QuestPhaseMark: {fileID: 0}
   Rewards: []
   dialogue:
-    dialogueLines: []
+    dialogueLines:
+    - character:
+        name: You
+        icon: {fileID: 0}
+      line: Okey, let's try
   NPCToCommit: {fileID: 0}
