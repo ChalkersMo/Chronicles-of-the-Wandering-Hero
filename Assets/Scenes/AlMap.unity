@@ -2996,7 +2996,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1bd07eb93396261418374622c8ba7142, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  questScriptable: {fileID: 0}
+  questScriptable: {fileID: 11400000, guid: ea0e76631e95c714199baf65a09c7ad8, type: 2}
   questPhase: {fileID: 11400000, guid: 06e0a357ebe31764e92ad7eec83a574d, type: 2}
 --- !u!65 &329260889
 BoxCollider:
@@ -12139,17 +12139,17 @@ PrefabInstance:
     - target: {fileID: 5611056566566572433, guid: 47f0b9df9e5f1c14cbc6b50257e7e158,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.06622749
+      value: -0.0662275
       objectReference: {fileID: 0}
     - target: {fileID: 5611056566566572433, guid: 47f0b9df9e5f1c14cbc6b50257e7e158,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.000000020882876
+      value: -3.278418e-15
       objectReference: {fileID: 0}
     - target: {fileID: 5611056566566572433, guid: 47f0b9df9e5f1c14cbc6b50257e7e158,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.0000000013860634
+      value: -1.3564505e-16
       objectReference: {fileID: 0}
     - target: {fileID: 6589432489703694472, guid: 47f0b9df9e5f1c14cbc6b50257e7e158,
         type: 3}
@@ -24345,7 +24345,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1bd07eb93396261418374622c8ba7142, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  questScriptable: {fileID: 0}
+  questScriptable: {fileID: 11400000, guid: ea0e76631e95c714199baf65a09c7ad8, type: 2}
   questPhase: {fileID: 11400000, guid: 1356c4d6de152df4f8f2af447b653120, type: 2}
 --- !u!65 &2075465029
 BoxCollider:
@@ -34365,6 +34365,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchorMin.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2539243307812268177, guid: d12b161fbfc785041bf9d80b5be83ec2,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2747217790254874746, guid: d12b161fbfc785041bf9d80b5be83ec2,
         type: 3}

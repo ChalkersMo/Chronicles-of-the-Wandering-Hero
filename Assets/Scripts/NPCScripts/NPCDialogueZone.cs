@@ -43,6 +43,7 @@ public class NPCDialogueZone : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F) && isPlayerNear)
         {
             StartingDialogue();
+            isPlayerNear = false;
         }
     }
     private void OnTriggerExit(Collider other)

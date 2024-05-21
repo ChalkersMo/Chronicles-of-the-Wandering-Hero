@@ -81,9 +81,10 @@ public class QuestHolder : MonoBehaviour
             {
                 questPhase.ProgressPoints++;
                 questVisual.QuestProgress(tempQuestScriptable);
+                Debug.Log($"Progress{questPhase.ProgressPoints}");
                 if (questPhase.ProgressPoints >= questPhase.PointsToComplete)
                     QuestPhaseComplete(questPhase);
-                Debug.Log("Progress");
+                
                 break;
             }
         }

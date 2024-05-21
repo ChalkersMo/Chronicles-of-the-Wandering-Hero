@@ -19,6 +19,7 @@ MonoBehaviour:
   IsCompleted: 0
   IsActive: 0
   IsTalkQuest: 0
+  EnemyToKill: {fileID: 0}
   QuestPhaseMark: {fileID: 0}
   Rewards: []
   dialogue:

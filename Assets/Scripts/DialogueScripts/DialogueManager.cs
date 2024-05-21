@@ -48,6 +48,8 @@ public class DialogueManager : MonoBehaviour
     }
     public void StartDialogue(Dialogue dialogue)
     {
+        EndOfDialogue = null;
+
         OffAllUI.Instance.OffUI();
         CanvasesSortingOrder.Instance.ShowOnFirst(_canvas);
         playerController.enabled = false;
@@ -104,7 +106,9 @@ public class DialogueManager : MonoBehaviour
         Cursor.visible = false;
 
         panelDialogue.DOScale(0, 1);
+
+        Debug.Log(EndOfDialogue);
         EndOfDialogue?.Invoke();
-        EndOfDialogue = null;
+        EndOfDialogue = null;       
     }
 }

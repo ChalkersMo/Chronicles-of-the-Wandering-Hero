@@ -30,7 +30,7 @@ public class Inventory : MonoBehaviour
         }       
         itemInvSlot.Assign(item);
         itemInvSlot.ItemUseable = currentItem.GetComponent<ItemUseable>();
-        items.Add(itemInvSlot.Name, itemInvSlot);
+        TryAddNonStackableItem(itemInvSlot);
         quantity--;
         currentItem.transform.SetParent(transform.GetComponentInChildren<GridLayoutGroup>().transform);
         currentItem.transform.localScale = new Vector3(1, 1, 1);
@@ -41,6 +41,27 @@ public class Inventory : MonoBehaviour
 
         return true;
     }
+
+    private void TryAddNonStackableItem(InventorySlot itemInvSlot)
+    {
+        try
+        {
+            items.Add(itemInvSlot.Name, itemInvSlot);
+        }
+        catch
+        {
+            itemInvSlot.Name += Random.Range(0, 10000);
+            try
+            {
+                items.Add(itemInvSlot.Name, itemInvSlot);
+            }
+            catch
+            {
+                TryAddNonStackableItem(itemInvSlot);
+            }
+        }
+    }
+
     public bool DeleteItem(InventorySlot item, int quantity)
     {
         if (items.ContainsKey(item.Name) && item.Stackable)
