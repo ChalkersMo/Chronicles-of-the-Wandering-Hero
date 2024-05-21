@@ -24,7 +24,7 @@ public class PlayerDamageable : MonoBehaviour, IDamageable, IHealable
         MaxHealth = PlayerStats.instance.MaxHealth;
         CurrentHealth = MaxHealth;
         _healthTxt.text = CurrentHealth.ToString();
-
+        EventBus.Instance.OnLvlUp += HealOnLvlUp;
     }
     public void TakeDamage(float amount)
     {
@@ -40,7 +40,11 @@ public class PlayerDamageable : MonoBehaviour, IDamageable, IHealable
         _healthTxt.text = CurrentHealth.ToString();
         StartCoroutine(UpdateHealthBar());
     }
-
+    private void HealOnLvlUp()
+    {
+        MaxHealth += 15;
+        Heal(10000);
+    }
     IEnumerator UpdateHealthBar()
     {
         float targetFillAmount = CurrentHealth / MaxHealth;

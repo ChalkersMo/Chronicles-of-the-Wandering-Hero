@@ -4,12 +4,15 @@ using UnityEngine;
 [RequireComponent(typeof(InventorySlot))]
 public class HealingPod : ItemUseable
 {
-    PlayerStats playerStats;
-    PlayerDamageable playerDamageable;
-    InventorySlot invSlot;
-    float _healPoints;
-    ItemHUDSlots _slots;
-    Inventory inventory;
+    private PlayerStats playerStats;
+    private PlayerDamageable playerDamageable;
+
+    private InventorySlot invSlot;
+    private ItemHUDSlots _slots;
+    private Inventory inventory;
+
+    private float _healPoints;
+
     private void Start()
     {
         GameObject player = GameObject.FindGameObjectWithTag("Player");
@@ -18,7 +21,7 @@ public class HealingPod : ItemUseable
         _slots = FindObjectOfType<ItemHUDSlots>();
         playerStats = player.GetComponent<PlayerStats>();
         playerDamageable = player.GetComponent<PlayerDamageable>();
-        _healPoints = 10 * playerStats.HealingMultiply;
+        _healPoints = 20 * playerStats.HealingMultiply;
         _recoveringTime = 5;
     }
 

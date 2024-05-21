@@ -19,4 +19,6 @@ public class EventBus : MonoBehaviour
     public Action OnHit;
     public Action OnTakeDamage;
     public Action OnHeal;
+
+    public Action OnLvlUp;
 }

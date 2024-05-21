@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7237abefa49e7d4449584d270633544c, type: 3}
+  m_Name: Phase4
+  m_EditorClassIdentifier: 
+  Name: End of the forest
+  Description: Finaly go out
+  ProgressPoints: 0
+  PointsToComplete: 1
+  IsCompleted: 0
+  IsActive: 0
+  IsTalkQuest: 0
+  EnemyToKill: {fileID: 0}
+  QuestPhaseMark: {fileID: 0}
+  Rewards: []
+  dialogue:
+    dialogueLines:
+    - character:
+        name: You
+        icon: {fileID: 0}
+      line: Finaly, i'm so exhausted
+    - character:
+        name: You
+        icon: {fileID: 0}
+      line: It was realy hard, i hope i could rest a little at the village
+  NPCToCommit: {fileID: 0}

@@ -12,20 +12,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d09f006eb76354548b221f14a84749ae, type: 3}
   m_Name: RoadToVillage
   m_EditorClassIdentifier: 
-  QuestPhasesScriptable: []
-  NextQuest: {fileID: 0}
+  QuestPhasesScriptable:
+  - {fileID: 11400000, guid: 06e0a357ebe31764e92ad7eec83a574d, type: 2}
+  - {fileID: 11400000, guid: 1397219ba24aa324c9086abbff10223d, type: 2}
+  - {fileID: 11400000, guid: 05b7e826a56f5a342890846be21f772f, type: 2}
+  - {fileID: 11400000, guid: 1356c4d6de152df4f8f2af447b653120, type: 2}
+  EnemyToKill: {fileID: 0}
+  NextQuest: {fileID: 11400000, guid: 8d0ae6769fc80764ab0c400ad552ef46, type: 2}
   QuestImage: {fileID: 0}
   QuestMark: {fileID: 0}
   Name: Road to village
   Description: Go to the village through the forest
-  PhaseCount: 0
+  PhaseCount: 4
   CurrentPhase: 0
   LvlToStart: 0
-  PointsToComplete: 0
+  PointsToComplete: 4
   ProgressPoints: 0
   IsActive: 0
   IsAccepted: 0
   IsCompleted: 0
-  Rewards: []
+  Rewards:
+  - {fileID: 11400000, guid: abba2cfdc64d60c4db38931e32548dfb, type: 2}
+  - {fileID: 11400000, guid: abba2cfdc64d60c4db38931e32548dfb, type: 2}
   dialogue:
     dialogueLines: []

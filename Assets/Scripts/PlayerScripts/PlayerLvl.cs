@@ -1,5 +1,6 @@
 using DG.Tweening;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,6 +12,7 @@ public class PlayerLvl : MonoBehaviour
     [SerializeField] private TextMeshProUGUI XpText;
 
     private PlayerStats playerStats;
+    private EventBus eventBus;
     private NPCDialogueZone[] nPCs;
 
     private int _currentLvl = 1;
@@ -21,6 +23,7 @@ public class PlayerLvl : MonoBehaviour
     {
         nPCs = FindObjectsOfType<NPCDialogueZone>();
         playerStats = GetComponent<PlayerStats>();
+        eventBus = EventBus.Instance;
         playerStats.CurrentLvl = _currentLvl;
         LvlText.text = _currentLvl.ToString();
         RenewXpImage(_currentXp);
@@ -52,6 +55,8 @@ public class PlayerLvl : MonoBehaviour
         {
             npc.IsHaveQuest(_currentLvl);
         }
+
+        eventBus.OnLvlUp?.Invoke();
     }
 
     private void LvlUpWithDifferenceXp()
@@ -68,6 +73,8 @@ public class PlayerLvl : MonoBehaviour
         {
             npc.IsHaveQuest(_currentLvl);
         }
+
+        eventBus.OnLvlUp?.Invoke();
     }
 
     private void RenewXpImage(float xp)

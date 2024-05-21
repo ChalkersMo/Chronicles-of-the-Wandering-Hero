@@ -3,7 +3,8 @@ using UnityEngine;
 [RequireComponent(typeof(EnemyAttacksAbstract), typeof(EnemyAnimation))]
 public class EnemyController : EnemyAbstract
 {
-    [SerializeField] private Enemy enemyScriptable;
+    public Enemy enemyScriptable;
+
     private EnemyAttacksAbstract _enemyAttack;
     private EnemyAnimation _enemyAnim;
 
@@ -62,10 +63,18 @@ public class EnemyController : EnemyAbstract
     }
     private void SeekPatrolPoint()
     {
-        int rand = Random.Range(0, targets.Length);
-        target = targets[rand];
-        _walkPointSet = true;
-        _isSeekingPoint = false;
+        if(targets != null)
+        {
+            int rand = Random.Range(0, targets.Length);
+            target = targets[rand];
+            _walkPointSet = true;
+            _isSeekingPoint = false;
+        }
+        else
+        {
+            _walkPointSet = false;
+            _isSeekingPoint = false;
+        }
     }
     protected override void Chasing()
     {

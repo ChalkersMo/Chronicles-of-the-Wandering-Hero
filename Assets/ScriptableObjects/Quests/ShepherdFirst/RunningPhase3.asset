@@ -19,6 +19,7 @@ MonoBehaviour:
   IsCompleted: 0
   IsActive: 0
   IsTalkQuest: 0
+  EnemyToKill: {fileID: 11400000, guid: cda9f3ece3380cd45861266a98cb3959, type: 2}
   QuestPhaseMark: {fileID: 0}
   Rewards:
   - {fileID: 11400000, guid: 04245dae3bf032846b5252753dd6e143, type: 2}

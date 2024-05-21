@@ -469,7 +469,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1917314786810527764}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: -0.28635734, z: 0, w: 0.9581229}
+  m_LocalRotation: {x: 0, y: -0.28635725, z: 0, w: 0.95812297}
   m_LocalPosition: {x: 745.49, y: 250.3, z: 835.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -482,7 +482,7 @@ Transform:
   - {fileID: 5878296799335180199}
   - {fileID: 7900879221433258118}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -33.28, z: 0}
 --- !u!136 &3813649944555297346
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -570,7 +570,7 @@ MonoBehaviour:
   whatIsPlayer:
     serializedVersion: 2
     m_Bits: 8
-  sightRange: 8
+  sightRange: 12
   attackRange: 2.5
   specialAttackRange: 2.5
   timeBetweenAttacks: 3
@@ -580,9 +580,6 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  timeToStand: 4
-  patrolingSpeed: 4
-  chasingSpeed: 7
 --- !u!114 &6768755679638700074
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -595,8 +592,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1bd07eb93396261418374622c8ba7142, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  questScriptable: {fileID: 11400000, guid: 8cf0836a6ee42544f81220473394f49f, type: 2}
-  questPhase: {fileID: 11400000, guid: 9418afeb7e2a22d4989b15f6de051007, type: 2}
+  questScriptable: {fileID: 0}
+  questPhase: {fileID: 0}
 --- !u!114 &4650390790128340247
 MonoBehaviour:
   m_ObjectHideFlags: 0

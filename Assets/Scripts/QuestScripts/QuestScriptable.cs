@@ -5,6 +5,9 @@ public class QuestScriptable : ScriptableObject
 {
     public QuestPhaseScriptable[] QuestPhasesScriptable;
 
+    [Space, Header("If quest is for killing place here an enemy")]
+    public Enemy EnemyToKill;
+
     [Space, Header("If needto activate next quest after ending this put here next quest")]
     public QuestScriptable NextQuest;
 
@@ -31,6 +34,7 @@ public class QuestScriptable : ScriptableObject
     public bool IsActive = false;
     public bool IsAccepted = false;
     public bool IsCompleted = false;
+    public bool IsNPCDialogue = false;
     [Space]
     public RewardScriptable[] Rewards;
     [Space, Header("Entering quest dialogue if need")]

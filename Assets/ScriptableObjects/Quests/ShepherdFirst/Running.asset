@@ -17,6 +17,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 53ba7de2d1423ec47b5e6e088c40e304, type: 2}
   - {fileID: 11400000, guid: 9418afeb7e2a22d4989b15f6de051007, type: 2}
   - {fileID: 11400000, guid: 5aeb56e469b87764c805ef7997f22917, type: 2}
+  EnemyToKill: {fileID: 0}
+  NextQuest: {fileID: 11400000, guid: ea0e76631e95c714199baf65a09c7ad8, type: 2}
   QuestImage: {fileID: 21300000, guid: 233bce233c29db243b9bdf77cb28c531, type: 3}
   QuestMark: {fileID: 0}
   Name: The way to village

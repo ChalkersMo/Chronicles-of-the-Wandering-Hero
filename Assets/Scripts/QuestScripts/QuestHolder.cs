@@ -5,9 +5,13 @@ using UnityEngine;
 public class QuestHolder : MonoBehaviour
 {
     public static QuestHolder Instance;
+
+    public QuestScriptable tempQuestScriptable;
+    public QuestPhaseScriptable tempQuestPhaseScriptable;
+
     private QuestVisual questVisual;
     private RewardReciever rewardReciever;
-    private QuestScriptable tempQuestScriptable;
+
     private QuestMarkScript questMarkScript;
 
     private Dictionary<string, QuestScriptable> AcceptedQuests = new Dictionary<string, QuestScriptable>();
@@ -43,10 +47,15 @@ public class QuestHolder : MonoBehaviour
            {
                questScriptable.CurrentPhase++;
                questScriptable.QuestPhasesScriptable[questScriptable.CurrentPhase - 1].IsActive = true;
+               tempQuestPhaseScriptable = questScriptable.QuestPhasesScriptable[questScriptable.CurrentPhase - 1];
            }
                  
             ReplaceQuest(questScriptable);
             questVisual.QuestAccept(questScriptable);
+            if(questScriptable.dialogue != null && !questScriptable.IsNPCDialogue)
+            {
+                DialogueManager.Instance.StartDialogue(questScriptable.dialogue);
+            }
             return;
         }
     }
@@ -68,7 +77,7 @@ public class QuestHolder : MonoBehaviour
     {
         foreach(QuestPhaseScriptable questPhase in tempQuestScriptable.QuestPhasesScriptable)
         {
-            if (!questPhase.IsCompleted)
+            if (questPhase.IsActive)
             {
                 questPhase.ProgressPoints++;
                 questVisual.QuestProgress(tempQuestScriptable);
@@ -100,6 +109,7 @@ public class QuestHolder : MonoBehaviour
 
         tempQuestScriptable.CurrentPhase++;
         tempQuestScriptable.QuestPhasesScriptable[tempQuestScriptable.CurrentPhase - 1].IsActive = true;
+        tempQuestPhaseScriptable = tempQuestScriptable.QuestPhasesScriptable[tempQuestScriptable.CurrentPhase - 1];
         questVisual.QuestProgress(tempQuestScriptable);
         questMarkScript.ShowQuestPhaseMark(questPhase);
     }
@@ -126,25 +136,37 @@ public class QuestHolder : MonoBehaviour
 
     public void ReplaceQuest(QuestScriptable questScriptable)
     {
-        if (tempQuestScriptable == null)
-        {
-            tempQuestScriptable = questScriptable;
-            questScriptable.IsActive = true;
-        }           
-        else
-        {
-            tempQuestScriptable.IsActive = false;            
-            questScriptable.IsActive = true;
-            tempQuestScriptable = questScriptable;
-        }
+        
 
         if (questScriptable.PhaseCount > 0)
         {
+            if (tempQuestPhaseScriptable == null)
+            {
+                tempQuestPhaseScriptable = questScriptable.QuestPhasesScriptable[tempQuestScriptable.CurrentPhase - 1];
+                tempQuestPhaseScriptable.IsActive = true;
+            }
+            else
+            {
+                tempQuestScriptable.IsActive = false;
+                tempQuestPhaseScriptable = questScriptable.QuestPhasesScriptable[tempQuestScriptable.CurrentPhase - 1];
+                tempQuestPhaseScriptable.IsActive = true;
+            }
             questMarkScript.ShowQuestPhaseMark
                 (questScriptable.QuestPhasesScriptable[questScriptable.CurrentPhase - 1]);
         }
         else
         {
+            if (tempQuestScriptable == null)
+            {
+                tempQuestScriptable = questScriptable;
+                questScriptable.IsActive = true;
+            }
+            else
+            {
+                tempQuestScriptable.IsActive = false;
+                questScriptable.IsActive = true;
+                tempQuestScriptable = questScriptable;
+            }
             questMarkScript.ShowQuestMark(questScriptable);
         }
 

@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d09f006eb76354548b221f14a84749ae, type: 3}
+  m_Name: SunAfterTheShadow
+  m_EditorClassIdentifier: 
+  QuestPhasesScriptable: []
+  EnemyToKill: {fileID: 0}
+  NextQuest: {fileID: 0}
+  QuestImage: {fileID: 0}
+  QuestMark: {fileID: 0}
+  Name: SunAfterTheShadow
+  Description: Go through the beautiful glade and find the village
+  PhaseCount: 0
+  CurrentPhase: 0
+  LvlToStart: 3
+  PointsToComplete: 1
+  ProgressPoints: 0
+  IsActive: 0
+  IsAccepted: 0
+  IsCompleted: 0
+  IsNPCDialogue: 0
+  Rewards:
+  - {fileID: 11400000, guid: 01cf446b25ca93d4b8e07d2b3b822c44, type: 2}
+  dialogue:
+    dialogueLines:
+    - character:
+        name: You
+        icon: {fileID: 0}
+      line: Wow!
+    - character:
+        name: You
+        icon: {fileID: 0}
+      line: How beautiful it is
+    - character:
+        name: You
+        icon: {fileID: 0}
+      line: Want to have a sleep in this flowers
+    - character:
+        name: You
+        icon: {fileID: 0}
+      line: But i need to go

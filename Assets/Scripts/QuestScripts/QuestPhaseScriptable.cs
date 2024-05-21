@@ -12,6 +12,10 @@ public class QuestPhaseScriptable : ScriptableObject
     public bool IsCompleted = false;
     public bool IsActive = false;
     public bool IsTalkQuest;
+
+    [Space, Header("If quest is for killing place here an enemy")]
+    public Enemy EnemyToKill;
+
     [Space, Header("If need mark to show quest position place here")]
     public GameObject QuestPhaseMark;
     [Space]

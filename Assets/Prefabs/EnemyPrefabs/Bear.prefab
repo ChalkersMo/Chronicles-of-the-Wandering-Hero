@@ -1258,8 +1258,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1bd07eb93396261418374622c8ba7142, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  questScriptable: {fileID: 11400000, guid: a76a1626d487b7f43a54683491459262, type: 2}
-  questPhase: {fileID: 11400000, guid: 8beacdb02f257464a8f5bdd0126898fb, type: 2}
+  questScriptable: {fileID: 0}
+  questPhase: {fileID: 0}
 --- !u!114 &20959000292534712
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1285,9 +1285,6 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  timeToStand: 5
-  patrolingSpeed: 2
-  chasingSpeed: 5
 --- !u!114 &3424331374147060252
 MonoBehaviour:
   m_ObjectHideFlags: 0
