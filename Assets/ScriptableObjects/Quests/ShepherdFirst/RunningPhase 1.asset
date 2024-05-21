@@ -19,6 +19,7 @@ MonoBehaviour:
   IsCompleted: 0
   IsActive: 0
   IsTalkQuest: 1
+  EnemyToKill: {fileID: 0}
   QuestPhaseMark: {fileID: 0}
   Rewards:
   - {fileID: 11400000, guid: 04245dae3bf032846b5252753dd6e143, type: 2}
@@ -30,14 +31,14 @@ MonoBehaviour:
       line: Hello, can you help me? I need to go to village
     - character:
         name: Shepherd
-        icon: {fileID: 0}
-      line: 'Hi! I can but now i busy. Will you wait? or try to do it solo? '
+        icon: {fileID: 21300000, guid: b2e58361f5e819148bdfe9de2d5d5ae6, type: 3}
+      line: 'Hi! I can because now i busy. Will you wait? or try to do it solo? '
     - character:
         name: You
         icon: {fileID: 0}
       line: Yea, i can wait with you, because i cant find it solo
     - character:
         name: Shepherd
-        icon: {fileID: 0}
+        icon: {fileID: 21300000, guid: b2e58361f5e819148bdfe9de2d5d5ae6, type: 3}
       line: if you kill some wolf it will go faster
   NPCToCommit: {fileID: 11400000, guid: 147f59badd7137f4598c0a59fc008285, type: 2}

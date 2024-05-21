@@ -63,7 +63,7 @@ public class EnemyController : EnemyAbstract
     }
     private void SeekPatrolPoint()
     {
-        if(targets != null)
+        if(targets.Length != 0)
         {
             int rand = Random.Range(0, targets.Length);
             target = targets[rand];

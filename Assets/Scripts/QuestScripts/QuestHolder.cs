@@ -83,7 +83,7 @@ public class QuestHolder : MonoBehaviour
                 questVisual.QuestProgress(tempQuestScriptable);
                 if (questPhase.ProgressPoints >= questPhase.PointsToComplete)
                     QuestPhaseComplete(questPhase);
-
+                Debug.Log("Progress");
                 break;
             }
         }
@@ -100,18 +100,21 @@ public class QuestHolder : MonoBehaviour
             rewardReciever.RecieveReward(reward);
         }
         questVisual.GetPhaseQuestRewardVisual(questPhase);
-
-        if (tempQuestScriptable.QuestPhasesScriptable[tempQuestScriptable.PhaseCount - 1].IsCompleted)
+        Debug.Log("Complete");
+        if (tempQuestScriptable.ProgressPoints >= tempQuestScriptable.PointsToComplete)
         {
             QuestCompleted(tempQuestScriptable);
             return;
         }
 
         tempQuestScriptable.CurrentPhase++;
-        tempQuestScriptable.QuestPhasesScriptable[tempQuestScriptable.CurrentPhase - 1].IsActive = true;
-        tempQuestPhaseScriptable = tempQuestScriptable.QuestPhasesScriptable[tempQuestScriptable.CurrentPhase - 1];
+        QuestPhaseScriptable currentPhase =
+            tempQuestScriptable.QuestPhasesScriptable[tempQuestScriptable.CurrentPhase - 1];
+
+        currentPhase.IsActive = true;
+        tempQuestPhaseScriptable = currentPhase;
+        questMarkScript.ShowQuestPhaseMark(currentPhase);
         questVisual.QuestProgress(tempQuestScriptable);
-        questMarkScript.ShowQuestPhaseMark(questPhase);
     }
 
     private void QuestCompleted(QuestScriptable questScriptable)
@@ -127,28 +130,52 @@ public class QuestHolder : MonoBehaviour
             rewardReciever.RecieveReward(reward);
         }
 
+        Debug.Log("COMPLETE");
         questVisual.GetMainQuestRewardVisual(questScriptable);
         questVisual.QuestComplete(questScriptable);
 
         if (questScriptable.NextQuest != null)
             QuestAccept(questScriptable.NextQuest, questScriptable.NextQuest.Name);
+
     }
 
     public void ReplaceQuest(QuestScriptable questScriptable)
-    {
-        
-
+    {        
         if (questScriptable.PhaseCount > 0)
         {
             if (tempQuestPhaseScriptable == null)
             {
-                tempQuestPhaseScriptable = questScriptable.QuestPhasesScriptable[tempQuestScriptable.CurrentPhase - 1];
+                if (tempQuestScriptable == null)
+                {
+                    tempQuestScriptable = questScriptable;
+                    questScriptable.IsActive = true;
+                }
+                else
+                {
+                    tempQuestScriptable.IsActive = false;
+                    questScriptable.IsActive = true;
+                    tempQuestScriptable = questScriptable;
+                }
+
+                tempQuestPhaseScriptable = questScriptable.QuestPhasesScriptable[questScriptable.CurrentPhase - 1];
                 tempQuestPhaseScriptable.IsActive = true;
             }
             else
             {
-                tempQuestScriptable.IsActive = false;
-                tempQuestPhaseScriptable = questScriptable.QuestPhasesScriptable[tempQuestScriptable.CurrentPhase - 1];
+                if (tempQuestScriptable == null)
+                {
+                    tempQuestScriptable = questScriptable;
+                    questScriptable.IsActive = true;
+                }
+                else
+                {
+                    tempQuestScriptable.IsActive = false;
+                    questScriptable.IsActive = true;
+                    tempQuestScriptable = questScriptable;
+                }
+
+                tempQuestPhaseScriptable.IsActive = false;
+                tempQuestPhaseScriptable = questScriptable.QuestPhasesScriptable[questScriptable.CurrentPhase - 1];
                 tempQuestPhaseScriptable.IsActive = true;
             }
             questMarkScript.ShowQuestPhaseMark

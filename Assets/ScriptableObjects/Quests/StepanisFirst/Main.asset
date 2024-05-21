@@ -15,7 +15,10 @@ MonoBehaviour:
   QuestPhasesScriptable:
   - {fileID: 11400000, guid: 8beacdb02f257464a8f5bdd0126898fb, type: 2}
   - {fileID: 11400000, guid: 32c40a1b52af71a48b8b60638f372bd3, type: 2}
+  EnemyToKill: {fileID: 0}
+  NextQuest: {fileID: 0}
   QuestImage: {fileID: 21300000, guid: 11b199c4150d0dd419f971897d51f201, type: 3}
+  QuestMark: {fileID: 0}
   Name: Bear dangerous
   Description: Defend Stepanis from bears
   PhaseCount: 2
@@ -26,6 +29,7 @@ MonoBehaviour:
   IsActive: 0
   IsAccepted: 0
   IsCompleted: 0
+  IsNPCDialogue: 0
   Rewards:
   - {fileID: 11400000, guid: c3ed99e06e65a174e9b0e0dfedba59b3, type: 2}
   - {fileID: 11400000, guid: abba2cfdc64d60c4db38931e32548dfb, type: 2}
@@ -37,7 +41,7 @@ MonoBehaviour:
       line: Hi im looking for Shepherd
     - character:
         name: Stepanis
-        icon: {fileID: 0}
+        icon: {fileID: 21300000, guid: f11992b3199d64840b428dc8a3bb6704, type: 3}
       line: I know where he is but you need to kill Bears for this information
     - character:
         name: You

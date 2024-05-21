@@ -19,5 +19,4 @@ MonoBehaviour:
   isEnemy: 0
   isFriend: 0
   dialogues: []
-  Quests:
-  - {fileID: 11400000, guid: 8204fb75d9642c14a84cd5b90c214856, type: 2}
+  Quests: []

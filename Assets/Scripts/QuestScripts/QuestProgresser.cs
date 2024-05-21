@@ -15,48 +15,29 @@ public class QuestProgresser : MonoBehaviour
 
     public void ProgressQuest()
     {
-        if (questScriptable.PhaseCount > 0)
+        if (TryGetComponent(out EnemyController enemy))
         {
-            if (TryGetComponent(out EnemyController enemy))
+            if (enemy.enemyScriptable == questHolder.tempQuestPhaseScriptable.EnemyToKill)
+                QuestHolder.Instance.QuestProgress();
+        }
+        else
+        {
+            try
             {
-                if (enemy.enemyScriptable == questHolder.tempQuestPhaseScriptable.EnemyToKill)
-                    QuestHolder.Instance.QuestProgress();
-            }
-            else if (questScriptable.IsAccepted && questScriptable.IsActive)
-            {
-                try
+                if(questScriptable.IsAccepted && questScriptable.IsActive && questScriptable.PhaseCount > 0)
                 {
                     if (questScriptable.QuestPhasesScriptable[questScriptable.CurrentPhase - 1] == questPhase)
                         QuestHolder.Instance.QuestProgress();
                 }
-                catch
-                {
-                    Debug.LogError("questScriptable or questPhase not set " +
-                       "or there is no EnemyController script on the object");
-                    return;
-                }
-            }
-        }
-        else
-        {
-            if (TryGetComponent(out EnemyController enemy))
-            {
-                if (enemy.enemyScriptable == questHolder.tempQuestScriptable.EnemyToKill)
+                else if(questScriptable.IsAccepted && questScriptable.IsActive)
                     QuestHolder.Instance.QuestProgress();
             }
-            else if (questScriptable.IsAccepted && questScriptable.IsActive)
+            catch
             {
-                try
-                {
-                    QuestHolder.Instance.QuestProgress();
-                }
-                catch
-                {
-                    Debug.LogError("questScriptable or questPhase not set " +
-                        "or there is no EnemyController script on the object");
-                    return;
-                }
-            }           
+                Debug.LogError("questScriptable or questPhase not set " +
+                   "or there is no EnemyController script on the object");
+                return;
+            }
         }
     }
 }

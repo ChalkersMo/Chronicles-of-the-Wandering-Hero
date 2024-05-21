@@ -19,6 +19,7 @@ MonoBehaviour:
   IsCompleted: 0
   IsActive: 0
   IsTalkQuest: 1
+  EnemyToKill: {fileID: 0}
   QuestPhaseMark: {fileID: 0}
   Rewards:
   - {fileID: 11400000, guid: 04245dae3bf032846b5252753dd6e143, type: 2}
@@ -31,11 +32,11 @@ MonoBehaviour:
       line: Done, what about village?
     - character:
         name: Shepherd
-        icon: {fileID: 0}
+        icon: {fileID: 21300000, guid: b2e58361f5e819148bdfe9de2d5d5ae6, type: 3}
       line: Oh, thanks, it is over the forest, but be careful, there are many wolfs
         and bears, your way won't be easy
     - character:
         name: Shepherd
-        icon: {fileID: 0}
+        icon: {fileID: 21300000, guid: b2e58361f5e819148bdfe9de2d5d5ae6, type: 3}
       line: Take this knife it will help you a little, bears are strong...
   NPCToCommit: {fileID: 11400000, guid: 147f59badd7137f4598c0a59fc008285, type: 2}

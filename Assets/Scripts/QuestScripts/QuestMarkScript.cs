@@ -49,6 +49,15 @@ public class QuestMarkScript : MonoBehaviour
             _tempMark.gameObject.SetActive(false);
             _tempMark = null;
         }
+
+        if (_tempMark != null && _tempMark.transform.childCount > 1)
+        {
+            for(int i = 0; i < _tempMark.transform.childCount; i++)
+            {
+                if (i > 0)
+                    _tempMark.transform.GetChild(i).transform.SetParent(null);
+            }
+        }
     }
 
     private void Update()
@@ -57,7 +66,6 @@ public class QuestMarkScript : MonoBehaviour
         {
             float distance = Vector3.Distance(_player.position, _tempMark.transform.position);
             _tempMark.GetComponentInChildren<TextMeshProUGUI>().text = $"{Math.Round(distance)}m";
-            _tempMark.transform.localScale = new Vector3(distance / 10, distance / 10);
         }
     }
 }

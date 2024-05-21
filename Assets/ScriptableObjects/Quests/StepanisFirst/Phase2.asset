@@ -19,6 +19,8 @@ MonoBehaviour:
   IsCompleted: 0
   IsActive: 0
   IsTalkQuest: 1
+  EnemyToKill: {fileID: 0}
+  QuestPhaseMark: {fileID: 0}
   Rewards:
   - {fileID: 11400000, guid: 04245dae3bf032846b5252753dd6e143, type: 2}
   dialogue:
@@ -29,11 +31,11 @@ MonoBehaviour:
       line: Done
     - character:
         name: Stepanis
-        icon: {fileID: 0}
+        icon: {fileID: 21300000, guid: f11992b3199d64840b428dc8a3bb6704, type: 3}
       line: THANKS!
     - character:
         name: Stepanis
-        icon: {fileID: 0}
+        icon: {fileID: 21300000, guid: f11992b3199d64840b428dc8a3bb6704, type: 3}
       line: I'll reward you. 2 healing pods with herbs. I hope it will help you in
         your wandering!! Also, Shepherd is around home next to me
     - character:

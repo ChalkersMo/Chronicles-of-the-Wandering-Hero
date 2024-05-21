@@ -22,7 +22,7 @@ MonoBehaviour:
   EnemyToKill: {fileID: 11400000, guid: fbbfd189016037b418657236c078e55d, type: 2}
   QuestPhaseMark: {fileID: 0}
   Rewards:
-  - {fileID: 11400000, guid: 04245dae3bf032846b5252753dd6e143, type: 2}
+  - {fileID: 11400000, guid: 01cf446b25ca93d4b8e07d2b3b822c44, type: 2}
   dialogue:
     dialogueLines: []
   NPCToCommit: {fileID: 11400000, guid: 6addea1c080ac4e43a5dd7327f812986, type: 2}

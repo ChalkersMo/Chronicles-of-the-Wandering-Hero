@@ -19,7 +19,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 1356c4d6de152df4f8f2af447b653120, type: 2}
   EnemyToKill: {fileID: 0}
   NextQuest: {fileID: 11400000, guid: 8d0ae6769fc80764ab0c400ad552ef46, type: 2}
-  QuestImage: {fileID: 0}
+  QuestImage: {fileID: 21300000, guid: 0842f80d33203d94fa8f45a1ef34489e, type: 3}
   QuestMark: {fileID: 0}
   Name: Road to village
   Description: Go to the village through the forest
@@ -31,6 +31,7 @@ MonoBehaviour:
   IsActive: 0
   IsAccepted: 0
   IsCompleted: 0
+  IsNPCDialogue: 0
   Rewards:
   - {fileID: 11400000, guid: abba2cfdc64d60c4db38931e32548dfb, type: 2}
   - {fileID: 11400000, guid: abba2cfdc64d60c4db38931e32548dfb, type: 2}

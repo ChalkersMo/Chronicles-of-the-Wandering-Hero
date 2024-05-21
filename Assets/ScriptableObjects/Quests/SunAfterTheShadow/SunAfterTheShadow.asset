@@ -15,7 +15,7 @@ MonoBehaviour:
   QuestPhasesScriptable: []
   EnemyToKill: {fileID: 0}
   NextQuest: {fileID: 0}
-  QuestImage: {fileID: 0}
+  QuestImage: {fileID: 21300000, guid: c25885556d5b3f44fa8df60948a46ea1, type: 3}
   QuestMark: {fileID: 0}
   Name: SunAfterTheShadow
   Description: Go through the beautiful glade and find the village

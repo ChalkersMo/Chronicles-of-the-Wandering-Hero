@@ -1280,11 +1280,7 @@ MonoBehaviour:
   specialAttackRange: 15
   timeBetweenAttacks: 3
   enemyScriptable: {fileID: 11400000, guid: fbbfd189016037b418657236c078e55d, type: 2}
-  targets:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  targets: []
 --- !u!114 &3424331374147060252
 MonoBehaviour:
   m_ObjectHideFlags: 0
