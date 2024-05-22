@@ -107,7 +107,6 @@ public class DialogueManager : MonoBehaviour
 
         panelDialogue.DOScale(0, 1);
 
-        Debug.Log(EndOfDialogue);
         EndOfDialogue?.Invoke();
         EndOfDialogue = null;       
     }

@@ -41,10 +41,10 @@ public class ItemPickUpZone : MonoBehaviour
     {
         _tip.DestroyTip();
         inventory.AddItem(inventorySlot, inventorySlot.Quantity);
-        Destroy(gameObject);
-        if(TryGetComponent(out QuestProgresser questProgresser))
+        if (TryGetComponent(out QuestProgresser questProgresser))
         {
             questProgresser.ProgressQuest();
         }
+        Destroy(gameObject);
     }
 }

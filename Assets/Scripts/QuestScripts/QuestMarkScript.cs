@@ -54,8 +54,14 @@ public class QuestMarkScript : MonoBehaviour
         {
             for(int i = 0; i <= _tempMark.transform.childCount; i++)
             {
-                if (i > 0)
-                    _tempMark.transform.GetChild(i).transform.SetParent(null);
+                try
+                {
+                    _tempMark.transform.GetChild(1).transform.SetParent(null);
+                }
+                catch
+                {
+                    return;
+                }                 
             }
         }
     }

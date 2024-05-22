@@ -6,18 +6,11 @@ public class QuestProgresser : MonoBehaviour
     [SerializeField] private QuestScriptable questScriptable;
     [SerializeField] private QuestPhaseScriptable questPhase;
 
-    private QuestHolder questHolder;
-
-    private void Start()
-    {
-        questHolder = FindObjectOfType<QuestHolder>();
-    }
-
     public void ProgressQuest()
     {
         if (TryGetComponent(out EnemyController enemy))
         {
-            if (enemy.enemyScriptable == questHolder.tempQuestPhaseScriptable.EnemyToKill)
+            if (enemy.enemyScriptable == QuestHolder.Instance.tempQuestPhaseScriptable.EnemyToKill)
                 QuestHolder.Instance.QuestProgress();
         }
         else

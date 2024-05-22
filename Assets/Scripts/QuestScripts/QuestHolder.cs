@@ -6,8 +6,8 @@ public class QuestHolder : MonoBehaviour
 {
     public static QuestHolder Instance;
 
-    public QuestScriptable tempQuestScriptable;
-    public QuestPhaseScriptable tempQuestPhaseScriptable;
+    [HideInInspector] public QuestScriptable tempQuestScriptable;
+    [HideInInspector] public QuestPhaseScriptable tempQuestPhaseScriptable;
 
     private QuestVisual questVisual;
     private RewardReciever rewardReciever;
@@ -81,7 +81,6 @@ public class QuestHolder : MonoBehaviour
             {
                 questPhase.ProgressPoints++;
                 questVisual.QuestProgress(tempQuestScriptable);
-                Debug.Log($"Progress{questPhase.ProgressPoints}");
                 if (questPhase.ProgressPoints >= questPhase.PointsToComplete)
                     QuestPhaseComplete(questPhase);
                 
@@ -101,7 +100,6 @@ public class QuestHolder : MonoBehaviour
             rewardReciever.RecieveReward(reward);
         }
         questVisual.GetPhaseQuestRewardVisual(questPhase);
-        Debug.Log("Complete");
         if (tempQuestScriptable.ProgressPoints >= tempQuestScriptable.PointsToComplete)
         {
             QuestCompleted(tempQuestScriptable);
@@ -131,7 +129,6 @@ public class QuestHolder : MonoBehaviour
             rewardReciever.RecieveReward(reward);
         }
 
-        Debug.Log("COMPLETE");
         questVisual.GetMainQuestRewardVisual(questScriptable);
         questVisual.QuestComplete(questScriptable);
 

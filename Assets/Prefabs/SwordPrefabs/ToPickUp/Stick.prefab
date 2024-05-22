@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 6887553489952994587}
   - component: {fileID: 5266624972665553461}
   - component: {fileID: 5159244674239098447}
+  - component: {fileID: 1286356549787178496}
   m_Layer: 0
   m_Name: Stick
   m_TagString: Untagged
@@ -208,3 +209,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cc31292677aa0a4795292b6a4eb69ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1286356549787178496
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7937149015195221557}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1bd07eb93396261418374622c8ba7142, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  questScriptable: {fileID: 11400000, guid: 8cf0836a6ee42544f81220473394f49f, type: 2}
+  questPhase: {fileID: 11400000, guid: 53ba7de2d1423ec47b5e6e088c40e304, type: 2}
