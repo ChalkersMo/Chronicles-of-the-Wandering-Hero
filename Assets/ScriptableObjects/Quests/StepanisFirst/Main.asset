@@ -29,7 +29,7 @@ MonoBehaviour:
   IsActive: 0
   IsAccepted: 0
   IsCompleted: 0
-  IsNPCDialogue: 0
+  IsNPCDialogue: 1
   Rewards:
   - {fileID: 11400000, guid: c3ed99e06e65a174e9b0e0dfedba59b3, type: 2}
   - {fileID: 11400000, guid: abba2cfdc64d60c4db38931e32548dfb, type: 2}

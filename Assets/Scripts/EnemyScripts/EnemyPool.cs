@@ -9,7 +9,7 @@ public class EnemyPool : MonoBehaviour
 
     private List<GameObject> objectPool;
 
-    private void Start()
+    private void Awake()
     {
         InitializePool();
     }
@@ -20,8 +20,11 @@ public class EnemyPool : MonoBehaviour
 
         for (int i = 0; i < poolSize; i++)
         {
-            GameObject obj = Instantiate(prefab, transform);
-            obj.SetActive(false);
+            Vector3 spawnPos = new Vector3(transform.position.x + Random.Range(0, 5),
+                transform.position.y + Random.Range(0, 6),
+                transform.position.z + Random.Range(0, 7));
+
+            GameObject obj = Instantiate(prefab, spawnPos, Quaternion.identity, transform);
             objectPool.Add(obj);
         }
     }
