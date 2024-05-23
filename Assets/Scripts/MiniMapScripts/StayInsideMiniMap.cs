@@ -3,14 +3,15 @@ using UnityEngine;
 public class StayInsideMiniMap : MonoBehaviour
 {
     [SerializeField] private Transform MinimapCam;
-    private float MinimapSize = 12;
+    private float MinimapSize = 13;
 
     private Vector3 TempV3;
 
     void Update()
     {
-        TempV3 = transform.parent.transform.position;
-        TempV3.y = transform.position.y;
+        Vector3 parentPos = transform.parent.transform.parent.transform.position;
+        TempV3 = parentPos;
+        TempV3.y = parentPos.y + 1;
         transform.position = TempV3;
     }
 

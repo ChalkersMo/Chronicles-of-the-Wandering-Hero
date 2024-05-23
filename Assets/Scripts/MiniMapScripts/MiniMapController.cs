@@ -18,8 +18,6 @@ public class MiniMapController : MonoBehaviour
         Vector3 newPos = _player.position;
         newPos.y = transform.position.y;
         transform.position = newPos;   
-
-        transform.rotation = Quaternion.Euler(90f, _player.eulerAngles.y, 0f);
     }
 
     public void Zoom(float zoom)

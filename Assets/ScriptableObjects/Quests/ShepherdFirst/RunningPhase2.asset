@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: RunningPhase2
   m_EditorClassIdentifier: 
   Name: First sword
-  Description: Find ant stick on road
+  Description: Find a stick on road
   ProgressPoints: 0
   PointsToComplete: 1
   IsCompleted: 0
