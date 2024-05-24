@@ -55,6 +55,11 @@ public class EnemyAnimation : MonoBehaviour
         }           
     }
 
+    public void DieAnim()
+    {
+        RenewBools();
+        animator.SetTrigger("Die");
+    }
     public void RenewBools()
     {
         _isStanding = false;

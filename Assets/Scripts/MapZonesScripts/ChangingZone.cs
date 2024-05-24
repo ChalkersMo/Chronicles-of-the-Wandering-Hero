@@ -11,14 +11,14 @@ public class ChangingZone : MonoBehaviour
 
     [SerializeField] Transform rootNamingZoneObj;
 
-    private Volume globalVolume;
+    private GlobalVolumeController globalVolumeController;
 
     private TextMeshProUGUI nameText;
     private TextMeshProUGUI descriptionText;
 
     private void Start()
     {
-        globalVolume =  GameObject.FindGameObjectWithTag("GlobalVolume").GetComponent<Volume>();
+        globalVolumeController =  GameObject.FindGameObjectWithTag("GlobalVolume").GetComponent<GlobalVolumeController>();
         nameText = rootNamingZoneObj.GetChild(0).GetComponent<TextMeshProUGUI>();
         descriptionText = rootNamingZoneObj.GetChild(1).GetComponent<TextMeshProUGUI>();
     }
@@ -26,9 +26,13 @@ public class ChangingZone : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            VignetteSetUp(zoneScriptable.VignetteColor,
+            globalVolumeController.ChangeVignette(zoneScriptable.VignetteColor,
                 zoneScriptable.VignetteIntensity,
-                zoneScriptable.VignetteSmoothness);
+                zoneScriptable.VignetteSmoothness,
+                zoneScriptable.ChangingDuration);
+
+            globalVolumeController.ChangeGamma(zoneScriptable.GammaW, zoneScriptable.Duration);
+            globalVolumeController.ChangeGain(zoneScriptable.GainW, zoneScriptable.Duration);
 
             EnteringTextAnim(zoneScriptable.Name, zoneScriptable.Description);
         } 
@@ -38,19 +42,13 @@ public class ChangingZone : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            VignetteSetUp(defaultZoneScriptable.VignetteColor,
+            globalVolumeController.ChangeVignette(defaultZoneScriptable.VignetteColor,
                 defaultZoneScriptable.VignetteIntensity,
-                defaultZoneScriptable.VignetteSmoothness);
-        }
-    }
+                defaultZoneScriptable.VignetteSmoothness,
+                defaultZoneScriptable.ChangingDuration);
 
-    private void VignetteSetUp(Color color, float Intensity, float Smoothness)
-    {
-        if(globalVolume.profile.TryGet(out Vignette vignette))
-        {
-            vignette.color.value = color;
-            vignette.intensity.value = Intensity;
-            vignette.smoothness.value = Smoothness;
+            globalVolumeController.ChangeGamma(defaultZoneScriptable.GammaW, defaultZoneScriptable.Duration);
+            globalVolumeController.ChangeGain(defaultZoneScriptable.GainW, defaultZoneScriptable.Duration);
         }
     }
 

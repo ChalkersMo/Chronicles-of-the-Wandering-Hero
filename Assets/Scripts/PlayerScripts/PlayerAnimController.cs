@@ -44,6 +44,10 @@ public class PlayerAnimController : MonoBehaviour
     {
         animatorController.SetTrigger("Jump");
     }
+    public void RollAnim()
+    {
+        animatorController.SetTrigger("Roll");
+    }
     public void AttackAnim(int numberOfCklicks)
     {
         if (numberOfCklicks >= 0 && ReadyToHit)

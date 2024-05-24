@@ -12,8 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e64063a2a1e0a804eaa69c60286c377a, type: 3}
   m_Name: DefaultZone
   m_EditorClassIdentifier: 
+  Name: ...
+  Description: .....
   VignetteColor: {r: 1, g: 1, b: 1, a: 1}
   VignetteIntensity: 0
   VignetteSmoothness: 1
-  Name: ...
-  Description: .....
+  ChangingDuration: 3
+  LiftW: 0
+  GammaW: -0.1
+  GainW: 0.45
+  Duration: 2

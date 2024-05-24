@@ -12,8 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e64063a2a1e0a804eaa69c60286c377a, type: 3}
   m_Name: ForestZone
   m_EditorClassIdentifier: 
-  VignetteColor: {r: 0.036762346, g: 0, b: 0.5471698, a: 1}
-  VignetteIntensity: 0.35
-  VignetteSmoothness: 1
   Name: Forest
   Description: Brr...
+  VignetteColor: {r: 0.018194083, g: 0, b: 0.2830189, a: 1}
+  VignetteIntensity: 0.25
+  VignetteSmoothness: 1
+  ChangingDuration: 2
+  LiftW: 0
+  GammaW: -0.2
+  GainW: 0.02
+  Duration: 2

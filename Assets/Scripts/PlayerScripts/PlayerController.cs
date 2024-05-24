@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -34,6 +35,7 @@ public class PlayerController : MonoBehaviour, IEquipSword, IRunning
     public bool SwordEquiped { get; set; }
 
     private bool _canJump = true;
+    private bool _canRoll = true;
 
     private void Start()
     {
@@ -57,7 +59,16 @@ public class PlayerController : MonoBehaviour, IEquipSword, IRunning
     }
     void Update()
     {
-        if(CanMove)
+        groundedPlayer = _CharacterController.isGrounded;
+
+        if (groundedPlayer && playerVelocity.y < 0)
+            playerVelocity.y = 0;
+
+        playerVelocity.y += gravityValue * Time.deltaTime;
+        _CharacterController.Move(playerVelocity * Time.deltaTime);
+
+
+        if (CanMove)
         {
             playerAnimController.SetBoolsAnim(groundedPlayer, IsRunning);
 
@@ -74,12 +85,6 @@ public class PlayerController : MonoBehaviour, IEquipSword, IRunning
                 Invoke(nameof(JumpRenew), 2.5f);
             }
 
-            groundedPlayer = _CharacterController.isGrounded;
-
-            if (groundedPlayer && playerVelocity.y < 0)
-                playerVelocity.y = 0;
-
-
             Vector2 input = moveAction.ReadValue<Vector2>();
             Vector3 move = new Vector3(input.x, 0, input.y);
             move = move.x * cameraTransform.right.normalized + move.z * cameraTransform.forward.normalized;
@@ -95,10 +100,7 @@ public class PlayerController : MonoBehaviour, IEquipSword, IRunning
                 playerAnimController.WalkAnim();
                 _CharacterController.Move(WalkingSpeed * Time.deltaTime * move);
             }
-
-            playerVelocity.y += gravityValue * Time.deltaTime;
-            _CharacterController.Move(playerVelocity * Time.deltaTime);
-
+         
             Quaternion targetRotation = Quaternion.Euler(0, cameraTransform.eulerAngles.y, 0);
             transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
 
@@ -119,10 +121,41 @@ public class PlayerController : MonoBehaviour, IEquipSword, IRunning
         {
             StartAttacking();
         }
+        if (Input.GetKeyDown(KeyCode.Q) && _canRoll)
+        {
+            playerAnimController.RollAnim();
+            StartCoroutine(Roll(1));  
+        }
     }
     private void JumpRenew()
     {
         _canJump = true;
+    }
+    private void RollRenew()
+    {
+        _canRoll = true;
+    }
+    private IEnumerator Roll(float Duration)
+    {
+        float elapsed = 0.0f;
+
+        CanMove = false;
+        _canRoll = false;
+
+        Vector2 input = moveAction.ReadValue<Vector2>();
+        Vector3 move = new Vector3(input.x, 0, input.y + 1f);
+
+        move = move.x * cameraTransform.right.normalized + move.z * cameraTransform.forward.normalized;
+        move.y = 0f;
+
+        while (elapsed < Duration)
+        {
+            _CharacterController.Move(RunningSpeed * Time.deltaTime * move);
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+        CanMove = true;
+        Invoke(nameof(RollRenew), Duration);
     }
     public void AssignSwordController(PlayerSwordController controller)
     {
