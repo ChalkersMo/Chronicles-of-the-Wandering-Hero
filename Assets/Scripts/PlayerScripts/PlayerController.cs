@@ -145,6 +145,14 @@ public class PlayerController : MonoBehaviour, IEquipSword, IRunning
 
             ComboRenewCheck();
         }
+        else
+        {
+            if (playerAudio.audioSource.clip == playerAudio.runningClip ||
+                playerAudio.audioSource.clip == playerAudio.walkingClip)
+            {
+                playerAudio.RenewSource();
+            }
+        }
         if (Input.GetMouseButtonDown(0))
         {
             StartAttacking();

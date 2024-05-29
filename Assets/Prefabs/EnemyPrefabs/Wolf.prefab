@@ -455,6 +455,7 @@ GameObject:
   - component: {fileID: 8772488591493482361}
   - component: {fileID: 8895882526933736191}
   - component: {fileID: 7189450297593687694}
+  - component: {fileID: -3101943449140839759}
   m_Layer: 0
   m_Name: Wolf
   m_TagString: Untagged
@@ -780,6 +781,20 @@ MonoBehaviour:
   attackingClip: {fileID: 8300000, guid: a15c2b52296c6a4499b0317f71ae961e, type: 3}
   uniqueAttackingClip: {fileID: 8300000, guid: 07f586f4a3d8c2b4dbe92033163bee17, type: 3}
   takedamageClip: {fileID: 8300000, guid: f1d18b62b2b2461499072e43b6d53a71, type: 3}
+--- !u!114 &-3101943449140839759
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1917314786810527764}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1bd07eb93396261418374622c8ba7142, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  questScriptable: {fileID: 0}
+  questPhase: {fileID: 0}
 --- !u!1 &2175390767424437897
 GameObject:
   m_ObjectHideFlags: 0
