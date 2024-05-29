@@ -2,12 +2,13 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(CharacterController), typeof(PlayerInput))] 
+[RequireComponent(typeof(CharacterController), typeof(PlayerInput), typeof(PlayerAudio))] 
 public class PlayerController : MonoBehaviour, IEquipSword, IRunning
 {
     private CharacterController _CharacterController;
     private PlayerAnimController playerAnimController;
     private PlayerSwordController playerSwordController;
+    private PlayerAudio playerAudio;
 
     private Vector3 playerVelocity;
     private bool groundedPlayer;
@@ -36,13 +37,14 @@ public class PlayerController : MonoBehaviour, IEquipSword, IRunning
 
     private bool _canJump = true;
     private bool _canRoll = true;
-
+   
     private void Start()
     {
         _CharacterController = GetComponent<CharacterController>();
         playerInput = GetComponent<PlayerInput>();
 
         playerAnimController = GetComponent<PlayerAnimController>();
+        playerAudio = GetComponent<PlayerAudio>();
 
         cameraTransform = Camera.main.transform;
         moveAction = playerInput.actions["Move"];
@@ -82,7 +84,8 @@ public class PlayerController : MonoBehaviour, IEquipSword, IRunning
                 playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
                 playerAnimController.JumpAnim();
                 _canJump = false;
-                Invoke(nameof(JumpRenew), 2.5f);
+                playerAudio.RenewSource();
+                playerAudio.PlayJumpSound();
             }
 
             Vector2 input = moveAction.ReadValue<Vector2>();
@@ -90,15 +93,41 @@ public class PlayerController : MonoBehaviour, IEquipSword, IRunning
             move = move.x * cameraTransform.right.normalized + move.z * cameraTransform.forward.normalized;
             move.y = 0f;
 
+
+            if (groundedPlayer && !_canJump)
+                _canJump = true;
+
             if (IsRunning)
             {
                 playerAnimController.RunAnim();
                 _CharacterController.Move(RunningSpeed * Time.deltaTime * move);
+
+                if (move != Vector3.zero
+               && playerAudio.audioSource.clip != playerAudio.runningClip
+               && _canJump)
+                {
+                    playerAudio.PlayRunningSound();
+                }
+                else if (move == Vector3.zero && playerAudio.audioSource.clip == playerAudio.runningClip)
+                {
+                    playerAudio.RenewSource();
+                }
             }
             else
             {
                 playerAnimController.WalkAnim();
                 _CharacterController.Move(WalkingSpeed * Time.deltaTime * move);
+
+                if (move != Vector3.zero
+               && playerAudio.audioSource.clip != playerAudio.walkingClip
+               && _canJump)
+                {
+                    playerAudio.PlayWalkingSound();
+                }
+                else if (move == Vector3.zero && playerAudio.audioSource.clip == playerAudio.walkingClip)
+                {
+                    playerAudio.RenewSource();
+                }
             }
          
             Quaternion targetRotation = Quaternion.Euler(0, cameraTransform.eulerAngles.y, 0);
@@ -124,7 +153,9 @@ public class PlayerController : MonoBehaviour, IEquipSword, IRunning
         if (Input.GetKeyDown(KeyCode.Q) && _canRoll)
         {
             playerAnimController.RollAnim();
-            StartCoroutine(Roll(1));  
+            StartCoroutine(Roll(1));
+            playerAudio.RenewSource();
+            playerAudio.PlayRollSound();
         }
     }
     private void JumpRenew()

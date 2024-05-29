@@ -42,11 +42,13 @@ public class PlayerAnimController : MonoBehaviour
     }
     public void JumpAnim()
     {
-        animatorController.SetTrigger("Jump");
+        if(animatorController.GetCurrentAnimatorStateInfo(0).IsName("MovementBlend"))
+            animatorController.SetTrigger("Jump");
     }
     public void RollAnim()
     {
-        animatorController.SetTrigger("Roll");
+        if (animatorController.GetCurrentAnimatorStateInfo(0).IsName("MovementBlend"))
+            animatorController.SetTrigger("Roll");
     }
     public void AttackAnim(int numberOfCklicks)
     {

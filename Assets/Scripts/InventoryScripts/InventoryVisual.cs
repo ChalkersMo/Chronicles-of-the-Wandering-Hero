@@ -7,24 +7,25 @@ using UnityEngine.UI;
 
 public class InventoryVisual : MonoBehaviour
 {
+    [SerializeField] private Sprite UIMaskSprite;
+
+    [HideInInspector] public Transform panelInventory;
+
+    [HideInInspector] public bool _isActive = false;
+
     private PlayerController _playerController;
     private CinemachineVirtualCamera ThirdPersonCamera;
+    private UiAudio uiAudio;
 
     private TextMeshProUGUI _nameItem;
     private TextMeshProUGUI _descriptionItem;
     private TextMeshProUGUI _quantityItem;
 
-    private Image _imageItem;
-
-    [SerializeField] private Sprite UIMaskSprite;
+    private Image _imageItem;  
 
     private Canvas _canvas;
 
-    [HideInInspector] public Transform panelInventory;
-
     private float _transitionSpeed;
-
-    [HideInInspector] public bool _isActive;
 
     private void Awake()
     {
@@ -36,6 +37,8 @@ public class InventoryVisual : MonoBehaviour
 
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         _playerController = player.GetComponent<PlayerController>();
+
+        uiAudio = FindObjectOfType<UiAudio>();  
 
         _canvas = GetComponent<Canvas>();
         panelInventory = transform.GetChild(0);
@@ -56,6 +59,8 @@ public class InventoryVisual : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         ThirdPersonCamera.enabled = false;
         _isActive = true;
+
+        uiAudio.PlayOnSound();
     }
     public void OffInventory()
     {
@@ -69,6 +74,8 @@ public class InventoryVisual : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         ThirdPersonCamera.enabled = true;
         _isActive = false;
+
+        uiAudio.PlayOffSound();
     }
 
     private void Update()

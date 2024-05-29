@@ -7,18 +7,22 @@ public class MapZoneScriptable : ScriptableObject
     public string Name;
     public string Description;
 
+    [Space, Header("Music settings")]
+    public AudioClip ZoneThemeClip;
+    public float ClipChangingDuration = 2;
+
     [Space, Header("Vignette settings")]
     public Color VignetteColor = Color.black;
 
     public float VignetteIntensity = 0.35f;
     public float VignetteSmoothness = 1;
 
-    public float ChangingDuration = 3f;
+    public float VigneteChangingDuration = 3f;
 
     [Space, Header("Lift Gamma and Gain settings")]
-    public float LiftW;
-    public float GammaW;
-    public float GainW;
+    public float LiftW = 0;
+    public float GammaW = -0.1f;
+    public float GainW = 0.45f;
 
-    public float Duration = 2f;
+    public float LiftGammaGainChangingDuration = 2f;
 }

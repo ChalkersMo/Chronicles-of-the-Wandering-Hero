@@ -7,6 +7,7 @@ public class EnemyController : EnemyAbstract
 
     private EnemyAttacksAbstract _enemyAttack;
     private EnemyAnimation _enemyAnim;
+    private AudioController _audioController;
 
     private Transform target;
 
@@ -21,6 +22,7 @@ public class EnemyController : EnemyAbstract
     {
         _enemyAttack = GetComponent<EnemyAttacksAbstract>();
         _enemyAnim = GetComponent<EnemyAnimation>();
+        _audioController = FindObjectOfType<AudioController>(); 
     }
     private void Update()
     {
@@ -81,6 +83,11 @@ public class EnemyController : EnemyAbstract
         agent.SetDestination(player.position);
         agent.speed = enemyScriptable.ChasingSpeed;
         _enemyAnim.RunAnim();
+        if (!_audioController.IsFightingTheme)
+        {
+            _audioController.ChangeTheme(null, 2, true);
+            _audioController.IsFightingTheme = true;
+        }
     }
 
     protected override void Attacking()

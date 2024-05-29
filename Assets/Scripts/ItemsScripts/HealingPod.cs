@@ -11,7 +11,7 @@ public class HealingPod : ItemUseable
     private ItemHUDSlots _slots;
     private Inventory inventory;
 
-    private float _healPoints;
+    private float _healPoints = 20.5f;
 
     private void Start()
     {

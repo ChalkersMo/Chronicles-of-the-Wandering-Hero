@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e64063a2a1e0a804eaa69c60286c377a, type: 3}
+  m_Name: GladeZone
+  m_EditorClassIdentifier: 
+  Name: Glade
+  Description: Beautifull....
+  ZoneThemeClip: {fileID: 8300000, guid: 715de687c8daf4677806f46a380cd292, type: 3}
+  ClipChangingDuration: 3
+  VignetteColor: {r: 0.4150587, g: 0.8396226, b: 0.479297, a: 1}
+  VignetteIntensity: 0.1
+  VignetteSmoothness: 1
+  VigneteChangingDuration: 3
+  LiftW: 0
+  GammaW: -0.1
+  GainW: 0.55
+  LiftGammaGainChangingDuration: 2

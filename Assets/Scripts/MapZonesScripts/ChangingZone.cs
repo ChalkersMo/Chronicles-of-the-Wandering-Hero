@@ -1,8 +1,6 @@
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Rendering;
-using UnityEngine.Rendering.Universal;
 
 public class ChangingZone : MonoBehaviour
 {
@@ -12,6 +10,7 @@ public class ChangingZone : MonoBehaviour
     [SerializeField] Transform rootNamingZoneObj;
 
     private GlobalVolumeController globalVolumeController;
+    private AudioController audioController;
 
     private TextMeshProUGUI nameText;
     private TextMeshProUGUI descriptionText;
@@ -19,6 +18,7 @@ public class ChangingZone : MonoBehaviour
     private void Start()
     {
         globalVolumeController =  GameObject.FindGameObjectWithTag("GlobalVolume").GetComponent<GlobalVolumeController>();
+        audioController = FindObjectOfType<AudioController>();
         nameText = rootNamingZoneObj.GetChild(0).GetComponent<TextMeshProUGUI>();
         descriptionText = rootNamingZoneObj.GetChild(1).GetComponent<TextMeshProUGUI>();
     }
@@ -29,12 +29,13 @@ public class ChangingZone : MonoBehaviour
             globalVolumeController.ChangeVignette(zoneScriptable.VignetteColor,
                 zoneScriptable.VignetteIntensity,
                 zoneScriptable.VignetteSmoothness,
-                zoneScriptable.ChangingDuration);
+                zoneScriptable.VigneteChangingDuration);
 
-            globalVolumeController.ChangeGamma(zoneScriptable.GammaW, zoneScriptable.Duration);
-            globalVolumeController.ChangeGain(zoneScriptable.GainW, zoneScriptable.Duration);
+            globalVolumeController.ChangeGamma(zoneScriptable.GammaW, zoneScriptable.LiftGammaGainChangingDuration);
+            globalVolumeController.ChangeGain(zoneScriptable.GainW, zoneScriptable.LiftGammaGainChangingDuration);
 
             EnteringTextAnim(zoneScriptable.Name, zoneScriptable.Description);
+            audioController.ChangeTheme(zoneScriptable.ZoneThemeClip, zoneScriptable.ClipChangingDuration, false);
         } 
     }
 
@@ -45,10 +46,14 @@ public class ChangingZone : MonoBehaviour
             globalVolumeController.ChangeVignette(defaultZoneScriptable.VignetteColor,
                 defaultZoneScriptable.VignetteIntensity,
                 defaultZoneScriptable.VignetteSmoothness,
-                defaultZoneScriptable.ChangingDuration);
+                defaultZoneScriptable.VigneteChangingDuration);
 
-            globalVolumeController.ChangeGamma(defaultZoneScriptable.GammaW, defaultZoneScriptable.Duration);
-            globalVolumeController.ChangeGain(defaultZoneScriptable.GainW, defaultZoneScriptable.Duration);
+            globalVolumeController.ChangeGamma(defaultZoneScriptable.GammaW,
+                defaultZoneScriptable.LiftGammaGainChangingDuration);
+            globalVolumeController.ChangeGain(defaultZoneScriptable.GainW,
+                defaultZoneScriptable.LiftGammaGainChangingDuration);
+
+            audioController.ChangeTheme(defaultZoneScriptable.ZoneThemeClip, defaultZoneScriptable.ClipChangingDuration, false);
         }
     }
 

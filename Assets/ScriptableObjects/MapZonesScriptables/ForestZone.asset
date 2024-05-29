@@ -14,11 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Forest
   Description: Brr...
+  ZoneThemeClip: {fileID: 8300000, guid: d345e8933373b40de9f2836c20ebc6f8, type: 3}
+  ClipChangingDuration: 2
   VignetteColor: {r: 0.018194083, g: 0, b: 0.2830189, a: 1}
   VignetteIntensity: 0.25
   VignetteSmoothness: 1
-  ChangingDuration: 2
+  VigneteChangingDuration: 3
   LiftW: 0
   GammaW: -0.2
   GainW: 0.02
-  Duration: 2
+  LiftGammaGainChangingDuration: 2

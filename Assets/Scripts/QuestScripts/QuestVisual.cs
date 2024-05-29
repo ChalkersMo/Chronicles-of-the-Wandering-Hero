@@ -40,6 +40,8 @@ public class QuestVisual : MonoBehaviour
     
     private Canvas thisCanvas;
 
+    private UiAudio uiAudio;
+
     private TextMeshProUGUI miniQuestPhaseDescription;
 
     private void Awake()
@@ -53,6 +55,8 @@ public class QuestVisual : MonoBehaviour
         PhaseRewardImage.DOFade(0, 0);
         PhaseRewardImage.gameObject.SetActive(false);
         isActive = false;
+
+        uiAudio = FindObjectOfType<UiAudio>(); 
     }
     private void Update()
     {
@@ -85,6 +89,8 @@ public class QuestVisual : MonoBehaviour
         Invoke(nameof(ShowQuestsProgressInfo), 1);
 
         isActive = true;
+
+        uiAudio.PlayOnSound();
     }
     public void OffQuestsPanel()
     {
@@ -108,6 +114,8 @@ public class QuestVisual : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         isActive = false;
+
+        uiAudio.PlayOffSound();
     }
     public void QuestAccept(QuestScriptable questScriptable)
     {
@@ -122,6 +130,8 @@ public class QuestVisual : MonoBehaviour
         }
         else
             miniQuestPhaseDescription.text = $"{questScriptable.Description}: {questScriptable.ProgressPoints}/{questScriptable.PointsToComplete}";
+
+        uiAudio.PlayQuestGettingSound();
     }
     public void QuestProgress(QuestScriptable questScriptable)
     {
@@ -137,6 +147,7 @@ public class QuestVisual : MonoBehaviour
     {
         miniQuestPhaseDescription.text = null;
         ShowQuestinfo(questScriptable);
+        uiAudio.PlayCompleteRewardSound();
     }
     public void GetMainQuestRewardVisual(QuestScriptable questScriptable)
     {
@@ -218,6 +229,7 @@ public class QuestVisual : MonoBehaviour
             PhaseRewardImage.gameObject.SetActive(true);
             PhaseRewardImage.sprite = reward.RewardSprite;
             PhaseRewardImage.DOFade(1, 1);
+            uiAudio.PlayRecieveRewardSound();
             yield return new WaitForSeconds(2);
             PhaseRewardImage.DOFade(0, 0.2f);
             yield return new WaitForSeconds(0.2f);

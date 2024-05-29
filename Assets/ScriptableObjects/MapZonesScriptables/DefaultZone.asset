@@ -14,11 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: ...
   Description: .....
+  ZoneThemeClip: {fileID: 8300000, guid: b7f51c7a0b0b3164b879f72cef2af19c, type: 3}
+  ClipChangingDuration: 2
   VignetteColor: {r: 1, g: 1, b: 1, a: 1}
   VignetteIntensity: 0
   VignetteSmoothness: 1
-  ChangingDuration: 3
+  VigneteChangingDuration: 3
   LiftW: 0
   GammaW: -0.1
   GainW: 0.45
-  Duration: 2
+  LiftGammaGainChangingDuration: 2
