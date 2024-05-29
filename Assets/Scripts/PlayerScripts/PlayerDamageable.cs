@@ -18,6 +18,8 @@ public class PlayerDamageable : MonoBehaviour, IDamageable, IHealable
     [SerializeField] private Image _healthBarFill;
     [SerializeField] private Image _healthBarDamageFill;
 
+    [SerializeField] private Image DeathPanel;
+
     [SerializeField] private TextMeshProUGUI _healthTxt;
 
     private GlobalVolumeController volumeController;
@@ -26,8 +28,10 @@ public class PlayerDamageable : MonoBehaviour, IDamageable, IHealable
     private PlayerAnimController playerAnimController;
     private PlayerController playerController;
 
-    private float _fillSpeed = 1;
-    private float _fillDamageSpeed = 0.6f;
+    private readonly float _fillSpeed = 1;
+    private readonly float _fillDamageSpeed = 0.6f;
+
+    private bool _isAlive = true;
 
     private void Start()
     {
@@ -40,20 +44,26 @@ public class PlayerDamageable : MonoBehaviour, IDamageable, IHealable
         playerAudio = GetComponent<PlayerAudio>();
         playerAnimController = GetComponent<PlayerAnimController>();
         playerController = GetComponent<PlayerController>();
+
+        DeathPanel.DOFade(0, 3);
     }
     public void TakeDamage(float amount)
     {
-        CurrentHealth -= amount;
-        CurrentHealth = Mathf.Clamp(CurrentHealth, 0, MaxHealth);
-        _healthTxt.text = CurrentHealth.ToString();
-        volumeController.ChangeVignette(_takingDamageVignetteColor, 0.35f, 0.7f, 0.5f);
-        StartCoroutine(OffVignette(0.5f));
-        StartCoroutine(UpdateHealthBar());
-
-        if(CurrentHealth <= 0)
+        if (_isAlive)
         {
-            StartCoroutine(DeathRoutine());
-        }
+            CurrentHealth -= amount;
+            CurrentHealth = Mathf.Clamp(CurrentHealth, 0, MaxHealth);
+            _healthTxt.text = CurrentHealth.ToString();
+            volumeController.ChangeVignette(_takingDamageVignetteColor, 0.35f, 0.7f, 0.5f);
+            StartCoroutine(OffVignette(0.5f));
+            StartCoroutine(UpdateHealthBar());
+
+            if (CurrentHealth <= 0)
+            {
+                _isAlive = false;
+                StartCoroutine(DeathRoutine());
+            }
+        }       
     }
     public void Heal(float amount)
     {
@@ -75,8 +85,10 @@ public class PlayerDamageable : MonoBehaviour, IDamageable, IHealable
 
     private void Recovering()
     {
-        Heal(MaxHealth / 40);
+        _isAlive = true;
+        Heal(MaxHealth / 3);
         volumeController.ChangeVignette(Color.black, 0, 1, 3);
+        DeathPanel.DOFade(0, 3);
         playerAnimController.RecoveringAnim();
     }
 
@@ -102,8 +114,9 @@ public class PlayerDamageable : MonoBehaviour, IDamageable, IHealable
         playerAnimController.DeathAnim();
         playerAudio.PlayDeathSound();
         audioController.ChangeTheme(null, 3, false, 0);
-        volumeController.ChangeVignette(Color.black, 1f, 1, 4);
-        yield return new WaitForSeconds(4);
+        volumeController.ChangeVignette(Color.black, 1f, 0, 4);
+        DeathPanel.DOFade(1, 4);
+        yield return new WaitForSeconds(6);
         transform.position = playerController.CheckPointPosition;
         yield return new WaitForSeconds(1);
         Recovering();

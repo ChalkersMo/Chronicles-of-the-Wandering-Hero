@@ -10,14 +10,17 @@ public class QuestMarkObject : MonoBehaviour
 
     private void Start()
     {
-        playerController = FindObjectOfType<PlayerController>();
-        playerController.CheckPointPosition  = transform.position;
-
         if (isPhase)
             phaseScriptable.QuestPhaseMark = gameObject;
         else
             questScriptable.QuestMark = gameObject;
 
         gameObject.SetActive(false);
+    }
+
+    private void OnDisable()
+    {
+        playerController = FindObjectOfType<PlayerController>();
+        playerController.CheckPointPosition = transform.position;
     }
 }

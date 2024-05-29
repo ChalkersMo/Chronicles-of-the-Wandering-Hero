@@ -234,7 +234,6 @@ public class PlayerController : MonoBehaviour, IEquipSword, IRunning
             if (SwordEquiped && CanMove)
             {
                 playerAnimController.AttackAnim(numberOfCklicks);
-                playerAudio.PlaySlashSound();
                 CanMove = false;
             }
         }
@@ -253,6 +252,9 @@ public class PlayerController : MonoBehaviour, IEquipSword, IRunning
     {
         if (playerSwordController != null)
             playerSwordController.IsAttacking = true;
+
+        playerAudio.RenewSource();
+        playerAudio.PlaySlashSound();
     }
     public void DisableAttacking()
     {
