@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[RequireComponent(typeof(AudioSource))]
 public class PlayerAudio : MonoBehaviour
 {
     [HideInInspector] public AudioSource audioSource;
@@ -7,8 +8,11 @@ public class PlayerAudio : MonoBehaviour
     public AudioClip walkingClip;
     public AudioClip runningClip;
 
+    [SerializeField] private AudioClip pickingUp;
     [SerializeField] private AudioClip jumpingClip;
-    [SerializeField] private AudioClip RollingClip;
+    [SerializeField] private AudioClip rollingClip;
+    [SerializeField] private AudioClip deathClip;
+    [SerializeField] private AudioClip slashClip;
 
     private bool somethingPlaying = false;
 
@@ -56,7 +60,27 @@ public class PlayerAudio : MonoBehaviour
 
     public void PlayRollSound()
     {
-        audioSource.clip = RollingClip;
+        audioSource.clip = rollingClip;
+        audioSource.Play();
+        somethingPlaying = true;
+    }
+
+    public void PlayDeathSound()
+    {
+        audioSource.clip = deathClip;
+        audioSource.Play();
+        somethingPlaying = true;
+    }
+    public void PlaySlashSound()
+    {
+        audioSource.clip = slashClip;
+        audioSource.Play();
+        somethingPlaying = true;
+    }
+
+    public void PlayPickUpSound()
+    {
+        audioSource.clip = pickingUp;
         audioSource.Play();
         somethingPlaying = true;
     }

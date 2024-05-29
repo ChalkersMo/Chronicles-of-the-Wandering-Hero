@@ -5,6 +5,18 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(CharacterController), typeof(PlayerInput), typeof(PlayerAudio))] 
 public class PlayerController : MonoBehaviour, IEquipSword, IRunning
 {
+    [HideInInspector] public bool CanMove;
+    public bool IsRunning { get; set; }
+    public bool SwordEquiped { get; set; }
+
+    public int numberOfCklicks = 0;
+
+    public float WalkingSpeed { get; set; }
+    public float RunningSpeed { get; set; }
+    public float cooldownTime = 1.2f;
+
+    public Vector3 CheckPointPosition;
+
     private CharacterController _CharacterController;
     private PlayerAnimController playerAnimController;
     private PlayerSwordController playerSwordController;
@@ -13,12 +25,6 @@ public class PlayerController : MonoBehaviour, IEquipSword, IRunning
     private Vector3 playerVelocity;
     private bool groundedPlayer;
     private Transform cameraTransform;
-
-    public int numberOfCklicks = 0;
-
-    public float WalkingSpeed { get; set; }
-    public float RunningSpeed { get; set; }
-    public float cooldownTime = 1.2f;
 
     private float lastClickedTime = 0;
     private float maxComboDelay = 1;
@@ -30,10 +36,6 @@ public class PlayerController : MonoBehaviour, IEquipSword, IRunning
     private PlayerInput playerInput;
     private InputAction moveAction;
     private InputAction jumpAction;
-
-    [HideInInspector] public bool CanMove;
-    public bool IsRunning { get; set; }
-    public bool SwordEquiped { get; set; }
 
     private bool _canJump = true;
     private bool _canRoll = true;
@@ -86,16 +88,13 @@ public class PlayerController : MonoBehaviour, IEquipSword, IRunning
                 _canJump = false;
                 playerAudio.RenewSource();
                 playerAudio.PlayJumpSound();
+                Invoke(nameof(JumpRenew), 1);
             }
 
             Vector2 input = moveAction.ReadValue<Vector2>();
             Vector3 move = new Vector3(input.x, 0, input.y);
             move = move.x * cameraTransform.right.normalized + move.z * cameraTransform.forward.normalized;
             move.y = 0f;
-
-
-            if (groundedPlayer && !_canJump)
-                _canJump = true;
 
             if (IsRunning)
             {
@@ -220,8 +219,11 @@ public class PlayerController : MonoBehaviour, IEquipSword, IRunning
             SwordEquiped = false;
         }
     }
-
-    void StartAttacking()
+    public void SavePosition(Vector3 position)
+    {
+        CheckPointPosition = position;
+    }
+    private void StartAttacking()
     {
         if (playerSwordController != null)
         {
@@ -232,6 +234,7 @@ public class PlayerController : MonoBehaviour, IEquipSword, IRunning
             if (SwordEquiped && CanMove)
             {
                 playerAnimController.AttackAnim(numberOfCklicks);
+                playerAudio.PlaySlashSound();
                 CanMove = false;
             }
         }

@@ -21,6 +21,10 @@ public class PlayerDamageable : MonoBehaviour, IDamageable, IHealable
     [SerializeField] private TextMeshProUGUI _healthTxt;
 
     private GlobalVolumeController volumeController;
+    private AudioController audioController;
+    private PlayerAudio playerAudio;
+    private PlayerAnimController playerAnimController;
+    private PlayerController playerController;
 
     private float _fillSpeed = 1;
     private float _fillDamageSpeed = 0.6f;
@@ -32,6 +36,10 @@ public class PlayerDamageable : MonoBehaviour, IDamageable, IHealable
         _healthTxt.text = CurrentHealth.ToString();
         EventBus.Instance.OnLvlUp += HealOnLvlUp;
         volumeController = FindObjectOfType<GlobalVolumeController>();
+        audioController = FindObjectOfType<AudioController>();
+        playerAudio = GetComponent<PlayerAudio>();
+        playerAnimController = GetComponent<PlayerAnimController>();
+        playerController = GetComponent<PlayerController>();
     }
     public void TakeDamage(float amount)
     {
@@ -41,6 +49,11 @@ public class PlayerDamageable : MonoBehaviour, IDamageable, IHealable
         volumeController.ChangeVignette(_takingDamageVignetteColor, 0.35f, 0.7f, 0.5f);
         StartCoroutine(OffVignette(0.5f));
         StartCoroutine(UpdateHealthBar());
+
+        if(CurrentHealth <= 0)
+        {
+            StartCoroutine(DeathRoutine());
+        }
     }
     public void Heal(float amount)
     {
@@ -59,12 +72,22 @@ public class PlayerDamageable : MonoBehaviour, IDamageable, IHealable
         StartCoroutine(OffVignette(2));
     }
 
+
+    private void Recovering()
+    {
+        Heal(MaxHealth / 40);
+        volumeController.ChangeVignette(Color.black, 0, 1, 3);
+        playerAnimController.RecoveringAnim();
+    }
+
     private IEnumerator OffVignette(float duration)
     {
         yield return new WaitForSeconds(duration + 0.5f);
         volumeController.ChangeVignette(_lvlUpVignetteColor, 0f, 1, duration);
     }
-    IEnumerator UpdateHealthBar()
+
+    
+    private IEnumerator UpdateHealthBar()
     {
         float targetFillAmount = CurrentHealth / MaxHealth;
         _healthBarFill.DOFillAmount(targetFillAmount, _fillSpeed);
@@ -74,4 +97,15 @@ public class PlayerDamageable : MonoBehaviour, IDamageable, IHealable
         StopCoroutine(UpdateHealthBar());
     }
 
+    private IEnumerator DeathRoutine()
+    {
+        playerAnimController.DeathAnim();
+        playerAudio.PlayDeathSound();
+        audioController.ChangeTheme(null, 3, false, 0);
+        volumeController.ChangeVignette(Color.black, 1f, 1, 4);
+        yield return new WaitForSeconds(4);
+        transform.position = playerController.CheckPointPosition;
+        yield return new WaitForSeconds(1);
+        Recovering();
+    }
 }

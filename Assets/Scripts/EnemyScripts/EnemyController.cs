@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[RequireComponent(typeof(EnemyAttacksAbstract), typeof(EnemyAnimation))]
+[RequireComponent(typeof(EnemyAttacksAbstract), typeof(EnemyAnimation), typeof(EnemyAudio))]
 public class EnemyController : EnemyAbstract
 {
     public Enemy enemyScriptable;
@@ -8,6 +8,7 @@ public class EnemyController : EnemyAbstract
     private EnemyAttacksAbstract _enemyAttack;
     private EnemyAnimation _enemyAnim;
     private AudioController _audioController;
+    private EnemyAudio _enemyAudio;
 
     private Transform target;
 
@@ -22,7 +23,8 @@ public class EnemyController : EnemyAbstract
     {
         _enemyAttack = GetComponent<EnemyAttacksAbstract>();
         _enemyAnim = GetComponent<EnemyAnimation>();
-        _audioController = FindObjectOfType<AudioController>(); 
+        _enemyAudio = GetComponent<EnemyAudio>();
+        _audioController = FindObjectOfType<AudioController>();
     }
     private void Update()
     {
@@ -46,6 +48,7 @@ public class EnemyController : EnemyAbstract
             agent.SetDestination(transform.position);
             _isSeekingPoint = true;
             _enemyAnim.StandAnim();
+            _enemyAudio.RenewSource();
             Invoke(nameof(SeekPatrolPoint), enemyScriptable.TimeToStand);          
         }         
 
@@ -54,6 +57,8 @@ public class EnemyController : EnemyAbstract
             agent.SetDestination(target.position);
             agent.speed = enemyScriptable.PatrolingSpeed;
             _enemyAnim.WalkAnim();
+            _enemyAudio.RenewSource();
+            _enemyAudio.PlayWalkingSound();
         }
 
         if(target != null)
@@ -83,9 +88,11 @@ public class EnemyController : EnemyAbstract
         agent.SetDestination(player.position);
         agent.speed = enemyScriptable.ChasingSpeed;
         _enemyAnim.RunAnim();
+        _enemyAudio.RenewSource();
+        _enemyAudio.PlayRunningSound();
         if (!_audioController.IsFightingTheme)
         {
-            _audioController.ChangeTheme(null, 2, true);
+            _audioController.ChangeTheme(null, 2, true, 0.8f);
             _audioController.IsFightingTheme = true;
         }
     }
@@ -99,6 +106,8 @@ public class EnemyController : EnemyAbstract
             agent.SetDestination(transform.position);
             if (_enemyAttack.AttackCount % 3 != 0)
             {
+                _enemyAudio.RenewSource();
+                _enemyAudio.PlayAttackSound();
                 _enemyAttack.DeafaultAttack();
                 canAttack = false;
                 _enemyAnim.DefaultAttackAnim();
@@ -106,6 +115,8 @@ public class EnemyController : EnemyAbstract
             }
             else
             {
+                _enemyAudio.RenewSource();
+                _enemyAudio.PlayUniqueAttackSound();
                 _enemyAttack.SpecialAttack();
                 canAttack = false;
                 _enemyAnim.SpecialAttackAnim();
@@ -123,6 +134,8 @@ public class EnemyController : EnemyAbstract
     public override void TakeDamage(float damage)
     {
         base.TakeDamage(damage);
+        _enemyAudio.RenewSource();
+        _enemyAudio.PlayTakingdamageSound();
     }
 
     private void OnDrawGizmosSelected()

@@ -2,13 +2,15 @@ using UnityEngine;
 
 public class ItemPickUpZone : MonoBehaviour
 {
-    InventorySlot inventorySlot;
-    PickUpTip _tip;
-    Inventory inventory;
+    private InventorySlot inventorySlot;
+    private PickUpTip _tip;
+    private Inventory inventory;
+    private PlayerAudio playerAudio;
 
     private void Start()
     {
         inventory = FindObjectOfType<Inventory>();
+        playerAudio = FindObjectOfType<PlayerAudio>();
         inventorySlot = GetComponent<InventorySlot>();
         _tip = GetComponent<PickUpTip>();
     }
@@ -39,6 +41,7 @@ public class ItemPickUpZone : MonoBehaviour
 
     private void PickUp()
     {
+        playerAudio.PlayPickUpSound();
         _tip.DestroyTip();
         inventory.AddItem(inventorySlot, inventorySlot.Quantity);
         if (TryGetComponent(out QuestProgresser questProgresser))

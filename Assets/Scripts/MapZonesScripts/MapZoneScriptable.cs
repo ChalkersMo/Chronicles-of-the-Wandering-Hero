@@ -10,6 +10,7 @@ public class MapZoneScriptable : ScriptableObject
     [Space, Header("Music settings")]
     public AudioClip ZoneThemeClip;
     public float ClipChangingDuration = 2;
+    public float ClipVolume = 0.7f;
 
     [Space, Header("Vignette settings")]
     public Color VignetteColor = Color.black;

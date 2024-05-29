@@ -449,11 +449,12 @@ GameObject:
   - component: {fileID: 7621543859601695849}
   - component: {fileID: 2689602697164445573}
   - component: {fileID: 7431187408300370994}
-  - component: {fileID: 6768755679638700074}
   - component: {fileID: 4650390790128340247}
   - component: {fileID: 5659757453189947905}
   - component: {fileID: 5533512173082075451}
   - component: {fileID: 8772488591493482361}
+  - component: {fileID: 8895882526933736191}
+  - component: {fileID: 7189450297593687694}
   m_Layer: 0
   m_Name: Wolf
   m_TagString: Untagged
@@ -576,20 +577,6 @@ MonoBehaviour:
   timeBetweenAttacks: 3
   enemyScriptable: {fileID: 11400000, guid: cda9f3ece3380cd45861266a98cb3959, type: 2}
   targets: []
---- !u!114 &6768755679638700074
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1917314786810527764}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1bd07eb93396261418374622c8ba7142, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  questScriptable: {fileID: 0}
-  questPhase: {fileID: 0}
 --- !u!114 &4650390790128340247
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -679,6 +666,120 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!82 &8895882526933736191
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1917314786810527764}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 0.7
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 122
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &7189450297593687694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1917314786810527764}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 554258d5a8ff176488ca6fc601ded2ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioSource: {fileID: 0}
+  walkingClip: {fileID: 8300000, guid: 3a06a27039e144e5c853a93d408fd63a, type: 3}
+  runningClip: {fileID: 8300000, guid: f54a7e8aabfc8436b965149db8156132, type: 3}
+  attackingClip: {fileID: 8300000, guid: a15c2b52296c6a4499b0317f71ae961e, type: 3}
+  uniqueAttackingClip: {fileID: 8300000, guid: 07f586f4a3d8c2b4dbe92033163bee17, type: 3}
+  takedamageClip: {fileID: 8300000, guid: f1d18b62b2b2461499072e43b6d53a71, type: 3}
 --- !u!1 &2175390767424437897
 GameObject:
   m_ObjectHideFlags: 0

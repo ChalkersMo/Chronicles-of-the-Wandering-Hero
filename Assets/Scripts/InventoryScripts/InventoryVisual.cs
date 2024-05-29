@@ -27,7 +27,7 @@ public class InventoryVisual : MonoBehaviour
 
     private float _transitionSpeed;
 
-    private void Awake()
+    private void Start()
     {
         _nameItem = GameObject.FindGameObjectWithTag("Inventory/ItemName").GetComponent<TextMeshProUGUI>();
         _descriptionItem = GameObject.FindGameObjectWithTag("Inventory/ItemDescription").GetComponent<TextMeshProUGUI>();

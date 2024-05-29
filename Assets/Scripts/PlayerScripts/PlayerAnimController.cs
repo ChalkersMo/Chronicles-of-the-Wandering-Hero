@@ -3,12 +3,13 @@ using UnityEngine;
 [RequireComponent(typeof(PlayerController))]
 public class PlayerAnimController : MonoBehaviour
 {
-    Animator animatorController;
-    Vector2 animMove;
+    private Animator animatorController;
 
-    bool ReadyToHit;
-    bool ReadyToHit2;
-    bool ReadyToHit3;
+    private Vector2 animMove;
+
+    private bool ReadyToHit;
+    private bool ReadyToHit2;
+    private bool ReadyToHit3;
 
     private void Start()
     {
@@ -49,6 +50,15 @@ public class PlayerAnimController : MonoBehaviour
     {
         if (animatorController.GetCurrentAnimatorStateInfo(0).IsName("MovementBlend"))
             animatorController.SetTrigger("Roll");
+    }
+    public void DeathAnim()
+    {
+        animatorController.SetTrigger("Death");
+        animatorController.SetBool("IsAlive", false);
+    }
+    public void RecoveringAnim()
+    {
+        animatorController.SetBool("IsAlive", true);
     }
     public void AttackAnim(int numberOfCklicks)
     {

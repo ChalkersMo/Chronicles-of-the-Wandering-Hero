@@ -35,7 +35,9 @@ public class ChangingZone : MonoBehaviour
             globalVolumeController.ChangeGain(zoneScriptable.GainW, zoneScriptable.LiftGammaGainChangingDuration);
 
             EnteringTextAnim(zoneScriptable.Name, zoneScriptable.Description);
-            audioController.ChangeTheme(zoneScriptable.ZoneThemeClip, zoneScriptable.ClipChangingDuration, false);
+            audioController.ChangeTheme(zoneScriptable.ZoneThemeClip,
+                zoneScriptable.ClipChangingDuration,
+                false, zoneScriptable.ClipVolume);
         } 
     }
 
@@ -53,7 +55,9 @@ public class ChangingZone : MonoBehaviour
             globalVolumeController.ChangeGain(defaultZoneScriptable.GainW,
                 defaultZoneScriptable.LiftGammaGainChangingDuration);
 
-            audioController.ChangeTheme(defaultZoneScriptable.ZoneThemeClip, defaultZoneScriptable.ClipChangingDuration, false);
+            audioController.ChangeTheme(defaultZoneScriptable.ZoneThemeClip,
+                defaultZoneScriptable.ClipChangingDuration,
+                false, defaultZoneScriptable.ClipVolume);
         }
     }
 

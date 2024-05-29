@@ -10,8 +10,15 @@ public class QuestProgresser : MonoBehaviour
     {
         if (TryGetComponent(out EnemyController enemy))
         {
-            if (enemy.enemyScriptable == QuestHolder.Instance.tempQuestPhaseScriptable.EnemyToKill)
-                QuestHolder.Instance.QuestProgress();
+            try
+            {
+                if (enemy.enemyScriptable == QuestHolder.Instance.tempQuestPhaseScriptable.EnemyToKill)
+                    QuestHolder.Instance.QuestProgress();
+            }
+            catch
+            {
+
+            }
         }
         else
         {

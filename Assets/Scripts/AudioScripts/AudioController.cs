@@ -18,22 +18,22 @@ public class AudioController : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
     }
 
-    public void ChangeTheme(AudioClip clip, float duration, bool isFightingTheme)
+    public void ChangeTheme(AudioClip clip, float duration, bool isFightingTheme, float volume)
     {
-        StartCoroutine(ChangingTheme(clip, duration, isFightingTheme));
+        StartCoroutine(ChangingTheme(clip, duration, isFightingTheme, volume));
     }
-    private IEnumerator ChangingTheme(AudioClip clip, float duration, bool isFightingTheme)
+    private IEnumerator ChangingTheme(AudioClip clip, float duration, bool isFightingTheme, float volume)
     {
         if (!isFightingTheme)
         {
             if (tempAudioClip != null)
             {
                 previousAudioClip = audioSource.clip;
-                audioSource.DOFade(0, duration);
+                audioSource.DOFade(volume, duration);
                 yield return new WaitForSeconds(duration);
                 audioSource.clip = clip;
                 tempAudioClip = clip;
-                audioSource.DOFade(1, duration);
+                audioSource.DOFade(volume, duration);
                 audioSource.Play();
             }
             else
@@ -41,7 +41,7 @@ public class AudioController : MonoBehaviour
                 previousAudioClip = audioSource.clip;
                 audioSource.clip = clip;
                 tempAudioClip = clip;
-                audioSource.DOFade(1, duration);
+                audioSource.DOFade(volume, duration);
                 audioSource.Play();
             }
         }
@@ -51,11 +51,11 @@ public class AudioController : MonoBehaviour
             {
                 previousAudioClip = audioSource.clip;
                 int randomClip = Random.Range(0, fightingAudioClips.Length);
-                audioSource.DOFade(0, duration);
+                audioSource.DOFade(volume, duration);
                 yield return new WaitForSeconds(duration);
                 audioSource.clip = fightingAudioClips[randomClip];
                 tempAudioClip = fightingAudioClips[randomClip];
-                audioSource.DOFade(1, duration);
+                audioSource.DOFade(volume, duration);
                 audioSource.Play();
             }
             else
@@ -64,7 +64,7 @@ public class AudioController : MonoBehaviour
                 int randomClip = Random.Range(0, fightingAudioClips.Length);
                 audioSource.clip = fightingAudioClips[randomClip];
                 tempAudioClip = fightingAudioClips[randomClip];
-                audioSource.DOFade(1, duration);
+                audioSource.DOFade(volume, duration);
                 audioSource.Play();
             }
             IsFightingTheme = true;
