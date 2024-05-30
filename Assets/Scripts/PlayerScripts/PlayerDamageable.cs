@@ -112,6 +112,7 @@ public class PlayerDamageable : MonoBehaviour, IDamageable, IHealable
     private IEnumerator DeathRoutine()
     {
         playerAnimController.DeathAnim();
+        playerAudio.RenewSource();
         playerAudio.PlayDeathSound();
         audioController.ChangeTheme(null, 3, false, 0);
         volumeController.ChangeVignette(Color.black, 1f, 0, 4);
